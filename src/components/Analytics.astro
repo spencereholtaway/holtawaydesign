@@ -1,0 +1,22 @@
+---
+// Standard Google Analytics 4 tag. Only runs on the real domain so Netlify
+// previews and local builds don't count.
+import { GA_HOSTS, GA_MEASUREMENT_ID } from '../data/analytics';
+---
+
+{
+  GA_MEASUREMENT_ID && (
+    <script is:inline define:vars={{ id: GA_MEASUREMENT_ID, hosts: GA_HOSTS }}>
+      if (hosts.indexOf(location.hostname) !== -1) {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', id);
+      }
+    </script>
+  )
+}
