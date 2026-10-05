@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import AppStoreButton from '../components/AppStoreButton.astro';
+import PrivacyScript from '../components/PrivacyScript.astro';
+import Shot from '../components/Shot.astro';
+import css from '../styles/breathebody.css?raw';
+
+const shots = ['01', '02', '03', '04', '05', '06', '07', '08'].map((n) => `breathebody/${n}`);
+---
+
+<Base
+  title={"Breath Body — a breathing app you don't look at"}
+  description={"Breath Body is a breathing app for iPhone. Rest it on your chest, close your eyes, and follow the haptics, sound and light."}
+  path="/breathebody"
+  fonts="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&display=swap"
+  css={css}
+  og="breathebody/01"
+  themeColor="#0B0B10"
+>
+  <div style="font-family:'Hanken Grotesk',system-ui,sans-serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip">
+    <header style="max-width:1200px; margin:0 auto; padding:20px clamp(20px,4vw,48px); display:flex; justify-content:space-between; align-items:center; gap:16px">
+      <span style="font-family:'Instrument Serif',serif; font-size:26px; letter-spacing:-0.01em; color:#EDE6DA">Breath Body</span>
+      <nav style="display:flex; gap:20px; font-size:15px"><a href="#support">Support</a><a href="#privacy">Privacy</a></nav>
+    </header>
+
+    <section data-screen-label="Hero" style="position:relative; max-width:1200px; margin:0 auto; padding:clamp(40px,8vw,120px) clamp(20px,4vw,48px) clamp(80px,12vw,180px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:48px; align-items:center">
+      <div style="display:grid; gap:28px; position:relative; z-index:1">
+        <h1 style="margin:0; font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(56px,8vw,112px); line-height:0.95; letter-spacing:-0.02em; text-wrap:balance">A breathing app you don't <i style="color:#F2C89B">look at</i>.</h1>
+        <p style="margin:0; max-width:34ch; font-size:clamp(18px,1.6vw,21px); color:#C9C1B4; text-wrap:pretty">Lie down, rest your iPhone on your chest and close your eyes. Breath Body guides you with touch, sound and a soft light, so there's nothing to watch.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center">
+          <AppStoreButton app="breathebody" />
+          <span style="font-size:14px; color:#8E877C">iPhone</span>
+        </div>
+      </div>
+      <div aria-hidden="true" style="position:relative; aspect-ratio:1; max-width:520px; width:100%; justify-self:center; filter:blur(18px) saturate(1.1)">
+        <div style="position:absolute; left:50%; top:50%; width:58%; aspect-ratio:1; border-radius:50%; transform:translate(-50%,-50%); will-change:transform; background:radial-gradient(circle at 40% 35%, #FFE3BF, #F0A86A 55%, rgba(240,168,106,0) 72%); animation:bbA 11s ease-in-out infinite"></div>
+        <div style="position:absolute; left:50%; top:50%; width:42%; aspect-ratio:1; border-radius:50%; transform:translate(-50%,-50%); will-change:transform; background:radial-gradient(circle, #F7C6A3, rgba(232,140,110,0) 70%); animation:bbB 11s ease-in-out infinite"></div>
+        <div style="position:absolute; left:50%; top:50%; width:38%; aspect-ratio:1; border-radius:50%; transform:translate(-50%,-50%); will-change:transform; background:radial-gradient(circle, #E9B3C4, rgba(200,120,150,0) 70%); animation:bbC 11s ease-in-out infinite"></div>
+        <div style="position:absolute; left:50%; top:50%; width:34%; aspect-ratio:1; border-radius:50%; transform:translate(-50%,-50%); will-change:transform; background:radial-gradient(circle, #FFD9A8, rgba(255,200,140,0) 70%); animation:bbD 11s ease-in-out infinite"></div>
+      </div>
+    </section>
+
+    <section data-screen-label="Screens" style="padding:0 0 clamp(80px,12vw,160px)">
+      <div style="display:flex; gap:clamp(16px,2vw,28px); overflow-x:auto; padding:0 clamp(20px,4vw,48px) 24px; scroll-snap-type:x mandatory">
+        {shots.map((s) => (
+          <div style="flex:0 0 clamp(200px,22vw,280px); aspect-ratio:1206/2622; border-radius:14% / 6.44%; overflow:hidden; position:relative; background:#16161D; scroll-snap-align:start; box-shadow:0 0 0 1px rgba(255,255,255,0.06), 0 40px 80px -30px rgba(240,168,106,0.35)"><Shot name={s} alt="Breath Body screen" widths={[320, 480, 640, 840]} sizes="(max-width: 909px) 200px, 280px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div>
+        ))}
+      </div>
+    </section>
+
+    <section data-screen-label="How it works" style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,12vw,160px); display:grid; gap:clamp(40px,6vw,72px)">
+      <h2 style="margin:0; font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(40px,5.5vw,72px); line-height:1; letter-spacing:-0.02em; max-width:16ch; text-wrap:balance">Almost every breathing app is a circle in the middle of a screen.</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:48px 40px">
+        <div style="display:grid; gap:10px; align-content:start; border-top:1px solid #2A2A33; padding-top:20px"><h3 style="margin:0; font-size:19px; font-weight:600">It rests on your chest</h3><p style="margin:0; color:#B3AB9E; text-wrap:pretty">The motion sensors feel your breathing and how the phone is lying, and the haptics swell through the whole breath instead of tapping at the start and end.</p></div>
+        <div style="display:grid; gap:10px; align-content:start; border-top:1px solid #2A2A33; padding-top:20px"><h3 style="margin:0; font-size:19px; font-weight:600">The sound is a wave</h3><p style="margin:0; color:#B3AB9E; text-wrap:pretty">A stereo field built for lying on your back, rising and falling with each breath.</p></div>
+        <div style="display:grid; gap:10px; align-content:start; border-top:1px solid #2A2A33; padding-top:20px"><h3 style="margin:0; font-size:19px; font-weight:600">The screen is a lamp</h3><p style="margin:0; color:#B3AB9E; text-wrap:pretty">Face-up in a dark room it becomes a soft glow, so it lights the room rather than asking to be looked at.</p></div>
+        <div style="display:grid; gap:10px; align-content:start; border-top:1px solid #2A2A33; padding-top:20px"><h3 style="margin:0; font-size:19px; font-weight:600">For eyes open, too</h3><p style="margin:0; color:#B3AB9E; text-wrap:pretty">Glassy blobs merge into one at the top of the in-breath and drift apart at the bottom of the out-breath. Tilt the phone and they shift. Touch the screen and your fingers pull them around.</p></div>
+        <div style="display:grid; gap:10px; align-content:start; border-top:1px solid #2A2A33; padding-top:20px"><h3 style="margin:0; font-size:19px; font-weight:600">Simple counts</h3><p style="margin:0; color:#B3AB9E; text-wrap:pretty">In, out and a break. Set the session length, pace, haptics, sound and light, and see a trace of your breathing when you finish.</p></div>
+        <div style="display:grid; gap:10px; align-content:start; border-top:1px solid #2A2A33; padding-top:20px"><h3 style="margin:0; font-size:19px; font-weight:600">Nothing leaves your phone</h3><p style="margin:0; color:#B3AB9E; text-wrap:pretty">No account, no tracking, no network connections. Your settings are the only thing it keeps.</p></div>
+      </div>
+    </section>
+
+    <section id="support" data-screen-label="Support" style="max-width:1200px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px); border-top:1px solid #2A2A33; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:24px">
+      <h2 style="margin:0; font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(36px,4.5vw,56px); line-height:1">need help? e-mail me!</h2>
+      <a href="mailto:breathe@holtawaydesign.com" style="font-size:clamp(18px,2vw,24px)">breathe@holtawaydesign.com</a>
+    </section>
+
+    <section id="privacy" data-screen-label="Privacy Policy" style="max-width:1200px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(80px,10vw,140px); border-top:1px solid #2A2A33; display:block">
+      <details style="border-top:1px solid #2A2A33; border-bottom:1px solid #2A2A33">
+        <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:64px; font-weight:600; font-size:17px; color:#EDE6DA">View privacy policy<span aria-hidden="true" style="font-size:24px; font-weight:400">+</span></summary>
+        <div style="padding:8px 0 48px; max-width:68ch; display:grid; gap:14px; font-size:17px; color:#C9C1B4">
+        <h2 style="margin:0; font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(32px,4vw,48px); line-height:1.05; color:#EDE6DA">Breath Body — Privacy Policy</h2>
+        <p style="margin:0"><em>Last updated: 5 October 2026</em></p>
+        <p style="margin:0">Breath Body is a breathing app for iPhone. It is built to work entirely on your device. We don't collect, store, sell or share any of your personal information.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:600; color:#EDE6DA">What we collect</h3>
+        <p style="margin:0">Nothing. Breath Body has no accounts, no analytics, no advertising, no tracking, and no third-party code that collects data. The app makes no network connections.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:600; color:#EDE6DA">What the app uses on your device</h3>
+        <p style="margin:0"><strong>Motion sensors.</strong> During a session, Breath Body reads your iPhone's motion sensors (the accelerometer and gyroscope) to sense your breathing and how the phone is resting. These readings are processed live on your device, used only to guide the session, and thrown away when the session ends. They are never saved or sent anywhere.</p>
+        <p style="margin:0"><strong>Your session.</strong> The breath trace shown at the end of a session is kept in memory only, and is gone when you leave that screen or close the app.</p>
+        <p style="margin:0"><strong>Settings.</strong> Your preferences, such as session length, breathing pace, haptics, sound and light, are saved on your device so the app remembers them next time. They stay on your iPhone and may be included in your device backups (iCloud or computer), as Apple's backup settings decide.</p>
+        <p style="margin:0"><strong>Haptics, sound and screen.</strong> The app uses the Taptic Engine, speaker and screen brightness to guide your breathing. It doesn't use the microphone or camera.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:600; color:#EDE6DA">Health information</h3>
+        <p style="margin:0">Breath Body doesn't read from or write to Apple Health, and it doesn't create any health records. It isn't a medical device and doesn't diagnose, treat or monitor any condition.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:600; color:#EDE6DA">Children</h3>
+        <p style="margin:0">Breath Body collects no data from anyone, including children.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:600; color:#EDE6DA">Deleting your data</h3>
+        <p style="margin:0">The only data the app keeps is your settings. Deleting the app removes them.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:600; color:#EDE6DA">Changes to this policy</h3>
+        <p style="margin:0">If the app ever changes how it handles data, we'll update this policy and the date above before that change ships.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:600; color:#EDE6DA">Contact</h3>
+        <p style="margin:0">Questions about this policy: Spencer Holtaway — <a href="mailto:breathe@holtawaydesign.com">breathe@holtawaydesign.com</a></p>
+      </div>
+      </details>
+    </section>
+
+    <footer style="max-width:1200px; margin:0 auto; padding:24px clamp(20px,4vw,48px) 40px; border-top:1px solid #2A2A33; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:14px; color:#8E877C">
+      <span>Breath Body</span>
+      <span>Made by <a href="/">Spencer Holtaway</a></span>
+    </footer>
+  </div>
+  <PrivacyScript />
+</Base>

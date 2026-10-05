@@ -1,0 +1,55 @@
+---
+// Pending (no link yet): a disabled, non-focusable "In review with Apple now" pill.
+// Live (URL set in src/data/appstore.ts): a "Download on the App Store" link.
+import { APP_STORE, type AppSlug } from '../data/appstore';
+
+interface Props {
+  app: AppSlug;
+}
+
+const { app } = Astro.props;
+const url = APP_STORE[app] as string | null;
+
+const base = 'display:inline-flex; align-items:center; gap:10px; user-select:none';
+
+const STYLES: Record<AppSlug, { pending: string; live: string; dot: string }> = {
+  breathebody: {
+    pending: 'min-height:48px; padding:0 22px; border-radius:999px; border:1px dashed #5A5A66; color:#C9C1B4; font-weight:600; font-size:15px',
+    live: 'min-height:48px; padding:0 22px; border-radius:999px; background:#EDE6DA; color:#0B0B10; font-weight:600; font-size:15px',
+    dot: '#F2C89B',
+  },
+  fishingforcompliments: {
+    pending: 'min-height:52px; padding:0 24px; border-radius:16px; border:2px dashed #0E3B47; background:rgba(244,239,227,0.45); color:#0E3B47; font-weight:700; font-size:16px',
+    live: 'min-height:52px; padding:0 24px; border-radius:16px; background:#0E3B47; color:#F4EFE3; box-shadow:0 6px 0 #082730; font-weight:700; font-size:16px',
+    dot: '#D9542F',
+  },
+  mybussf: {
+    pending: 'min-height:52px; padding:0 24px; border-radius:8px; border:2px dashed #4A4E52; color:#33373B; font-weight:800; font-size:16px',
+    live: 'min-height:52px; padding:0 24px; border-radius:8px; background:#14171A; color:#FFB000; font-weight:800; font-size:16px',
+    dot: '#C8361F',
+  },
+  'olivers-train': {
+    pending: 'min-height:52px; padding:0 24px; border:2px dashed #1F4D3A; color:#1F4D3A; font-weight:700; font-size:16px; border-radius:4px',
+    live: 'min-height:52px; padding:0 24px; background:#C8372D; color:#FFF8EA; font-weight:700; font-size:16px; border-radius:4px; text-decoration:none',
+    dot: '#C8372D',
+  },
+  pingpongcowboy: {
+    pending: 'min-height:54px; padding:0 28px; border-radius:14px; background:linear-gradient(#6B4A33, #54371F); color:#E7C99C; font-weight:700; font-size:17px; box-shadow:inset 0 1px 0 rgba(255,255,255,0.15), inset 0 0 0 2px #7A5A3E',
+    live: 'min-height:54px; padding:0 28px; border-radius:14px; background:linear-gradient(#FF8A5B, #D9431E 52%, #B8331A); color:#FFF; font-weight:700; font-size:17px; text-shadow:0 -1px 0 rgba(0,0,0,.35); box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 2px 0 #6E1E0C, 0 8px 16px rgba(0,0,0,.4)',
+    dot: '#FFD36B',
+  },
+};
+
+const s = STYLES[app];
+---
+
+{
+  url ? (
+    <a href={url} data-appstore="live" style={`${base}; ${s.live}`}>Download on the App Store</a>
+  ) : (
+    <span data-appstore="pending" aria-disabled="true" style={`${base}; ${s.pending}; cursor:not-allowed`}>
+      <span aria-hidden="true" style={`width:8px; height:8px; border-radius:50%; background:${s.dot}`} />
+      In review with Apple now
+    </span>
+  )
+}

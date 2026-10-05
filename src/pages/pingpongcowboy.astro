@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import AppStoreButton from '../components/AppStoreButton.astro';
+import PrivacyScript from '../components/PrivacyScript.astro';
+import Shot from '../components/Shot.astro';
+import css from '../styles/pingpongcowboy.css?raw';
+
+const shots = ['01', '02', '03'].map((n) => `pingpongcowboy/${n}`);
+---
+
+<Base
+  title={"Ping Pong Cowboy — back when phones were toys"}
+  description={"An arcade game for iPhone about throwing ping pong balls at things. 99 cents."}
+  path="/pingpongcowboy"
+  fonts="https://fonts.googleapis.com/css2?family=Rye&family=Arvo:wght@400;700&display=swap"
+  css={css}
+  og="pingpongcowboy/01"
+  themeColor="#3B2314"
+>
+  <div style="font-family:'Arvo',Georgia,serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip; background:repeating-linear-gradient(90deg, #4A2C19 0 3px, #3B2314 3px 46px, #43281A 46px 49px, #3B2314 49px 92px)">
+    <header style="max-width:1200px; margin:0 auto; padding:18px clamp(20px,4vw,48px); display:flex; justify-content:space-between; align-items:center; gap:16px">
+      <span style="font-family:'Rye',serif; font-size:22px; color:#FFD36B; text-shadow:0 2px 0 #1E0F06">Ping Pong Cowboy</span>
+      <nav style="display:flex; gap:20px; font-size:15px; font-weight:700"><a href="#support">Support</a><a href="#privacy">Privacy</a></nav>
+    </header>
+
+    <section data-screen-label="Hero" style="max-width:1200px; margin:0 auto; padding:clamp(32px,6vw,88px) clamp(20px,4vw,48px) clamp(64px,8vw,112px); display:grid; grid-template-columns:minmax(0,1fr); justify-items:center; text-align:center; gap:28px">
+      <div style="background:linear-gradient(#F6E3BC, #E8C98E); color:#5A2A12; border-radius:18px; padding:clamp(28px,5vw,56px) clamp(20px,6vw,80px); max-width:100%; box-shadow:inset 0 0 0 3px #B9874A, inset 0 0 0 6px #F6E3BC, inset 0 0 0 8px #7A4A22, 0 12px 0 #1E0F06, 0 30px 50px rgba(0,0,0,0.5); max-width:900px; animation:ppSwing 5s ease-in-out infinite; transform-origin:50% -40px">
+        <div style="font-family:'Rye',serif; font-size:clamp(14px,1.6vw,18px); letter-spacing:0.14em; color:#B23A1E">★ Step right up ★</div>
+        <h1 style="margin:12px 0 0; font-family:'Rye',serif; font-weight:400; font-size:clamp(34px,8vw,112px); line-height:0.95; text-wrap:balance; color:#5A2A12; text-shadow:0 2px 0 #FFF4DC">Remember when phones were toys?</h1>
+      </div>
+      <p style="margin:0; max-width:36ch; font-size:clamp(18px,1.7vw,22px); text-wrap:pretty">An arcade game about throwing ping pong balls at things. That's it. That's the game.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center">
+        <AppStoreButton app="pingpongcowboy" />
+        <span style="font-size:15px; color:#E7C99C">99 cents</span>
+      </div>
+    </section>
+
+    <section data-screen-label="Screens" style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:clamp(20px,3vw,40px); justify-items:center">
+      {shots.map((s) => (
+        <div style="width:100%; max-width:300px; padding:12px; border-radius:46px; background:linear-gradient(#2B2B2B, #0D0D0D); box-shadow:inset 0 1px 0 rgba(255,255,255,0.25), 0 20px 40px rgba(0,0,0,0.5)"><div style="position:relative; aspect-ratio:1320/2868; border-radius:36px; overflow:hidden; background:#1E0F06"><Shot name={s} alt="Ping Pong Cowboy screen" widths={[320, 480, 640, 840]} sizes="(max-width: 320px) calc(100vw - 64px), 276px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div></div>
+      ))}
+    </section>
+
+    <section data-screen-label="Features" style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:20px">
+      <div style="background:#F6E3BC; color:#4A2412; border-radius:14px; padding:28px; display:grid; gap:8px; align-content:start; box-shadow:inset 0 0 0 2px #B9874A, inset 0 0 0 5px #F6E3BC, inset 0 0 0 6px #B9874A, 0 6px 0 #1E0F06"><h3 style="margin:0; font-family:'Rye',serif; font-weight:400; font-size:24px; color:#B23A1E">Pins on your floor</h3><p style="margin:0; text-wrap:pretty">Point your camera down and the game sets up bowling pins on your actual floor, using augmented reality.</p></div>
+      <div style="background:#F6E3BC; color:#4A2412; border-radius:14px; padding:28px; display:grid; gap:8px; align-content:start; box-shadow:inset 0 0 0 2px #B9874A, inset 0 0 0 5px #F6E3BC, inset 0 0 0 6px #B9874A, 0 6px 0 #1E0F06"><h3 style="margin:0; font-family:'Rye',serif; font-weight:400; font-size:24px; color:#B23A1E">Tilt the booth</h3><p style="margin:0; text-wrap:pretty">Tip your phone and the light on the booth shifts with it, the way apps used to show off the accelerometer in 2009.</p></div>
+      <div style="background:#F6E3BC; color:#4A2412; border-radius:14px; padding:28px; display:grid; gap:8px; align-content:start; box-shadow:inset 0 0 0 2px #B9874A, inset 0 0 0 5px #F6E3BC, inset 0 0 0 6px #B9874A, 0 6px 0 #1E0F06"><h3 style="margin:0; font-family:'Rye',serif; font-weight:400; font-size:24px; color:#B23A1E">Beat yourself</h3><p style="margin:0; text-wrap:pretty">Your personal bests stay on your phone. Nobody else needs to know.</p></div>
+    </section>
+
+    <section id="support" data-screen-label="Support" style="background:#1E0F06; border-top:4px dashed #B9874A">
+      <div style="max-width:1200px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:24px">
+        <h2 style="margin:0; font-family:'Rye',serif; font-weight:400; font-size:clamp(34px,4.5vw,54px); line-height:1; color:#FFD36B">need help? e-mail me!</h2>
+        <a href="mailto:cowboy@holtawaydesign.com" style="font-size:clamp(18px,2vw,24px); font-weight:700">cowboy@holtawaydesign.com</a>
+      </div>
+    </section>
+
+    <section id="privacy" data-screen-label="Privacy Policy" style="background:#1E0F06">
+      <div style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px)">
+      <details style="border-top:1px solid #6E4A2A; border-bottom:1px solid #6E4A2A">
+        <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:64px; font-weight:700; font-size:17px; color:#FFD36B">View Privacy Policy<span>+</span></summary>
+        <div style="padding:8px 0 48px; max-width:68ch; display:grid; gap:14px; font-size:17px; color:#E7C99C">
+        <h2 style="margin:0; font-family:'Rye',serif; font-weight:400; font-size:clamp(28px,3.6vw,42px); line-height:1.05; color:#FBEBD0">Ping Pong Cowboy Privacy Policy</h2>
+        <p style="margin:0"><em>Effective October 4, 2026</em></p>
+        <p style="margin:0">Ping Pong Cowboy collects no data. Nothing leaves your phone.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:700; color:#FBEBD0">What we collect</h3>
+        <p style="margin:0">Nothing. Ping Pong Cowboy has no accounts, no ads, no analytics and no tracking. It doesn't connect to the internet, and we never see, store or share any information about you or how you use the app.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:700; color:#FBEBD0">Camera</h3>
+        <p style="margin:0">The game uses your camera to place bowling pins on your floor in augmented reality. The camera feed and the map of your room that ARKit builds are processed live on your iPhone and are thrown away when you leave the game. No photos or video are saved, and nothing is sent anywhere.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:700; color:#FBEBD0">Motion sensors</h3>
+        <p style="margin:0">The app reads your iPhone's motion sensors so the light on the booth shifts as you tilt your phone. This happens on your iPhone and isn't stored or shared.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:700; color:#FBEBD0">Saved on your iPhone</h3>
+        <p style="margin:0">Your personal best scores and a few game settings, such as whether you've seen the first-time tips, are saved on your iPhone so they're there next time you play. They never leave your device, and deleting the app deletes them.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:700; color:#FBEBD0">Children</h3>
+        <p style="margin:0">Ping Pong Cowboy is suitable for all ages. Because it collects no data, it collects no data from children either.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:700; color:#FBEBD0">Changes</h3>
+        <p style="margin:0">If this policy ever changes, the new version will be posted here with a new effective date.</p>
+        <h3 style="margin:20px 0 0; font-size:19px; font-weight:700; color:#FBEBD0">Contact</h3>
+        <p style="margin:0">Questions? Email <a href="mailto:cowboy@holtawaydesign.com">cowboy@holtawaydesign.com</a></p>
+        </div>
+      </details>
+      </div>
+    </section>
+  </div>
+  <PrivacyScript />
+</Base>

@@ -1,0 +1,11 @@
+html,body{margin:0;overflow-wrap:break-word;background:#0B0B10;color:#EDE6DA;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+#support a,footer a{display:inline-flex;align-items:center;min-height:44px}
+summary::-webkit-details-marker{display:none}
+nav a{display:inline-flex;align-items:center;min-height:44px}
+a{overflow-wrap:anywhere;color:#F2C89B;text-decoration:none}
+a:hover{color:#FFF1DE}
+@keyframes bbA{0%,100%{transform:translate(-60%,-40%) scale(.7)}50%{transform:translate(-50%,-50%) scale(1.15)}}
+@keyframes bbB{0%,100%{transform:translate(-20%,-70%) scale(.55)}50%{transform:translate(-50%,-50%) scale(1)}}
+@keyframes bbC{0%,100%{transform:translate(-85%,-15%) scale(.5)}50%{transform:translate(-50%,-50%) scale(.95)}}
+@keyframes bbD{0%,100%{transform:translate(-25%,-20%) scale(.45)}50%{transform:translate(-50%,-50%) scale(.9)}}

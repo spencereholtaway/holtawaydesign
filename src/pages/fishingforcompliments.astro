@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import AppStoreButton from '../components/AppStoreButton.astro';
+import PrivacyScript from '../components/PrivacyScript.astro';
+import Shot from '../components/Shot.astro';
+import css from '../styles/fishingforcompliments.css?raw';
+---
+
+<Base
+  title={"Fishing for Compliments: Isles — a game with no finish line"}
+  description={"A relaxing boating game for iPhone, iPad, Mac and Apple TV. Sail an endless sea, find messages in bottles, and stop at reflecting pools."}
+  path="/fishingforcompliments"
+  fonts="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap"
+  css={css}
+  og="fishingforcompliments/01"
+  themeColor="#9FD6D9"
+>
+  <div style="font-family:'Figtree',system-ui,sans-serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip">
+    <div style="background:linear-gradient(#9FD6D9, #5FB3BC 60%, #2E8B99); color:#0E3B47; position:relative">
+      <header style="max-width:1240px; margin:0 auto; padding:20px clamp(20px,4vw,48px); display:flex; justify-content:space-between; align-items:center; gap:16px">
+        <span style="font-family:'Young Serif',serif; font-size:22px">Fishing for Compliments</span>
+        <nav style="display:flex; gap:20px; font-size:15px; font-weight:600"><a href="#support" style="color:#0E3B47">Support</a><a href="#privacy" style="color:#0E3B47">Privacy</a></nav>
+      </header>
+      <section data-screen-label="Hero" style="max-width:1240px; margin:0 auto; padding:clamp(40px,7vw,100px) clamp(20px,4vw,48px) clamp(120px,14vw,200px); display:grid; gap:28px; justify-items:start">
+        <span style="font-weight:700; font-size:14px; letter-spacing:0.12em; text-transform:uppercase; background:#F4EFE3; padding:6px 12px; border-radius:999px">Isles</span>
+        <h1 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:clamp(56px,9vw,128px); line-height:0.95; letter-spacing:-0.02em; max-width:11ch; text-wrap:balance; animation:ffBob 6s ease-in-out infinite">A game with no finish line.</h1>
+        <p style="margin:0; max-width:36ch; font-size:clamp(18px,1.7vw,22px); font-weight:500; text-wrap:pretty">A relaxing boating game. Sail as far as you like across a sea that keeps going, and nothing out there will grade you for it.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center">
+          <AppStoreButton app="fishingforcompliments" />
+          <span style="font-size:14px; font-weight:600">iPhone · iPad · Mac · Apple TV</span>
+        </div>
+      </section>
+      <div aria-hidden="true" style="position:absolute; left:0; right:0; bottom:-1px; height:60px; background:radial-gradient(circle at 60px -20px, transparent 62px, #F4EFE3 63px) 0 0 / 120px 60px repeat-x; animation:ffSwell 9s linear infinite"></div>
+    </div>
+
+    <section data-screen-label="Screens" style="max-width:1240px; margin:0 auto; padding:clamp(48px,6vw,80px) clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr)); gap:clamp(20px,3vw,40px)">
+      <div style="position:relative; aspect-ratio:2868/1320; border-radius:28px; overflow:hidden; background:#DCE8EC; box-shadow:0 30px 60px -24px rgba(14,59,71,0.4); transform:rotate(-1.5deg)"><Shot name="fishingforcompliments/01" alt="Fishing for Compliments screen" widths={[480, 720, 960, 1280, 1600]} sizes="(max-width: 1059px) calc(100vw - 40px), 580px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div>
+      <div style="position:relative; aspect-ratio:2868/1320; border-radius:28px; overflow:hidden; background:#DCE8EC; box-shadow:0 30px 60px -24px rgba(14,59,71,0.4); transform:rotate(1.5deg); margin-top:clamp(0px,4vw,56px)"><Shot name="fishingforcompliments/02" alt="Fishing for Compliments screen" widths={[480, 720, 960, 1280, 1600]} sizes="(max-width: 1059px) calc(100vw - 40px), 580px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div>
+    </section>
+
+    <section data-screen-label="What's out there" style="max-width:1240px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; gap:clamp(36px,5vw,64px)">
+      <h2 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:clamp(40px,5.5vw,72px); line-height:1; letter-spacing:-0.02em">What's out there</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:20px">
+        <div style="background:#FFFFFF; border-radius:24px; padding:28px; display:grid; gap:10px; align-content:start; box-shadow:0 4px 0 #E2D9C6"><h3 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:26px; line-height:1.1">A sea that keeps going</h3><p style="margin:0; color:#3F5E66; text-wrap:pretty">The world is generated as you sail, with new biomes the farther out you go, weather that rolls in and water that changes with it.</p></div>
+        <div style="background:#FFFFFF; border-radius:24px; padding:28px; display:grid; gap:10px; align-content:start; box-shadow:0 4px 0 #E2D9C6"><h3 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:26px; line-height:1.1">Messages in bottles</h3><p style="margin:0; color:#3F5E66; text-wrap:pretty">Fish them out of the water and keep them in your journal. If one's worth passing on, you can share its text with someone.</p></div>
+        <div style="background:#FFFFFF; border-radius:24px; padding:28px; display:grid; gap:10px; align-content:start; box-shadow:0 4px 0 #E2D9C6"><h3 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:26px; line-height:1.1">Reflecting pools</h3><p style="margin:0; color:#3F5E66; text-wrap:pretty">Stop at a pool for an optional check-in on how you're feeling. With your permission it's saved to Apple Health, and the game keeps nothing about what you said.</p></div>
+        <div style="background:#FFFFFF; border-radius:24px; padding:28px; display:grid; gap:10px; align-content:start; box-shadow:0 4px 0 #E2D9C6"><h3 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:26px; line-height:1.1">One boat, every screen</h3><p style="margin:0; color:#3F5E66; text-wrap:pretty">Your voyage follows you between iPhone, iPad, Mac and Apple TV through iCloud, and your Game Center nickname is painted on the side of the boat.</p></div>
+        <div style="background:#FFFFFF; border-radius:24px; padding:28px; display:grid; gap:10px; align-content:start; box-shadow:0 4px 0 #E2D9C6"><h3 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:26px; line-height:1.1">Sound all around</h3><p style="margin:0; color:#3F5E66; text-wrap:pretty">With supported headphones, spatial audio places the sea and the wind around you as you turn your head.</p></div>
+        <div style="background:#FFFFFF; border-radius:24px; padding:28px; display:grid; gap:10px; align-content:start; box-shadow:0 4px 0 #E2D9C6"><h3 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:26px; line-height:1.1">Postcards on your Home Screen</h3><p style="margin:0; color:#3F5E66; text-wrap:pretty">Widgets show pictures from your voyages and your latest finds. Steer with touch, a game controller or the Apple TV remote.</p></div>
+      </div>
+    </section>
+
+    <section id="support" data-screen-label="Support" style="background:#0E3B47; color:#F4EFE3">
+      <div style="max-width:1240px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:24px">
+        <h2 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:clamp(36px,4.5vw,56px); line-height:1">need help? e-mail me!</h2>
+        <a href="mailto:fishing@holtawaydesign.com" style="color:#FFB59E; font-size:clamp(18px,2vw,24px); font-weight:600">fishing@holtawaydesign.com</a>
+      </div>
+    </section>
+
+    <section id="privacy" data-screen-label="Privacy Policy" style="max-width:1240px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:block">
+      <details style="border-top:1px solid #DDD3BF; border-bottom:1px solid #DDD3BF">
+        <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:64px; font-weight:600; font-size:17px; color:#0E3B47">View privacy policy<span aria-hidden="true" style="font-size:24px; font-weight:400">+</span></summary>
+        <div style="padding:8px 0 48px; max-width:70ch; display:grid; gap:14px; font-size:17px; color:#2C4C55">
+        <h2 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:clamp(30px,3.6vw,44px); line-height:1.05; color:#0E3B47">Privacy Policy — Fishing for Compliments</h2>
+        <p style="margin:0"><em>Effective date: October 1, 2026</em></p>
+        <p style="margin:0">Fishing for Compliments ("the app", "the game") is a relaxing boating game for iPhone, iPad, Mac and Apple TV, made by Spencer Holtaway ("I", "me"). This policy explains what information the game uses and where it goes.</p>
+        <p style="margin:0">The short version: I don't collect any of your data. The game has no accounts, no ads, no analytics, no tracking and no servers of its own. Everything it keeps stays on your devices or in your own Apple account (iCloud, Game Center, Apple Health), where Apple's privacy policy applies.</p>
+        <h3 style="margin:24px 0 0; font-family:'Young Serif',serif; font-weight:400; font-size:24px; color:#0E3B47">What the game keeps, and where</h3>
+        <h4 style="margin:8px 0 0; font-size:17px; font-weight:700; color:#0E3B47">On your device</h4>
+        <p style="margin:0">Your game progress is saved on your device: your world, where you left the boat, the things you've found, achievements, journal entries, stats about your play sessions (time spent anchored or sailing, distance sailed), and your settings. Deleting the app deletes this data.</p>
+        <h4 style="margin:8px 0 0; font-size:17px; font-weight:700; color:#0E3B47">Cloud (if you're signed in to iCloud)</h4>
+        <p style="margin:0">To keep one boat and one save across your devices, the game stores a copy of your progress in iCloud's key-value storage, tied to your Apple Account. Only your devices running the game can read it. I can't see it. You can turn this off for the app in your device's iCloud settings.</p>
+        <h4 style="margin:8px 0 0; font-size:17px; font-weight:700; color:#0E3B47">Game Center (if you're signed in)</h4>
+        <p style="margin:0">If you're signed in to Game Center, the game reports the achievements you earn to Game Center, and shows your Game Center nickname painted on the side of your boat. The nickname is only shown inside the game on your device. Game Center is run by Apple; what it shows to friends is controlled by your Game Center settings.</p>
+        <h4 style="margin:8px 0 0; font-size:17px; font-weight:700; color:#0E3B47">Apple Health (only if you choose to)</h4>
+        <p style="margin:0">At reflecting pools the game may offer an optional check-in, where you can record how you're feeling. If you take part and give permission, the game saves that entry to Apple Health as a "State of Mind" sample.</p>
+        <ul style="margin:0; padding-left:1.2em; display:grid; gap:8px">
+          <li>The game only <strong>writes</strong> this one kind of entry. It never reads any of your health data.</li>
+          <li>Nothing about your check-in (how you felt, or what it was about) is kept by the game. It only keeps a count of how many pools you've visited, when and in which area, for the journal and achievements.</li>
+          <li>Health data is never used for advertising, never shared with anyone, and never leaves your device except through Apple Health's own syncing.</li>
+          <li>You can change or remove the permission at any time in the Health app or Settings.</li>
+        </ul>
+        <h4 style="margin:8px 0 0; font-size:17px; font-weight:700; color:#0E3B47">Home Screen widgets</h4>
+        <p style="margin:0">The widgets show pictures from your voyages and recent finds. To do this the game saves a few pictures of the game scene (never camera photos), along with a summary of your journal, on your device in a storage space shared only with its own widgets. They're deleted when you delete the app.</p>
+        <h3 style="margin:24px 0 0; font-family:'Young Serif',serif; font-weight:400; font-size:24px; color:#0E3B47">Other features</h3>
+        <ul style="margin:0; padding-left:1.2em; display:grid; gap:8px">
+          <li>Spatial audio: With supported headphones, the game can use head tracking to position its sound. Head movement is used live by the system to place the audio. It isn't recorded or stored.</li>
+          <li>Sharing: You can share the text of a message you've found using the standard share sheet. Nothing is shared unless you choose to, and where it goes is up to you.</li>
+          <li>Local network: A design tool in the app can connect an iPhone or iPad to the game on an Apple TV on the same Wi-Fi network to adjust the scene live. It only exchanges game settings between your own devices and only connects if you allow local network access.</li>
+          <li>Game controllers: Controller and remote input is used only to steer the boat and work the menus.</li>
+        </ul>
+        <h3 style="margin:24px 0 0; font-family:'Young Serif',serif; font-weight:400; font-size:24px; color:#0E3B47">What I don't do</h3>
+        <ul style="margin:0; padding-left:1.2em; display:grid; gap:8px">
+          <li>I don't collect, sell, rent or share personal information.</li>
+          <li>I don't use advertising, analytics, crash-reporting or tracking services, and I don't track you across other apps or websites.</li>
+          <li>I don't use your location, contacts, photos, camera or microphone.</li>
+        </ul>
+        <h3 style="margin:24px 0 0; font-family:'Young Serif',serif; font-weight:400; font-size:24px; color:#0E3B47">Children</h3>
+        <p style="margin:0">The game doesn't collect personal information from anyone, including children under 13.</p>
+        <h3 style="margin:24px 0 0; font-family:'Young Serif',serif; font-weight:400; font-size:24px; color:#0E3B47">Deleting your data</h3>
+        <ul style="margin:0; padding-left:1.2em; display:grid; gap:8px">
+          <li>Delete the app to remove everything saved on the device.</li>
+          <li>Resetting your progress in the game's settings starts a new world and replaces the saved copy in iCloud.</li>
+          <li>Manage iCloud data in Settings → [your name] → iCloud, Game Center data in Settings → Game Center, and Health entries in the Health app.</li>
+        </ul>
+        <h3 style="margin:24px 0 0; font-family:'Young Serif',serif; font-weight:400; font-size:24px; color:#0E3B47">Changes to this policy</h3>
+        <p style="margin:0">If the game starts using information in a new way, I'll update this policy and change the effective date above.</p>
+        <h3 style="margin:24px 0 0; font-family:'Young Serif',serif; font-weight:400; font-size:24px; color:#0E3B47">Contact</h3>
+        <p style="margin:0">Questions about this policy: <a href="mailto:fishing@holtawaydesign.com">fishing@holtawaydesign.com</a></p>
+      </div>
+      </details>
+    </section>
+
+    <footer style="max-width:1240px; margin:0 auto; padding:24px clamp(20px,4vw,48px) 40px; border-top:1px solid #DDD3BF; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:14px; color:#5B7880">
+      <span>Fishing for Compliments: Isles</span>
+      <span>Made by <a href="/">Spencer Holtaway</a></span>
+    </footer>
+  </div>
+  <PrivacyScript />
+</Base>

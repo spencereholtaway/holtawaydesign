@@ -1,0 +1,39 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Hashed build assets (images, CSS, JS) never change, so cache them for a year.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Serve each app page with a trailing slash too (200, not a redirect), in case
+# a store listing has the URL on file that way.
+[[redirects]]
+  from = "/breathebody/"
+  to = "/breathebody.html"
+  status = 200
+
+[[redirects]]
+  from = "/fishingforcompliments/"
+  to = "/fishingforcompliments.html"
+  status = 200
+
+[[redirects]]
+  from = "/mybussf/"
+  to = "/mybussf.html"
+  status = 200
+
+[[redirects]]
+  from = "/olivers-train/"
+  to = "/olivers-train.html"
+  status = 200
+
+[[redirects]]
+  from = "/pingpongcowboy/"
+  to = "/pingpongcowboy.html"
+  status = 200

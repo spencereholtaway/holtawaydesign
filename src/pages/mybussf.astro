@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import AppStoreButton from '../components/AppStoreButton.astro';
+import PrivacyScript from '../components/PrivacyScript.astro';
+import Shot from '../components/Shot.astro';
+import css from '../styles/mybussf.css?raw';
+
+// Saved stops (01) and bus details (03) screens are still to come; they show a plain white screen until then.
+const features = [
+  { n: '01', t: 'Your daily commute & regular stops at a glance.', src: '', alt: 'My Bus SF saved stops' },
+  { n: '02', t: 'Nearest stops for when you’re not commuting.', src: 'mybussf/stops', alt: 'My Bus SF nearest stops' },
+  { n: '03', t: 'Get all the details of the buses you’re waiting for.', src: '', alt: 'My Bus SF bus details' },
+];
+---
+
+<Base
+  title={"My Bus SF — the bus app for San Franciscans"}
+  description={"The bus app for San Franciscans who know where they're going and how to get there."}
+  path="/mybussf"
+  fonts="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800;900&family=Overpass+Mono:wght@400;600&display=swap"
+  css={css}
+  og="mybussf/map"
+  themeColor="#14171A"
+>
+  <div style="font-family:'Overpass',system-ui,sans-serif; font-size:18px; line-height:1.5; min-height:100vh; overflow-x:clip">
+    <header style="background:#14171A; color:#E9E6DF">
+      <div style="max-width:1240px; margin:0 auto; padding:16px clamp(20px,4vw,48px); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; row-gap:8px">
+        <span style="display:flex; align-items:center; gap:10px; font-weight:900; font-size:20px; letter-spacing:-0.01em"><span style="width:14px; height:14px; border-radius:50%; background:#FFB000"></span>My Bus SF</span>
+        <nav style="display:flex; gap:20px; font-family:'Overpass Mono',monospace; font-size:14px"><a href="#support" style="color:#FFB000">Support</a><a href="#privacy" style="color:#FFB000">Privacy</a></nav>
+      </div>
+    </header>
+
+    <section data-screen-label="Hero" style="max-width:1240px; margin:0 auto; padding:clamp(48px,8vw,120px) clamp(20px,4vw,48px) clamp(64px,8vw,112px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr)); gap:clamp(40px,6vw,80px); align-items:center">
+      <div style="display:grid; gap:28px; justify-items:start">
+        <span style="font-family:'Overpass Mono',monospace; font-size:14px; letter-spacing:0.08em; text-transform:uppercase; color:#C8361F">Real-time arrivals · iPhone</span>
+        <h1 style="margin:0; font-weight:900; font-size:clamp(44px,6.4vw,88px); line-height:0.98; letter-spacing:-0.03em; text-wrap:balance">The bus app for San Franciscans who know where they’re going and how to get there.</h1>
+        <div style="display:flex; flex-wrap:wrap; gap:12px 16px; align-items:center">
+          <AppStoreButton app="mybussf" />
+          <span style="font-family:'Overpass Mono',monospace; font-size:14px; color:#4A4E52">99 cents</span>
+        </div>
+      </div>
+      <div style="justify-self:center; width:100%; max-width:320px; padding:11px; border-radius:48px; background:#14171A; box-shadow:0 30px 60px -20px rgba(20,23,26,0.45)"><div style="position:relative; aspect-ratio:1206/2622; border-radius:38px; overflow:hidden; background:#FFFFFF"><Shot name="mybussf/map" alt="My Bus SF — map" widths={[320, 480, 640, 840]} sizes="(max-width: 400px) calc(100vw - 62px), 298px" eager style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div></div>
+    </section>
+
+    <section data-screen-label="Features" style="background:#14171A; color:#E9E6DF">
+      <div style="max-width:1240px; margin:0 auto; padding:clamp(64px,9vw,128px) clamp(20px,4vw,48px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:clamp(48px,5vw,64px) clamp(24px,3vw,40px)">
+        {features.map((f) => (
+          <div style="display:grid; gap:24px; align-content:start">
+            <div style="justify-self:center; width:100%; max-width:280px; padding:10px; border-radius:44px; background:#2A2E33"><div style="position:relative; aspect-ratio:1206/2622; border-radius:35px; overflow:hidden; background:#FFFFFF">{f.src && <Shot name={f.src} alt={f.alt} widths={[320, 480, 640, 840]} sizes="(max-width: 360px) calc(100vw - 60px), 260px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" />}</div></div>
+            <div style="display:grid; gap:10px; border-top:3px solid #FFB000; padding-top:16px">
+              <span style="font-family:'Overpass Mono',monospace; font-size:14px; color:#FFB000">{f.n}</span>
+              <h2 style="margin:0; font-weight:800; font-size:clamp(22px,2.2vw,28px); line-height:1.15; letter-spacing:-0.01em; text-wrap:balance">{f.t}</h2>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="support" data-screen-label="Support" style="background:#FFB000; color:#14171A">
+      <div style="max-width:1240px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:24px">
+        <h2 style="margin:0; font-weight:900; font-size:clamp(34px,4.5vw,56px); line-height:1; letter-spacing:-0.02em">need help? e-mail me!</h2>
+        <a href="mailto:mybussf@holtawaydesign.com" style="font-family:'Overpass Mono',monospace; font-size:clamp(17px,1.8vw,22px); font-weight:600; color:#14171A; border-bottom:2px solid #14171A">mybussf@holtawaydesign.com</a>
+      </div>
+    </section>
+
+    <section id="privacy" data-screen-label="Privacy Policy" style="max-width:1240px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(80px,10vw,140px)">
+      <details style="border-top:2px solid #14171A; border-bottom:1px solid #B9B4A9">
+        <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:64px; font-weight:800; font-size:17px">View Privacy Policy<span style="font-family:'Overpass Mono',monospace">+</span></summary>
+        <div style="padding:8px 0 48px; max-width:70ch; display:grid; gap:14px; font-size:17px; color:#33373B">
+        <h2 style="margin:0; font-weight:900; font-size:clamp(30px,3.6vw,44px); line-height:1; letter-spacing:-0.02em; color:#14171A">Privacy Policy</h2>
+        <p style="margin:0; font-family:'Overpass Mono',monospace; font-size:15px">Last updated: September 20, 2026</p>
+        <p style="margin:0">My Bus SF ("the App") is developed by Spencer Holtaway. This policy explains what information the App accesses, how it's used, and what it does not do.</p>
+        <h3 style="margin:24px 0 0; font-weight:800; font-size:22px; color:#14171A">Information We Collect</h3>
+        <h4 style="margin:8px 0 0; font-weight:800; font-size:18px; color:#14171A">Location Data</h4>
+        <p style="margin:0">The App uses your device's location, with your permission, to show nearby bus stops and sort your saved stops by distance. Location data is processed on your device and is not transmitted to us, stored on any server we control, or shared with third parties. You can revoke location access at any time in your device's Settings.</p>
+        <h4 style="margin:8px 0 0; font-weight:800; font-size:18px; color:#14171A">Favorites and Preferences</h4>
+        <p style="margin:0">Stops and routes you save as favorites are stored locally on your device. This data is not uploaded to any server we operate and is not accessible to us.</p>
+        <h4 style="margin:8px 0 0; font-weight:800; font-size:18px; color:#14171A">Widget Data</h4>
+        <p style="margin:0">If you add the Nearest Stop widget, your nearest-stop information is shared between the App and the widget only on your device (via an app group), never transmitted elsewhere.</p>
+        <h3 style="margin:24px 0 0; font-weight:800; font-size:22px; color:#14171A">Information We Do Not Collect</h3>
+        <p style="margin:0">The App does not require an account or login. We do not collect your name, email address, contacts, or any other personally identifiable information. The App does not use analytics, advertising, or third-party tracking software of any kind.</p>
+        <h3 style="margin:24px 0 0; font-weight:800; font-size:22px; color:#14171A">Third-Party Services</h3>
+        <p style="margin:0">The App retrieves real-time transit predictions and route data from the <a href="https://511.org">511.org Regional Transit Open Data API</a> (Metropolitan Transportation Commission). Requests to this service include only the transit stop or route information needed to fetch predictions — no personal or location data identifying you is sent. Please refer to 511.org's own privacy policy for details on how they handle API requests.</p>
+        <h3 style="margin:24px 0 0; font-weight:800; font-size:22px; color:#14171A">Siri Shortcuts and App Intents</h3>
+        <p style="margin:0">If you enable Siri Shortcuts or widgets that surface nearby stops, this functionality operates entirely on-device through Apple's frameworks and does not send data to us.</p>
+        <h3 style="margin:24px 0 0; font-weight:800; font-size:22px; color:#14171A">Data Retention and Deletion</h3>
+        <p style="margin:0">All app data (favorites, cached transit schedules) is stored locally on your device and is deleted automatically when you delete the App. We do not retain any copy of this data.</p>
+        <h3 style="margin:24px 0 0; font-weight:800; font-size:22px; color:#14171A">Children's Privacy</h3>
+        <p style="margin:0">The App does not knowingly collect information from children. It is a general-purpose transit tool with no age-specific features or data collection.</p>
+        <h3 style="margin:24px 0 0; font-weight:800; font-size:22px; color:#14171A">Changes to This Policy</h3>
+        <p style="margin:0">We may update this policy from time to time. Changes will be reflected by the "Last updated" date above. Continued use of the App after changes constitutes acceptance of the updated policy.</p>
+        <h3 style="margin:24px 0 0; font-weight:800; font-size:22px; color:#14171A">Contact</h3>
+        <p style="margin:0">If you have questions about this policy, contact us at <a href="mailto:mybussf@holtawaydesign.com">mybussf@holtawaydesign.com</a></p>
+        </div>
+      </details>
+    </section>
+
+    <footer style="max-width:1240px; margin:0 auto; padding:0 clamp(20px,4vw,48px) 40px; font-family:'Overpass Mono',monospace; font-size:13px; color:#4A4E52; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px"><span>© 2026 Spencer Holtaway</span><a href="/" style="color:#4A4E52">holtawaydesign.com</a></footer>
+  </div>
+  <PrivacyScript />
+</Base>

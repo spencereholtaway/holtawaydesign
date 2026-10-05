@@ -1,0 +1,26 @@
+---
+// The only script on the app pages: /<slug>#privacy (on load, on hash change,
+// or from the header's Privacy link) opens the policy and scrolls to it.
+---
+
+<script is:inline>
+  (function () {
+    var section = document.getElementById('privacy');
+    var details = section && section.querySelector('details');
+    if (!details) return;
+    function open() {
+      details.open = true;
+      section.scrollIntoView();
+    }
+    function check() {
+      if (location.hash === '#privacy') open();
+    }
+    check();
+    addEventListener('hashchange', check);
+    document.querySelectorAll('a[href="#privacy"]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        details.open = true;
+      });
+    });
+  })();
+</script>

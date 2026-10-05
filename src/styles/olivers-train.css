@@ -1,0 +1,8 @@
+html,body{margin:0;overflow-wrap:break-word;background:#EFE7D2;color:#1B2B22;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+#support a,footer a{display:inline-flex;align-items:center;min-height:44px}
+summary::-webkit-details-marker{display:none}
+nav a{display:inline-flex;align-items:center;min-height:44px}
+a{overflow-wrap:anywhere;color:#1F4D3A;text-decoration:underline;text-underline-offset:3px}
+a:hover{color:#C8372D}
+@keyframes otBlink{0%,60%{opacity:1}61%,100%{opacity:.25}}

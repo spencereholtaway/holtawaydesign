@@ -1,0 +1,78 @@
+---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path without trailing slash, e.g. "/breathebody", or "/" for the homepage. */
+  path: string;
+  /** Google Fonts css2 URL for this page's families only. */
+  fonts: string;
+  /** Page-level CSS, copied from the reference file's <style>. */
+  css: string;
+  /** Social share image, a path under src/assets/apps without the extension. */
+  og?: string;
+  /** Background colour for the browser chrome on mobile. */
+  themeColor: string;
+}
+
+const { title, description, path, fonts, css, og, themeColor } = Astro.props;
+const canonical = new URL(path, Astro.site).href;
+
+// Share image: a 1200x630 crop of the first screenshot until real OG art exists.
+let ogImage: string | undefined;
+if (og) {
+  const files = import.meta.glob<ImageMetadata>('../assets/apps/**/*.{png,jpg,jpeg,webp}', {
+    eager: true,
+    import: 'default',
+  });
+  const key = Object.keys(files).find((k) => k.replace(/\.[a-z]+$/, '').endsWith(`/apps/${og}`));
+  if (key) {
+    const img = await getImage({ src: files[key], width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 80 });
+    ogImage = new URL(img.src, Astro.site).href;
+  }
+}
+
+// Every policy page and the homepage share these rules; motion and the
+// privacy disclosure behave the same way everywhere.
+const shared = `
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto !important}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content={themeColor} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta property="og:image:width" content="1200" />}
+    {ogImage && <meta property="og:image:height" content="630" />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={fonts} />
+    <style is:inline set:html={css + shared}></style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
