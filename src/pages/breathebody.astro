@@ -41,12 +41,52 @@ const shots = ['01', '02', '03', '04', '05', '06', '07', '08'].map((n) => `breat
       </div>
     </section>
 
-    <section data-section="Screens" data-screen-label="Screens" style="padding:0 0 clamp(80px,12vw,160px)">
-      <div style="display:flex; gap:clamp(16px,2vw,28px); overflow-x:auto; padding:0 clamp(20px,4vw,48px) 24px; scroll-snap-type:x mandatory">
+    <section data-section="Screens" data-screen-label="Screens" aria-label="Breath Body screenshots" style="padding:0 0 clamp(80px,12vw,160px)">
+      <div data-bb-track tabindex="0" style="display:flex; gap:clamp(16px,2vw,28px); overflow-x:auto; scroll-snap-type:x mandatory">
         {shots.map((s) => (
-          <div style="flex:0 0 clamp(200px,22vw,280px); aspect-ratio:1206/2622; border-radius:14% / 6.44%; overflow:hidden; position:relative; background:#16161D; scroll-snap-align:start; box-shadow:0 0 0 1px rgba(255,255,255,0.06), 0 40px 80px -30px rgba(240,168,106,0.35)"><Shot name={s} alt="Breath Body screen" widths={[320, 480, 640, 840]} sizes="(max-width: 909px) 200px, 280px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div>
+          <div data-bb-shot style="aspect-ratio:1206/2622; border-radius:14% / 6.44%; overflow:hidden; position:relative; background:#16161D; scroll-snap-align:center; box-shadow:0 0 0 1px rgba(255,255,255,0.06), 0 40px 80px -30px rgba(240,168,106,0.35)"><Shot name={s} alt="Breath Body screen" widths={[320, 480, 640, 840]} sizes="(max-width: 520px) 62vw, 320px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div>
         ))}
       </div>
+      <div style="display:flex; justify-content:center; align-items:center; gap:20px; padding:8px clamp(20px,4vw,48px) 0">
+        <button type="button" data-bb-prev aria-label="Previous screen">‹</button>
+        <span aria-hidden="true" data-bb-progress><span data-bb-fill></span></span>
+        <button type="button" data-bb-next aria-label="Next screen">›</button>
+      </div>
+      <script is:inline>
+        (function () {
+          var section = document.currentScript.parentNode;
+          var track = section.querySelector('[data-bb-track]');
+          var shots = track.querySelectorAll('[data-bb-shot]');
+          var prev = section.querySelector('[data-bb-prev]');
+          var next = section.querySelector('[data-bb-next]');
+          var fill = section.querySelector('[data-bb-fill]');
+          var smooth = function () { return matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'; };
+          function centre(i, behavior) {
+            var el = shots[Math.max(0, Math.min(shots.length - 1, i))];
+            track.scrollTo({ left: el.offsetLeft - (track.clientWidth - el.offsetWidth) / 2, behavior: behavior });
+          }
+          function current() {
+            var mid = track.scrollLeft + track.clientWidth / 2, best = 0, dist = Infinity;
+            shots.forEach(function (el, i) {
+              var d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - mid);
+              if (d < dist) { dist = d; best = i; }
+            });
+            return best;
+          }
+          function update() {
+            var i = current();
+            prev.disabled = i === 0;
+            next.disabled = i === shots.length - 1;
+            fill.style.transform = 'scaleX(' + (i + 1) / shots.length + ')';
+          }
+          prev.addEventListener('click', function () { centre(current() - 1, smooth()); });
+          next.addEventListener('click', function () { centre(current() + 1, smooth()); });
+          track.addEventListener('scroll', update, { passive: true });
+          // Open on the second screen so there are phones on both sides.
+          centre(1, 'auto');
+          update();
+        })();
+      </script>
     </section>
 
     <section data-section="How it works" data-screen-label="How it works" style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,12vw,160px); display:grid; gap:clamp(40px,6vw,72px)">

@@ -7,3 +7,9 @@ a{overflow-wrap:anywhere;color:#D9542F;text-decoration:none}
 a:hover{color:#0E3B47}
 @keyframes ffBob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
 @keyframes ffSwell{from{background-position-x:0}to{background-position-x:240px}}
+/* Screens: two big landscape shots, the daytime one overlapping the night one. */
+[data-ffc-screens]{display:grid;grid-template-columns:repeat(12,minmax(0,1fr))}
+[data-ffc-shot]{grid-row:1}
+[data-ffc-shot=night]{grid-column:1 / 9}
+[data-ffc-shot=day]{grid-column:5 / 13;margin-top:clamp(120px,17vw,230px);z-index:1}
+@media (max-width:700px){[data-ffc-shot=night]{grid-column:1 / 12}[data-ffc-shot=day]{grid-column:2 / 13;margin-top:30vw}}
