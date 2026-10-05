@@ -209,7 +209,7 @@ const jobs = [
   </script>
 
   <script is:inline>
-    // Bento tiles: the card tilts toward the cursor, with a soft glare, for mouse/trackpad users.
+    // Bento tiles: the card tilts toward the cursor for mouse/trackpad users.
     (function () {
       if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -220,8 +220,6 @@ const jobs = [
           frame = 0;
           panel.style.setProperty('--rx', ((0.5 - y) * 8).toFixed(2) + 'deg');
           panel.style.setProperty('--ry', ((x - 0.5) * 10).toFixed(2) + 'deg');
-          panel.style.setProperty('--gx', (x * 100).toFixed(1) + '%');
-          panel.style.setProperty('--gy', (y * 100).toFixed(1) + '%');
         }
         tile.addEventListener('pointerenter', function () { panel.setAttribute('data-tilting', ''); });
         tile.addEventListener('pointermove', function (e) {
