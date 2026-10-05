@@ -24,3 +24,5 @@ a:hover{color:#FFF1DE}
 [data-bb-prev]:disabled,[data-bb-next]:disabled{opacity:.3;cursor:default;border-color:#2A2A33;color:#EDE6DA}
 [data-bb-progress]{display:block;width:clamp(120px,20vw,200px);height:2px;border-radius:2px;background:#2A2A33;overflow:hidden}
 [data-bb-fill]{display:block;height:100%;background:#F2C89B;transform-origin:left;transition:transform .3s}
+/* Hero: a wider column for the headline beside the light blobs on desktop. */
+@media (min-width:900px){[data-bb-hero]{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) !important}}
