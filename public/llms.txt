@@ -1,0 +1,25 @@
+# Spencer Holtaway
+
+> Spencer Holtaway is an AI Native Staff Product Designer in San Rafael, CA. This site is his holding page plus support and privacy pages for five small apps he designed and built himself.
+
+Contact: spencer@holtawaydesign.com · LinkedIn: https://linkedin.com/in/holtawaydesign
+
+Previously: Calm (Staff Product Designer), Dialpad (Head of Design), Zynga (Lead UI Designer), Shuddle, Red9, Chipstack. BA Visual Communication, Central Saint Martins.
+
+## Pages
+
+- [Spencer Holtaway](https://www.holtawaydesign.com/): about, what he stands for, recent work and work history
+
+## Apps
+
+Each app page has a description, screenshots, a support email and the app's full privacy policy (under #privacy).
+
+- [Breath Body](https://www.holtawaydesign.com/breathebody): a breathing app for iPhone you don't look at. It rests on your chest and guides you with haptics, sound and light. Support: breathe@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/breathebody#privacy)
+- [Fishing for Compliments: Isles](https://www.holtawaydesign.com/fishingforcompliments): a relaxing boating game with no finish line for iPhone, iPad, Mac and Apple TV. Support: fishing@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/fishingforcompliments#privacy)
+- [My Bus SF](https://www.holtawaydesign.com/mybussf): real-time Muni bus arrivals for San Franciscans, for iPhone. Support: mybussf@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/mybussf#privacy)
+- [Oliver's Train](https://www.holtawaydesign.com/olivers-train): an ambient train ride for iPhone, a game you can't win, lose or cheat. Support: trainride@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/olivers-train#privacy)
+- [Ping Pong Cowboy](https://www.holtawaydesign.com/pingpongcowboy): an arcade game for iPhone about throwing ping pong balls at things. Support: cowboy@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/pingpongcowboy#privacy)
+
+## Optional
+
+- [Sitemap](https://www.holtawaydesign.com/sitemap.xml)

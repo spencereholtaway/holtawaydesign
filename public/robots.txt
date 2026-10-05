@@ -1,4 +1,6 @@
+# Search engines and AI crawlers are all welcome.
 User-agent: *
 Allow: /
 
 Sitemap: https://www.holtawaydesign.com/sitemap.xml
+# Plain-text summary of the site for AI tools: https://www.holtawaydesign.com/llms.txt
