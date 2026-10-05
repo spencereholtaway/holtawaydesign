@@ -19,15 +19,13 @@ h1[data-h1]{font-size:calc(clamp(32px,4.4vw,60px) * 1.52)}
 [data-tile=ffc],[data-tile=ot]{grid-column:span 2}[data-tile=ffc] [data-panel]{height:58vw}[data-tile=ot] [data-panel]{height:calc((min(100vw,1360px) - 2 * clamp(20px,4vw,56px)) / 1.65)}
 [data-tile=bb],[data-tile=mb]{grid-column:span 1}[data-tile=bb] [data-panel],[data-tile=mb] [data-panel]{height:78vw}
 [data-tile=pp]{grid-column:span 2;order:3}[data-tile=pp] [data-panel]{height:88vw}[data-tile=pp] img{object-position:50% 30% !important}}
-/* Bento hover. Touch: a light press fade. Mouse/trackpad: tilt, parallax and glare (script on the page). */
+/* Bento hover. Touch: a light press fade. Mouse/trackpad: the card tilts toward the cursor with a soft glare (script on the page). The screenshot itself never moves or crops. */
 @media (hover:none){[data-tile]:active{opacity:.88}}
 @media (hover:hover) and (pointer:fine){
   [data-tile]{position:relative}
   [data-tile]:hover{z-index:1}
   [data-tile] [data-panel]{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));clip-path:inset(0 round 14px);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
   [data-tile] [data-panel][data-tilting]{--s:1.03;transition:transform .15s ease-out;will-change:transform}
-  [data-tile] [data-panel] img{transition:translate .6s cubic-bezier(.2,.7,.2,1),scale .6s cubic-bezier(.2,.7,.2,1)}
-  [data-tile] [data-panel][data-tilting] img{scale:1.06;translate:var(--px,0) var(--py,0);transition:translate .15s ease-out,scale .4s cubic-bezier(.2,.7,.2,1)}
   [data-tile] [data-panel]::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.22),rgba(255,255,255,0) 55%);opacity:0;transition:opacity .4s}
   [data-tile] [data-panel][data-tilting]::after{opacity:1}
 }
