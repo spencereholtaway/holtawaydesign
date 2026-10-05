@@ -14,7 +14,7 @@ Previously: Calm (Staff Product Designer), Dialpad (Head of Design), Zynga (Lead
 
 Each app page has a description, screenshots, a support email and the app's full privacy policy (under #privacy).
 
-- [Breath Body](https://www.holtawaydesign.com/breathebody): a breathing app for iPhone you don't look at, $0.99. It rests on your chest and guides you with haptics, sound and light. [App Store](https://apps.apple.com/us/app/breath-body/id6819162493). Support: breathe@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/breathebody#privacy)
+- [Breath Body](https://www.holtawaydesign.com/breathebody): a breathing app for iPhone, $0.99 forever: breathwork for less than a cup of coffee. It rests on your chest and guides you with haptics, sound and light. [App Store](https://apps.apple.com/us/app/breath-body/id6819162493). Support: breathe@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/breathebody#privacy)
 - [Fishing for Compliments: Isles](https://www.holtawaydesign.com/fishingforcompliments): a relaxing boating game with no finish line for iPhone, iPad, Mac and Apple TV. Support: fishing@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/fishingforcompliments#privacy)
 - [My Bus SF](https://www.holtawaydesign.com/mybussf): real-time Muni bus arrivals for San Franciscans, for iPhone, $0.99. [App Store](https://apps.apple.com/us/app/mybussf-2026/id6814334469). Support: mybussf@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/mybussf#privacy)
 - [Oliver's Train](https://www.holtawaydesign.com/olivers-train): an ambient train ride for iPhone, a game you can't win, lose or cheat. Support: trainride@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/olivers-train#privacy)
