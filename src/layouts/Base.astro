@@ -14,16 +14,18 @@ interface Props {
   css: string;
   /** Social share image, a path under src/assets/apps without the extension. */
   og?: string;
+  /** A ready-made 1200x630 share image in public/, e.g. "/og/home.png". Wins over `og`. */
+  ogFile?: string;
   /** Background colour for the browser chrome on mobile. */
   themeColor: string;
 }
 
-const { title, description, path, fonts, css, og, themeColor } = Astro.props;
+const { title, description, path, fonts, css, og, ogFile, themeColor } = Astro.props;
 const canonical = new URL(path, Astro.site).href;
 
 // Share image: a 1200x630 crop of the first screenshot until real OG art exists.
-let ogImage: string | undefined;
-if (og) {
+let ogImage: string | undefined = ogFile && new URL(ogFile, Astro.site).href;
+if (og && !ogFile) {
   const files = import.meta.glob<ImageMetadata>('../assets/apps/**/*.{png,jpg,jpeg,webp}', {
     eager: true,
     import: 'default',
