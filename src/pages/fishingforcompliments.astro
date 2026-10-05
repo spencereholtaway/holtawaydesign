@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import AppStoreButton from '../components/AppStoreButton.astro';
 import PrivacyScript from '../components/PrivacyScript.astro';
 import Shot from '../components/Shot.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 import css from '../styles/fishingforcompliments.css?raw';
 ---
 
@@ -16,11 +17,11 @@ import css from '../styles/fishingforcompliments.css?raw';
   themeColor="#9FD6D9"
 >
   <div style="font-family:'Figtree',system-ui,sans-serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip">
+    <SiteHeader maxWidth={1240} background="rgba(159,214,217,0.92)" border="rgba(14,59,71,0.15)" color="#0E3B47" accent="#D9542F" link="#0E3B47" weight={700} />
     <div style="background:linear-gradient(#9FD6D9, #5FB3BC 60%, #2E8B99); color:#0E3B47; position:relative">
-      <header style="max-width:1240px; margin:0 auto; padding:20px clamp(20px,4vw,48px); display:flex; justify-content:space-between; align-items:center; gap:16px">
+      <div style="max-width:1240px; margin:0 auto; padding:20px clamp(20px,4vw,48px); display:flex; justify-content:space-between; align-items:center; gap:16px">
         <span style="font-family:'Young Serif',serif; font-size:22px">Fishing for Compliments</span>
-        <nav style="display:flex; gap:20px; font-size:15px; font-weight:600"><a href="#support" style="color:#0E3B47">Support</a><a href="#privacy" style="color:#0E3B47">Privacy</a></nav>
-      </header>
+      </div>
       <section data-screen-label="Hero" style="max-width:1240px; margin:0 auto; padding:clamp(40px,7vw,100px) clamp(20px,4vw,48px) clamp(120px,14vw,200px); display:grid; gap:28px; justify-items:start">
         <span style="font-weight:700; font-size:14px; letter-spacing:0.12em; text-transform:uppercase; background:#F4EFE3; padding:6px 12px; border-radius:999px">Isles</span>
         <h1 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:clamp(56px,9vw,128px); line-height:0.95; letter-spacing:-0.02em; max-width:11ch; text-wrap:balance; animation:ffBob 6s ease-in-out infinite">A game with no finish line.</h1>
@@ -33,12 +34,12 @@ import css from '../styles/fishingforcompliments.css?raw';
       <div aria-hidden="true" style="position:absolute; left:0; right:0; bottom:-1px; height:60px; background:radial-gradient(circle at 60px -20px, transparent 62px, #F4EFE3 63px) 0 0 / 120px 60px repeat-x; animation:ffSwell 9s linear infinite"></div>
     </div>
 
-    <section data-screen-label="Screens" style="max-width:1240px; margin:0 auto; padding:clamp(48px,6vw,80px) clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr)); gap:clamp(20px,3vw,40px)">
+    <section data-section="Screens" data-screen-label="Screens" style="max-width:1240px; margin:0 auto; padding:clamp(48px,6vw,80px) clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr)); gap:clamp(20px,3vw,40px)">
       <div style="position:relative; aspect-ratio:2868/1320; border-radius:28px; overflow:hidden; background:#DCE8EC; box-shadow:0 30px 60px -24px rgba(14,59,71,0.4); transform:rotate(-1.5deg)"><Shot name="fishingforcompliments/01" alt="Fishing for Compliments screen" widths={[480, 720, 960, 1280, 1600]} sizes="(max-width: 1059px) calc(100vw - 40px), 580px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div>
       <div style="position:relative; aspect-ratio:2868/1320; border-radius:28px; overflow:hidden; background:#DCE8EC; box-shadow:0 30px 60px -24px rgba(14,59,71,0.4); transform:rotate(1.5deg); margin-top:clamp(0px,4vw,56px)"><Shot name="fishingforcompliments/02" alt="Fishing for Compliments screen" widths={[480, 720, 960, 1280, 1600]} sizes="(max-width: 1059px) calc(100vw - 40px), 580px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div>
     </section>
 
-    <section data-screen-label="What's out there" style="max-width:1240px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; gap:clamp(36px,5vw,64px)">
+    <section data-section="What’s out there" data-screen-label="What's out there" style="max-width:1240px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; gap:clamp(36px,5vw,64px)">
       <h2 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:clamp(40px,5.5vw,72px); line-height:1; letter-spacing:-0.02em">What's out there</h2>
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:20px">
         <div style="background:#FFFFFF; border-radius:24px; padding:28px; display:grid; gap:10px; align-content:start; box-shadow:0 4px 0 #E2D9C6"><h3 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:26px; line-height:1.1">A sea that keeps going</h3><p style="margin:0; color:#3F5E66; text-wrap:pretty">The world is generated as you sail, with new biomes the farther out you go, weather that rolls in and water that changes with it.</p></div>
@@ -50,14 +51,14 @@ import css from '../styles/fishingforcompliments.css?raw';
       </div>
     </section>
 
-    <section id="support" data-screen-label="Support" style="background:#0E3B47; color:#F4EFE3">
+    <section id="support" data-section="Support" data-screen-label="Support" style="background:#0E3B47; color:#F4EFE3">
       <div style="max-width:1240px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:24px">
         <h2 style="margin:0; font-family:'Young Serif',serif; font-weight:400; font-size:clamp(36px,4.5vw,56px); line-height:1">need help? e-mail me!</h2>
         <a href="mailto:fishing@holtawaydesign.com" style="color:#FFB59E; font-size:clamp(18px,2vw,24px); font-weight:600">fishing@holtawaydesign.com</a>
       </div>
     </section>
 
-    <section id="privacy" data-screen-label="Privacy Policy" style="max-width:1240px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:block">
+    <section id="privacy" data-section="Privacy" data-screen-label="Privacy Policy" style="max-width:1240px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:block">
       <details style="border-top:1px solid #DDD3BF; border-bottom:1px solid #DDD3BF">
         <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:64px; font-weight:600; font-size:17px; color:#0E3B47">View privacy policy<span aria-hidden="true" style="font-size:24px; font-weight:400">+</span></summary>
         <div style="padding:8px 0 48px; max-width:70ch; display:grid; gap:14px; font-size:17px; color:#2C4C55">

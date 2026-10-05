@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import AppStoreButton from '../components/AppStoreButton.astro';
 import PrivacyScript from '../components/PrivacyScript.astro';
 import Shot from '../components/Shot.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 import css from '../styles/breathebody.css?raw';
 
 const shots = ['01', '02', '03', '04', '05', '06', '07', '08'].map((n) => `breathebody/${n}`);
@@ -18,10 +19,10 @@ const shots = ['01', '02', '03', '04', '05', '06', '07', '08'].map((n) => `breat
   themeColor="#0B0B10"
 >
   <div style="font-family:'Hanken Grotesk',system-ui,sans-serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip">
-    <header style="max-width:1200px; margin:0 auto; padding:20px clamp(20px,4vw,48px); display:flex; justify-content:space-between; align-items:center; gap:16px">
+    <SiteHeader maxWidth={1200} background="rgba(11,11,16,0.88)" border="#2A2A33" color="#EDE6DA" accent="#F2C89B" link="#F2C89B" weight={600} />
+    <div style="max-width:1200px; margin:0 auto; padding:20px clamp(20px,4vw,48px); display:flex; justify-content:space-between; align-items:center; gap:16px">
       <span style="font-family:'Instrument Serif',serif; font-size:26px; letter-spacing:-0.01em; color:#EDE6DA">Breath Body</span>
-      <nav style="display:flex; gap:20px; font-size:15px"><a href="#support">Support</a><a href="#privacy">Privacy</a></nav>
-    </header>
+    </div>
 
     <section data-screen-label="Hero" style="position:relative; max-width:1200px; margin:0 auto; padding:clamp(40px,8vw,120px) clamp(20px,4vw,48px) clamp(80px,12vw,180px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:48px; align-items:center">
       <div style="display:grid; gap:28px; position:relative; z-index:1">
@@ -40,7 +41,7 @@ const shots = ['01', '02', '03', '04', '05', '06', '07', '08'].map((n) => `breat
       </div>
     </section>
 
-    <section data-screen-label="Screens" style="padding:0 0 clamp(80px,12vw,160px)">
+    <section data-section="Screens" data-screen-label="Screens" style="padding:0 0 clamp(80px,12vw,160px)">
       <div style="display:flex; gap:clamp(16px,2vw,28px); overflow-x:auto; padding:0 clamp(20px,4vw,48px) 24px; scroll-snap-type:x mandatory">
         {shots.map((s) => (
           <div style="flex:0 0 clamp(200px,22vw,280px); aspect-ratio:1206/2622; border-radius:14% / 6.44%; overflow:hidden; position:relative; background:#16161D; scroll-snap-align:start; box-shadow:0 0 0 1px rgba(255,255,255,0.06), 0 40px 80px -30px rgba(240,168,106,0.35)"><Shot name={s} alt="Breath Body screen" widths={[320, 480, 640, 840]} sizes="(max-width: 909px) 200px, 280px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div>
@@ -48,7 +49,7 @@ const shots = ['01', '02', '03', '04', '05', '06', '07', '08'].map((n) => `breat
       </div>
     </section>
 
-    <section data-screen-label="How it works" style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,12vw,160px); display:grid; gap:clamp(40px,6vw,72px)">
+    <section data-section="How it works" data-screen-label="How it works" style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,12vw,160px); display:grid; gap:clamp(40px,6vw,72px)">
       <h2 style="margin:0; font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(40px,5.5vw,72px); line-height:1; letter-spacing:-0.02em; max-width:16ch; text-wrap:balance">Almost every breathing app is a circle in the middle of a screen.</h2>
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:48px 40px">
         <div style="display:grid; gap:10px; align-content:start; border-top:1px solid #2A2A33; padding-top:20px"><h3 style="margin:0; font-size:19px; font-weight:600">It rests on your chest</h3><p style="margin:0; color:#B3AB9E; text-wrap:pretty">The motion sensors feel your breathing and how the phone is lying, and the haptics swell through the whole breath instead of tapping at the start and end.</p></div>
@@ -60,12 +61,12 @@ const shots = ['01', '02', '03', '04', '05', '06', '07', '08'].map((n) => `breat
       </div>
     </section>
 
-    <section id="support" data-screen-label="Support" style="max-width:1200px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px); border-top:1px solid #2A2A33; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:24px">
+    <section id="support" data-section="Support" data-screen-label="Support" style="max-width:1200px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px); border-top:1px solid #2A2A33; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:24px">
       <h2 style="margin:0; font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(36px,4.5vw,56px); line-height:1">need help? e-mail me!</h2>
       <a href="mailto:breathe@holtawaydesign.com" style="font-size:clamp(18px,2vw,24px)">breathe@holtawaydesign.com</a>
     </section>
 
-    <section id="privacy" data-screen-label="Privacy Policy" style="max-width:1200px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(80px,10vw,140px); border-top:1px solid #2A2A33; display:block">
+    <section id="privacy" data-section="Privacy" data-screen-label="Privacy Policy" style="max-width:1200px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(80px,10vw,140px); border-top:1px solid #2A2A33; display:block">
       <details style="border-top:1px solid #2A2A33; border-bottom:1px solid #2A2A33">
         <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:64px; font-weight:600; font-size:17px; color:#EDE6DA">View privacy policy<span aria-hidden="true" style="font-size:24px; font-weight:400">+</span></summary>
         <div style="padding:8px 0 48px; max-width:68ch; display:grid; gap:14px; font-size:17px; color:#C9C1B4">

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import AppStoreButton from '../components/AppStoreButton.astro';
 import PrivacyScript from '../components/PrivacyScript.astro';
 import Shot from '../components/Shot.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 import css from '../styles/pingpongcowboy.css?raw';
 
 const shots = ['01', '02', '03'].map((n) => `pingpongcowboy/${n}`);
@@ -18,10 +19,10 @@ const shots = ['01', '02', '03'].map((n) => `pingpongcowboy/${n}`);
   themeColor="#3B2314"
 >
   <div style="font-family:'Arvo',Georgia,serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip; background:repeating-linear-gradient(90deg, #4A2C19 0 3px, #3B2314 3px 46px, #43281A 46px 49px, #3B2314 49px 92px)">
-    <header style="max-width:1200px; margin:0 auto; padding:18px clamp(20px,4vw,48px); display:flex; justify-content:space-between; align-items:center; gap:16px">
+    <SiteHeader maxWidth={1200} background="rgba(30,15,6,0.9)" border="#6E4A2A" color="#FBEBD0" accent="#FFD36B" link="#FFD36B" weight={700} />
+    <div style="max-width:1200px; margin:0 auto; padding:18px clamp(20px,4vw,48px); display:flex; justify-content:space-between; align-items:center; gap:16px">
       <span style="font-family:'Rye',serif; font-size:22px; color:#FFD36B; text-shadow:0 2px 0 #1E0F06">Ping Pong Cowboy</span>
-      <nav style="display:flex; gap:20px; font-size:15px; font-weight:700"><a href="#support">Support</a><a href="#privacy">Privacy</a></nav>
-    </header>
+    </div>
 
     <section data-screen-label="Hero" style="max-width:1200px; margin:0 auto; padding:clamp(32px,6vw,88px) clamp(20px,4vw,48px) clamp(64px,8vw,112px); display:grid; grid-template-columns:minmax(0,1fr); justify-items:center; text-align:center; gap:28px">
       <div style="background:linear-gradient(#F6E3BC, #E8C98E); color:#5A2A12; border-radius:18px; padding:clamp(28px,5vw,56px) clamp(20px,6vw,80px); max-width:100%; box-shadow:inset 0 0 0 3px #B9874A, inset 0 0 0 6px #F6E3BC, inset 0 0 0 8px #7A4A22, 0 12px 0 #1E0F06, 0 30px 50px rgba(0,0,0,0.5); max-width:900px; animation:ppSwing 5s ease-in-out infinite; transform-origin:50% -40px">
@@ -35,26 +36,26 @@ const shots = ['01', '02', '03'].map((n) => `pingpongcowboy/${n}`);
       </div>
     </section>
 
-    <section data-screen-label="Screens" style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:clamp(20px,3vw,40px); justify-items:center">
+    <section data-section="Screens" data-screen-label="Screens" style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:clamp(20px,3vw,40px); justify-items:center">
       {shots.map((s) => (
         <div style="width:100%; max-width:300px; padding:12px; border-radius:46px; background:linear-gradient(#2B2B2B, #0D0D0D); box-shadow:inset 0 1px 0 rgba(255,255,255,0.25), 0 20px 40px rgba(0,0,0,0.5)"><div style="position:relative; aspect-ratio:1320/2868; border-radius:36px; overflow:hidden; background:#1E0F06"><Shot name={s} alt="Ping Pong Cowboy screen" widths={[320, 480, 640, 840]} sizes="(max-width: 320px) calc(100vw - 64px), 276px" style="position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover" /></div></div>
       ))}
     </section>
 
-    <section data-screen-label="Features" style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:20px">
+    <section data-section="Features" data-screen-label="Features" style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:20px">
       <div style="background:#F6E3BC; color:#4A2412; border-radius:14px; padding:28px; display:grid; gap:8px; align-content:start; box-shadow:inset 0 0 0 2px #B9874A, inset 0 0 0 5px #F6E3BC, inset 0 0 0 6px #B9874A, 0 6px 0 #1E0F06"><h3 style="margin:0; font-family:'Rye',serif; font-weight:400; font-size:24px; color:#B23A1E">Pins on your floor</h3><p style="margin:0; text-wrap:pretty">Point your camera down and the game sets up bowling pins on your actual floor, using augmented reality.</p></div>
       <div style="background:#F6E3BC; color:#4A2412; border-radius:14px; padding:28px; display:grid; gap:8px; align-content:start; box-shadow:inset 0 0 0 2px #B9874A, inset 0 0 0 5px #F6E3BC, inset 0 0 0 6px #B9874A, 0 6px 0 #1E0F06"><h3 style="margin:0; font-family:'Rye',serif; font-weight:400; font-size:24px; color:#B23A1E">Tilt the booth</h3><p style="margin:0; text-wrap:pretty">Tip your phone and the light on the booth shifts with it, the way apps used to show off the accelerometer in 2009.</p></div>
       <div style="background:#F6E3BC; color:#4A2412; border-radius:14px; padding:28px; display:grid; gap:8px; align-content:start; box-shadow:inset 0 0 0 2px #B9874A, inset 0 0 0 5px #F6E3BC, inset 0 0 0 6px #B9874A, 0 6px 0 #1E0F06"><h3 style="margin:0; font-family:'Rye',serif; font-weight:400; font-size:24px; color:#B23A1E">Beat yourself</h3><p style="margin:0; text-wrap:pretty">Your personal bests stay on your phone. Nobody else needs to know.</p></div>
     </section>
 
-    <section id="support" data-screen-label="Support" style="background:#1E0F06; border-top:4px dashed #B9874A">
+    <section id="support" data-section="Support" data-screen-label="Support" style="background:#1E0F06; border-top:4px dashed #B9874A">
       <div style="max-width:1200px; margin:0 auto; padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:24px">
         <h2 style="margin:0; font-family:'Rye',serif; font-weight:400; font-size:clamp(34px,4.5vw,54px); line-height:1; color:#FFD36B">need help? e-mail me!</h2>
         <a href="mailto:cowboy@holtawaydesign.com" style="font-size:clamp(18px,2vw,24px); font-weight:700">cowboy@holtawaydesign.com</a>
       </div>
     </section>
 
-    <section id="privacy" data-screen-label="Privacy Policy" style="background:#1E0F06">
+    <section id="privacy" data-section="Privacy" data-screen-label="Privacy Policy" style="background:#1E0F06">
       <div style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(80px,10vw,140px)">
       <details style="border-top:1px solid #6E4A2A; border-bottom:1px solid #6E4A2A">
         <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:64px; font-weight:700; font-size:17px; color:#FFD36B">View Privacy Policy<span>+</span></summary>
