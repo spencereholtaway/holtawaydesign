@@ -22,6 +22,7 @@
   --c-line-dashed: #B8B5AD;
   --c-accent: #E4007C;
   --c-on-accent: #fff;
+  --c-accent-deep: #8F0050; /* the sides of the 3D numbers */
 
   /* Dark surfaces */
   --c-dark: #111;

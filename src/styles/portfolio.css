@@ -48,6 +48,35 @@ html:has(dialog[open]) { overflow: hidden }
 .case-head--plain { display: grid; gap: 16px }
 @media (min-width: 720px) { .case-head__num { flex-basis: 25% } }
 
+/* 3D case numbers: a solid magenta block with deeper sides. The sides swing
+   with --ex/--ey and the block tilts with --rx/--ry (both set by
+   scripts/float-numbers.ts from the mouse), and it bobs gently on its own. */
+.case-head__num {
+  --ex: 0.6; --ey: 0.7; --rx: 0deg; --ry: 0deg; /* at rest, with no mouse */
+  display: inline-block;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  text-shadow:
+    calc(var(--ex) * 0.004em) calc(var(--ey) * 0.004em) 0 var(--c-accent-deep),
+    calc(var(--ex) * 0.008em) calc(var(--ey) * 0.008em) 0 var(--c-accent-deep),
+    calc(var(--ex) * 0.012em) calc(var(--ey) * 0.012em) 0 var(--c-accent-deep),
+    calc(var(--ex) * 0.016em) calc(var(--ey) * 0.016em) 0 var(--c-accent-deep),
+    calc(var(--ex) * 0.020em) calc(var(--ey) * 0.020em) 0 var(--c-accent-deep),
+    calc(var(--ex) * 0.024em) calc(var(--ey) * 0.024em) 0 var(--c-accent-deep),
+    calc(var(--ex) * 0.028em) calc(var(--ey) * 0.028em) 0 var(--c-accent-deep),
+    calc(var(--ex) * 0.032em) calc(var(--ey) * 0.032em) 0 var(--c-accent-deep),
+    calc(var(--ex) * 0.036em) calc(var(--ey) * 0.036em) 0 var(--c-accent-deep),
+    calc(var(--ex) * 0.040em) calc(var(--ey) * 0.040em) 0 var(--c-accent-deep),
+    calc(var(--ex) * 0.06em) calc(var(--ey) * 0.09em) 0.11em rgba(17, 17, 17, 0.16);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .case-head__num { animation: bob 6s ease-in-out infinite }
+  .case:nth-of-type(2n) .case-head__num { animation-duration: 7s; animation-delay: -2s }
+}
+@keyframes bob {
+  0%, 100% { translate: 0 0 }
+  50% { translate: 0 -0.035em }
+}
+
 .knockout { position: relative; max-width: 14ch }
 .knockout__bg { position: absolute; inset: 0; color: transparent; pointer-events: none; user-select: none }
 .knockout__bg > span, .knockout__text { -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0.02em 0.14em 0.08em 0 }
