@@ -36,17 +36,12 @@
 
   /* Screenshot panel tints ("Mixed tints") */
   --p-chip: #E3E8EE;
-  --p-bus: #E4ECE6;
   --p-pge: #F3EEDD;
   --p-calm: #E8E6F2;
   --p-bliss: #F5E8ED;
   --p-flight: #DDE3EA;
   --p-parent: #E9EEE3;
   --p-divorce: #EFEAE4;
-  --p-fish: #DCE8EC;
-  --p-train: #EEEAE0;
-  --p-pong: #F3E6DA;
-  --p-breath: #16161B;
 
   /* Type families. --font-detail is for small labels and meta rows. */
   --font-sans: 'Schibsted Grotesk', Helvetica, Arial, sans-serif;

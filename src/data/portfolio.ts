@@ -20,25 +20,10 @@ export const PGE_BEATS = beat(
   "During an outage your battery is the thing you're rationing, so the app is built to use as little of it as it can. Most of the work was deciding what not to build.",
 );
 
-export const BREATHBODY_NOTES = [
-  { label: 'On your chest', text: 'You lie down and rest the phone on your chest, and the haptics swell through the whole breath instead of tapping once at the start and once at the end.' },
-  { label: 'Sound', text: 'The sound is a wave, and the stereo field is built for someone lying on their back.' },
-  { label: 'Screen as light', text: 'Face-up in a dark room the screen turns into a soft glow, so it lights the room instead of asking to be watched.' },
-  { label: 'Blobs, not a circle', text: 'The visuals take after Liquid Glass so it feels native to iPhone. Metal-shader blobs expand and contract, merging into one bubble at the top of the in-breath and drifting apart into four or five at the bottom of the out-breath.' },
-  { label: 'Eyes open', text: 'Tilt the phone and the blobs shift. Touch the screen and your fingers make gravity or pull blobs off the main one, for people who meditate with their eyes open.' },
-  { label: 'Plain counts', text: "In, out and a break, because that's how people already think about breathing, and every button is a system iOS button." },
-];
-
-export const FFC_NOTES = [
-  { label: 'Bottles', text: 'Messages in bottles grew into affirmations you find as you sail.' },
-  { label: 'Pools that forget', text: "The reflecting pools connect to Apple Health, and they write and then wipe, so nothing about you is kept that you didn't need kept." },
-  { label: 'The engine', text: 'Underneath is a deep graphics engine: an infinite procedural world that generates new biomes the farther out you sail, with dynamic weather and water that responds to it.' },
-];
-
 /** "Five more." Each one has a card in the carousel and a side sheet. */
 export const PROJECTS = [
   {
-    key: 'calmb2b', num: '04', name: 'Calm for Business', year: '2026', tint: 'var(--p-calm)',
+    key: 'calmb2b', num: '03', name: 'Calm for Business', year: '2026', tint: 'var(--p-calm)',
     meta: 'My 2020 zero-to-one, revisited · 2026',
     head: 'A dashboard that lives up to the name.',
     teaser: 'An HR admin should feel the thing they just bought.',
@@ -47,7 +32,7 @@ export const PROJECTS = [
     i: "This is one where the feeling is doing real work. Someone buying Calm for their company should get a bit of the thing they're buying, even in an admin dashboard.",
   },
   {
-    key: 'bliss', num: '05', name: 'blisspool', year: '2026', tint: 'var(--p-bliss)',
+    key: 'bliss', num: '04', name: 'blisspool', year: '2026', tint: 'var(--p-bliss)',
     meta: 'Self-directed, carpools for families · 2026',
     head: 'I solved carpooling in 2015. Then I had kids.',
     teaser: 'The Shuddle problem, ten years later, for my own kids.',
@@ -56,7 +41,7 @@ export const PROJECTS = [
     i: "At Shuddle I had an engineering team for this. This time it's the same dependency web and it's just me, for my own kids.",
   },
   {
-    key: 'flight', num: '06', name: 'FlightAware', year: '2025', tint: 'var(--p-flight)',
+    key: 'flight', num: '05', name: 'FlightAware', year: '2025', tint: 'var(--p-flight)',
     meta: 'Self-directed redesign · 2025',
     head: 'Dark mode, for a reason.',
     teaser: 'They patched. I designed.',
@@ -65,7 +50,7 @@ export const PROJECTS = [
     i: 'Flight alerts and recent searches get somewhere proper to live. They patched. I designed.',
   },
   {
-    key: 'parent', num: '07', name: 'ParentSquare', year: '2025', tint: 'var(--p-parent)',
+    key: 'parent', num: '06', name: 'ParentSquare', year: '2025', tint: 'var(--p-parent)',
     meta: 'Self-directed refresh · 2025',
     head: 'Designed for messages nobody designed.',
     teaser: 'Built for whatever a teacher pastes in.',
@@ -74,7 +59,7 @@ export const PROJECTS = [
     i: 'The layout is built for the variety. Mixed text, images, whatever a teacher pastes in.',
   },
   {
-    key: 'divorce', num: '08', name: 'CA Divorce Disclosures Workbook', year: 'Holtaway Design', tint: 'var(--p-divorce)',
+    key: 'divorce', num: '07', name: 'CA Divorce Disclosures Workbook', year: 'Holtaway Design', tint: 'var(--p-divorce)',
     meta: 'Local-first app, shipped under Holtaway Design',
     head: 'Hundreds of fields, and now it knows where you left off.',
     teaser: "Same as PG&E. Work out what's running low and protect it.",

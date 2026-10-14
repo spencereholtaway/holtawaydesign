@@ -94,20 +94,6 @@ html:has(dialog[open]) { overflow: hidden }
   .beat p { font-size: 18px }
 }
 
-/* The five apps */
-.apps { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-section); padding-bottom: var(--space-section) }
-.apps-intro { display: flex; flex-wrap: wrap; flex-direction: row-reverse; gap: 8px 0; align-items: flex-start }
-.apps-intro__num { flex: 0 0 100%; text-align: right; margin-right: -0.04em }
-.apps-intro__body { flex: 1 1 50%; display: grid; gap: 20px; min-width: 0 }
-.apps-intro .t-intro { max-width: 40ch }
-@media (min-width: 720px) { .apps-intro__num { flex-basis: 25% } }
-
-.shorts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 56px 0 }
-.short { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-content: start; padding-right: var(--col-pad) }
-.short__panel { background: var(--tint); padding: clamp(32px, 4vw, 56px) 22% }
-.short__panel--wide { padding: clamp(56px, 7vw, 104px) 8% }
-.short p { color: var(--c-text) }
-
 /* Five more */
 .more { padding-bottom: var(--space-section); display: grid; gap: var(--space-stack); scroll-margin-top: var(--header-h) }
 .more__head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap }
