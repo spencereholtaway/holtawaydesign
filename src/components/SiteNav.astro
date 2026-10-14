@@ -95,35 +95,26 @@ const { sections, nav, email, activeBy = 'top' } = Astro.props;
     });
   }
 
+  // Worked out fresh on every scroll, so nothing is left over from where you
+  // were before: above the first section (the hero) there's no crumb at all.
   function onScroll() {
     const line = header.offsetHeight + 24;
+    const mid = innerHeight * 0.475;
     let cur = '';
+    let inMiddle = '';
     for (const s of sections) {
-      const el = document.getElementById(s.id);
-      if (el && el.getBoundingClientRect().top < line) cur = s.label;
+      const r = document.getElementById(s.id)?.getBoundingClientRect();
+      if (!r) continue;
+      if (r.top < line) cur = s.label;
+      if (r.top <= mid && r.bottom > mid) inMiddle = s.label;
     }
-    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = last.label;
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = inMiddle = last.label;
     if (cur) lastPast = cur;
-    if (cur !== past) {
+    if (cur !== past || inMiddle !== middle) {
       past = cur;
+      middle = inMiddle;
       render();
     }
-  }
-
-  if (byMiddle && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) middle = sections.find((s) => s.id === e.target.id)?.label ?? '';
-        }
-        render();
-      },
-      { rootMargin: '-45% 0px -50% 0px' },
-    );
-    sections.forEach((s) => {
-      const el = document.getElementById(s.id);
-      if (el) io.observe(el);
-    });
   }
 
   function setMenu(next: boolean) {
@@ -149,6 +140,7 @@ const { sections, nav, email, activeBy = 'top' } = Astro.props;
   });
   narrowMq.addEventListener('change', render);
   addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll, { passive: true });
   onScroll();
   render();
 </script>
