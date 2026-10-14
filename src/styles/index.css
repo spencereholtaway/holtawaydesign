@@ -1,40 +1,82 @@
-html{scroll-behavior:smooth}
-html,body{margin:0;background:#FAFAF7;color:#111;-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
-*{box-sizing:border-box}
-#support a,footer a{display:inline-flex;align-items:center;min-height:44px}
-a{color:#111;text-decoration:none}
-h1[data-h1]{font-size:calc(clamp(32px,4.4vw,60px) * 1.52)}
-@media (max-width:560px){h1[data-h1]{font-size:calc((100vw - 2 * clamp(20px,4vw,56px)) / 10.8);padding-bottom:16px}main#top{padding-top:clamp(88px,26vw,128px) !important}}
-[data-bento]{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(28px,3vw,40px) clamp(12px,1.6vw,20px);align-items:start}
-[data-tile=ffc]{grid-column:span 8}[data-tile=bb]{grid-column:span 4}
-[data-tile=ffc] [data-panel],[data-tile=bb] [data-panel]{height:clamp(260px,32vw,440px)}
-[data-tile=mb]{grid-column:span 3}[data-tile=ot]{grid-column:span 6}[data-tile=pp]{grid-column:span 3}
-[data-tile=mb] [data-panel],[data-tile=ot] [data-panel],[data-tile=pp] [data-panel]{height:calc(((min(100vw,1360px) - 2 * clamp(20px,4vw,56px)) - clamp(12px,1.6vw,20px)) / 3.25)}
-@media (max-width:900px){[data-bento]{grid-template-columns:repeat(6,minmax(0,1fr))}
-[data-tile=ffc]{grid-column:span 6}[data-tile=ffc] [data-panel]{height:clamp(240px,52vw,460px)}
-[data-tile=bb],[data-tile=mb],[data-tile=pp]{grid-column:span 2;order:1}
-[data-tile=bb] [data-panel],[data-tile=mb] [data-panel],[data-tile=pp] [data-panel]{height:clamp(240px,50vw,420px)}
-[data-tile=ot]{grid-column:span 6;order:2}[data-tile=ot] [data-panel]{height:calc((min(100vw,1360px) - 2 * clamp(20px,4vw,56px)) / 1.65)}}
-@media (max-width:560px){[data-bento]{grid-template-columns:repeat(2,minmax(0,1fr))}
-[data-tile=ffc],[data-tile=ot]{grid-column:span 2}[data-tile=ffc] [data-panel]{height:58vw}[data-tile=ot] [data-panel]{height:calc((min(100vw,1360px) - 2 * clamp(20px,4vw,56px)) / 1.65)}
-[data-tile=bb],[data-tile=mb]{grid-column:span 1}[data-tile=bb] [data-panel],[data-tile=mb] [data-panel]{height:78vw}
-[data-tile=pp]{grid-column:span 2;order:3}[data-tile=pp] [data-panel]{height:88vw}[data-tile=pp] img{object-position:50% 30% !important}}
-/* Bento hover. Touch: a light press fade. Mouse/trackpad: the card tilts toward the cursor (script on the page). The screenshot itself never moves or crops. */
-@media (hover:none){[data-tile]:active{opacity:.88}}
-@media (hover:hover) and (pointer:fine){
-  [data-tile]{position:relative}
-  [data-tile]:hover{z-index:1}
-  [data-tile] [data-panel]{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));clip-path:inset(0 round 14px);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-  [data-tile] [data-panel][data-tilting]{--s:1.03;transition:transform .15s ease-out;will-change:transform}
+/* Holding page at /. Built on tokens.css and system.css; this file is the
+   page's own layout: the title, the dark "recent work" band and its bento. */
+html, body { overflow-wrap: break-word }
+.page--home { --font-detail: 'JetBrains Mono', monospace; font-synthesis-weight: auto; font-size: 18px; display: grid; grid-template-rows: auto 1fr auto }
+.home-main { display: grid; align-content: center; gap: clamp(48px, 8vw, 96px); padding-top: clamp(48px, 10vw, 140px); padding-bottom: clamp(48px, 10vw, 140px) }
+.home-title { margin: 0; font-weight: 800; line-height: 1.12; letter-spacing: -0.025em; max-width: none; text-wrap: balance; font-size: calc(clamp(32px, 4.4vw, 60px) * 1.52) }
+.home-title > span { display: block }
+@media (max-width: 560px) {
+  .home-title { font-size: calc((100vw - 2 * var(--gutter)) / 10.8); padding-bottom: 16px }
+  .home-main { padding-top: clamp(88px, 26vw, 128px) }
 }
-[data-tile]:focus-visible{outline:2px solid #E4007C;outline-offset:6px;border-radius:16px}
-/* Header: nav on wide screens, Menu button + sheet below 720px. */
-[data-narrow]{display:none !important}
-@media (max-width:719px){[data-wide]{display:none !important}[data-narrow]{display:flex !important}}
-@media (min-width:720px){#menu{display:none !important}}
-#menu[hidden]{display:none !important}
+.home-section { scroll-margin-top: 96px; display: grid; gap: 16px; align-content: start }
+.home-label { font-family: var(--font-detail); font-size: var(--fs-label); letter-spacing: 0.04em; text-transform: uppercase; color: var(--c-muted) }
+.home-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 48px clamp(32px, 5vw, 72px); align-items: start }
+.home-about-lede { margin: 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.35; letter-spacing: -0.01em; text-wrap: pretty }
+.home-roleline { margin: 0; font-family: var(--font-detail); font-size: var(--fs-label); color: var(--c-muted); overflow: hidden }
+.home-list { margin: 0; padding: 0; list-style: none; display: grid; border-top: 1px solid var(--c-ink) }
+.home-list > li { padding: 12px 0; border-bottom: 1px solid var(--c-line-soft); font-weight: 700; font-size: clamp(20px, 2vw, 24px); letter-spacing: -0.02em }
+.home-jobs { display: grid; border-top: 1px solid var(--c-ink) }
+.home-job { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 2px 24px; padding: 14px 0; border-bottom: 1px solid var(--c-line-soft); align-items: baseline }
+.home-job__co { font-weight: 700; font-size: clamp(18px, 1.8vw, 22px); letter-spacing: -0.02em }
+.home-job__title { font-size: 17px }
+.home-job__dates { font-family: var(--font-detail); font-size: var(--fs-meta); color: var(--c-subtle) }
+.home-footer { width: calc(100% - 2 * var(--gutter)); max-width: calc(var(--container) - 2 * var(--gutter)); margin: 0 auto; padding: 24px 0 32px; border-top: 1px solid var(--c-line-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-detail); font-size: var(--fs-label); color: var(--c-muted) }
+.home-footer__links { display: flex; flex-wrap: wrap; gap: 8px 24px }
+.home-footer a { color: var(--c-muted); display: inline-flex; align-items: center; min-height: 44px }
+
+/* Recent work: a dark band that runs the full width of the window. */
+.recent { scroll-margin-top: var(--header-h); background: var(--c-dark-deep); color: var(--c-on-dark); box-shadow: 0 0 0 100vmax var(--c-dark-deep); clip-path: inset(0 -100vmax); padding: clamp(56px, 8vw, 112px) 0; display: grid; gap: 16px }
+.recent__title { margin: 0 0 8px; color: var(--c-on-dark); font-weight: 800; font-size: clamp(32px, 4.4vw, 60px); line-height: 1.08; letter-spacing: -0.025em; text-wrap: balance }
+.recent__lede { margin: 0 0 16px; color: var(--c-on-dark-soft); max-width: 60ch; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.45; text-wrap: pretty }
+
+/* Bento of the five apps. */
+[data-bento] { border-top: 1px solid var(--c-dark-line-strong); padding-top: 24px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(28px, 3vw, 40px) clamp(12px, 1.6vw, 20px); align-items: start }
+[data-tile] { display: grid; grid-template-rows: auto 1fr; align-content: start; gap: 12px; min-width: 0; color: var(--c-on-dark) }
+[data-panel] { position: relative; overflow: hidden; min-height: 0; border-radius: 14px; background: var(--tint) }
+[data-panel] > img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover }
+.tile__text { display: grid; gap: 2px }
+.tile__name { font-weight: 700; font-size: clamp(20px, 2vw, 26px); line-height: 1.1; letter-spacing: -0.03em }
+.tile__line { font-family: var(--font-detail); font-size: var(--fs-meta); color: var(--c-subtle) }
+[data-tile=ffc] { grid-column: span 8 }
+[data-tile=bb] { grid-column: span 4 }
+[data-tile=ffc] [data-panel], [data-tile=bb] [data-panel] { height: clamp(260px, 32vw, 440px) }
+[data-tile=mb] { grid-column: span 3 }
+[data-tile=ot] { grid-column: span 6 }
+[data-tile=pp] { grid-column: span 3 }
+[data-tile=mb] [data-panel], [data-tile=ot] [data-panel], [data-tile=pp] [data-panel] { height: calc(((min(100vw, var(--container)) - 2 * var(--gutter)) - clamp(12px, 1.6vw, 20px)) / 3.25) }
+@media (max-width: 900px) {
+  [data-bento] { grid-template-columns: repeat(6, minmax(0, 1fr)) }
+  [data-tile=ffc] { grid-column: span 6 }
+  [data-tile=ffc] [data-panel] { height: clamp(240px, 52vw, 460px) }
+  [data-tile=bb], [data-tile=mb], [data-tile=pp] { grid-column: span 2; order: 1 }
+  [data-tile=bb] [data-panel], [data-tile=mb] [data-panel], [data-tile=pp] [data-panel] { height: clamp(240px, 50vw, 420px) }
+  [data-tile=ot] { grid-column: span 6; order: 2 }
+  [data-tile=ot] [data-panel] { height: calc((min(100vw, var(--container)) - 2 * var(--gutter)) / 1.65) }
+}
+@media (max-width: 560px) {
+  [data-bento] { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  [data-tile=ffc], [data-tile=ot] { grid-column: span 2 }
+  [data-tile=ffc] [data-panel] { height: 58vw }
+  [data-tile=ot] [data-panel] { height: calc((min(100vw, var(--container)) - 2 * var(--gutter)) / 1.65) }
+  [data-tile=bb], [data-tile=mb] { grid-column: span 1 }
+  [data-tile=bb] [data-panel], [data-tile=mb] [data-panel] { height: 78vw }
+  [data-tile=pp] { grid-column: span 2; order: 3 }
+  [data-tile=pp] [data-panel] { height: 88vw }
+  [data-tile=pp] img { object-position: 50% 30% !important }
+}
+/* Bento hover. Touch: a light press fade. Mouse/trackpad: the card tilts toward the cursor (script on the page). The screenshot itself never moves or crops. */
+@media (hover: none) { [data-tile]:active { opacity: .88 } }
+@media (hover: hover) and (pointer: fine) {
+  [data-tile] { position: relative }
+  [data-tile]:hover { z-index: 1 }
+  [data-tile] [data-panel] { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--s, 1)); clip-path: inset(0 round 14px); transition: transform .6s var(--ease-out) }
+  [data-tile] [data-panel][data-tilting] { --s: 1.03; transition: transform .15s ease-out; will-change: transform }
+}
+[data-tile]:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 6px; border-radius: 16px }
+
 /* Role · location: the dot only shows when both fit on one line. Each item
    carries its own leading dot in a gutter that is clipped at the line start. */
-[data-roleline]{display:flex;flex-wrap:wrap;margin-left:-3ch}
-[data-roleline]>span{position:relative;padding-left:3ch;white-space:nowrap}
-[data-roleline]>span::before{content:"·";position:absolute;left:1ch}
+[data-roleline] { display: flex; flex-wrap: wrap; margin-left: -3ch }
+[data-roleline] > span { position: relative; padding-left: 3ch; white-space: nowrap }
+[data-roleline] > span::before { content: "·"; position: absolute; left: 1ch }

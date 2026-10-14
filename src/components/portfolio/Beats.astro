@@ -1,0 +1,74 @@
+---
+// Constraint / move / insight. Three stepped columns on wide screens; three
+// tabs below 720px.
+interface Beat {
+  /** Column heading, e.g. "The constraint". */
+  label: string;
+  /** Tab name, e.g. "constraint". */
+  tab: string;
+  text: string;
+}
+interface Props {
+  id: string;
+  beats: Beat[];
+  /** Columns (of 12) to indent from 1100px up. */
+  pushLg?: number;
+}
+
+const { id, beats, pushLg = 0 } = Astro.props;
+---
+
+<div class="beats" data-beats>
+  <div class="beats__tabs" role="tablist" aria-label="Case study">
+    {
+      beats.map((b, i) => (
+        <button
+          type="button"
+          role="tab"
+          class="beats__tab"
+          id={`${id}-tab-${i}`}
+          aria-controls={`${id}-beat-${i}`}
+          aria-selected={i === 0 ? 'true' : 'false'}
+          tabindex={i === 0 ? 0 : -1}
+        >
+          {b.tab}
+        </button>
+      ))
+    }
+  </div>
+  <div class:list={['beats__panels', 'stagger-3', pushLg && 'push']} style={`--push-lg:${pushLg}`}>
+    {
+      beats.map((b, i) => (
+        <div class:list={['beat', i === 0 && 'is-active']} id={`${id}-beat-${i}`} role="tabpanel" aria-labelledby={`${id}-tab-${i}`}>
+          <span class="t-label">{b.label}</span>
+          <p class="t-body">{b.text}</p>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-beats]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('.beat')];
+    function select(n: number, focus = false) {
+      tabs.forEach((t, i) => {
+        t.setAttribute('aria-selected', String(i === n));
+        t.tabIndex = i === n ? 0 : -1;
+      });
+      panels.forEach((p, i) => p.classList.toggle('is-active', i === n));
+      if (focus) tabs[n].focus();
+    }
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i));
+      t.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) {
+          e.preventDefault();
+          select((i + d + tabs.length) % tabs.length, true);
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,230 @@
+---
+// The full portfolio. Lives at /portfolio, out of search, until it replaces the
+// holding page at /.
+import Base from '../layouts/Base.astro';
+import Shot from '../components/Shot.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Section from '../components/portfolio/Section.astro';
+import CaseHead from '../components/portfolio/CaseHead.astro';
+import Stage from '../components/portfolio/Stage.astro';
+import Phone from '../components/portfolio/Phone.astro';
+import Beats from '../components/portfolio/Beats.astro';
+import Features from '../components/portfolio/Features.astro';
+import AppLinks from '../components/portfolio/AppLinks.astro';
+import MoreWork from '../components/portfolio/MoreWork.astro';
+import WorkSheet from '../components/portfolio/WorkSheet.astro';
+import CareerRow from '../components/portfolio/CareerRow.astro';
+import { APPS, priceOf } from '../data/apps';
+import {
+  CHIPSTACK_BEATS, PGE_BEATS, BREATHBODY_NOTES, FFC_NOTES,
+  CAREER, DOMAINS, PILLARS, PRINCIPLES,
+} from '../data/portfolio';
+import tokens from '../styles/tokens.css?raw';
+import system from '../styles/system.css?raw';
+import portfolio from '../styles/portfolio.css?raw';
+import { schibstedCss, schibstedPreload } from '../styles/fonts';
+
+const EMAIL = 'spencer@holtawaydesign.com';
+const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
+const shortPhone = '(max-width: 719px) 50vw, (max-width: 1099px) 22vw, 240px';
+---
+
+<Base
+  title="Spencer Holtaway — Staff Product Designer & Game Designer"
+  description="Staff Product Designer and game designer in the San Francisco Bay Area. AI-native: I design and ship my own iOS apps by directing Claude Code."
+  path="/portfolio"
+  preloadFonts={schibstedPreload}
+  css={schibstedCss + tokens + system + portfolio}
+  ogFile="/og/home.png?v=2"
+  themeColor="#FAFAF7"
+  noindex
+>
+  <div class="page page--portfolio">
+    <SiteNav
+      activeBy="middle"
+      email={EMAIL}
+      sections={[
+        { id: 'work', label: 'Work' },
+        { id: 'career', label: 'Career' },
+        { id: 'me', label: 'Me' },
+        { id: 'hello', label: 'Hello' },
+      ]}
+      nav={[
+        { href: '#work', label: 'Work', section: 'work' },
+        { href: '#career', label: 'Career', section: 'career' },
+        { href: '#me', label: 'Me', section: 'me' },
+        { href: '#hello', label: 'Say hello', menuLabel: 'Say hello.', cta: true },
+      ]}
+    />
+
+    <main id="top" class="container main">
+      <div class="grid-lines" aria-hidden="true"></div>
+
+      <section class="hero">
+        <h1 class="t-hero hero__title" data-fit aria-label="Intelligently oppose the expected.">
+          <span>Intelligently</span><span>oppose the</span><span>expected<span class="t-accent">.</span></span>
+        </h1>
+        <div class="hero__sub push" style="--push-md:6">
+          <p class="t-lede hero__lede">I'm Spencer Holtaway. I make complicated things simple for the people who have to use them.</p>
+          <p class="hero__note">Staff and lead product design. Head of design, when the team is small enough that the head still designs. San Rafael, CA.</p>
+        </div>
+      </section>
+
+      <Section id="work" label="Selected work" aside="Career work and a visual practice, side by side" word="Work" class="section--work">
+        <!-- 01: the five apps lead, as the newest work. -->
+        <div class="apps" id="apps">
+          <div class="apps-intro" data-reveal>
+            <span class="t-number apps-intro__num" aria-hidden="true">01</span>
+            <div class="apps-intro__body">
+              <div class="t-meta"><span>Independent work</span><span>Product and game design</span><span>iOS</span></div>
+              <h2 class="t-display-1">Back to experiences<span class="t-accent">.</span></h2>
+              <p class="t-intro">Five apps I designed and shipped to the App Store myself, by directing Claude Code. Three are games, and all of them are experiences first.</p>
+            </div>
+          </div>
+
+          <article class="case" data-reveal>
+            <CaseHead meta={[APPS.breathebody.name, 'iOS', priceOf('breathebody')]} push={3}>A breathing app you don't look at.</CaseHead>
+            <Stage tint="var(--p-breath)" bleed="right" indent={2}>
+              <Phone src="breathebody/06" alt="Breath Body: face-up in a dark room" frame="#0E0E12" sizes={stagePhone} />
+              <Phone src="breathebody/01" alt="Breath Body: blobs mid-breath" frame="#0E0E12" sizes={stagePhone} />
+            </Stage>
+            <div class="copy push" style="--push-md:2">
+              <p class="t-body-l">Almost every breathing app is a geometric circle in the middle of the screen, and you're meant to sit there and watch it. I wanted one you could use lying down with your eyes closed, so most of the design happens off the screen.</p>
+              <AppLinks app="breathebody" />
+            </div>
+            <Features items={BREATHBODY_NOTES} pushLg={2} />
+          </article>
+
+          <article class="case" data-reveal>
+            <CaseHead meta={[APPS.fishingforcompliments.name, 'iOS game', 'Built for the iPhone Duo launch window', priceOf('fishingforcompliments')]} pull={2}>A game with no finish line.</CaseHead>
+            <Stage tint="var(--p-fish)" bleed="left" indent={2}>
+              <Phone src="fishingforcompliments/open-water" alt="Fishing for Compliments: open water" sizes={stagePhone} widths={[240, 353]} />
+              <Phone src="fishingforcompliments/reflecting-pool" alt="Fishing for Compliments: a reflecting pool" sizes={stagePhone} widths={[240, 353]} />
+            </Stage>
+            <div class="copy">
+              <p class="t-body-l">You sail a calm world that goes on forever, and nothing in it grades you. It's there to invite you in and let you stay as long as you like.</p>
+              <AppLinks app="fishingforcompliments" />
+            </div>
+            <Features items={FFC_NOTES} />
+          </article>
+
+          <div class="shorts stagger-3">
+            <article class="short" data-reveal>
+              <div class="short__panel" style="--tint:var(--p-bus)">
+                <Phone src="mybussf/map" alt="My Bus SF: stop view" sizes={shortPhone} />
+              </div>
+              <div class="t-meta"><span>{APPS.mybussf.name}</span><span>{priceOf('mybussf')}</span></div>
+              <h3 class="t-title-m">An app that wants you to leave.</h3>
+              <p class="t-body">Real-time Muni arrivals. I first made it about fourteen years ago with an engineer friend, and now I've rebuilt it and shipped it. Most bus apps list every line through a stop, so this one asks what you need at that stop and cuts the rest.</p>
+              <AppLinks app="mybussf" />
+            </article>
+            <article class="short" data-reveal>
+              <div class="short__panel short__panel--wide" style="--tint:var(--p-train)">
+                <Phone src="olivers-train/window" alt="Oliver's Train: the view from the window" shape="landscape" sizes="(max-width: 719px) 80vw, 340px" widths={[320, 480, 630]} />
+              </div>
+              <div class="t-meta"><span>{APPS['olivers-train'].name}</span><span>{priceOf('olivers-train')}</span></div>
+              <h3 class="t-title-m">A game you can't win, lose, or cheat.</h3>
+              <p class="t-body">An ambient train ride with the kind of train sounds people fall asleep to. Each round names something out the window, cows or cottages or churches, and you tap when you see one. The stations get spoken announcements, and the time counts as Mindful Minutes in Apple Health. I started it to make something deliberately simpler than Fishing for Compliments.</p>
+              <AppLinks app="olivers-train" />
+            </article>
+            <article class="short" data-reveal>
+              <div class="short__panel" style="--tint:var(--p-pong)">
+                <Phone src="pingpongcowboy/01" alt="Ping Pong Cowboy: mid-throw" sizes={shortPhone} />
+              </div>
+              <div class="t-meta"><span>{APPS.pingpongcowboy.name}</span><span>{priceOf('pingpongcowboy')}</span></div>
+              <h3 class="t-title-m">Back when phones were toys.</h3>
+              <p class="t-body">An arcade game about throwing ping pong balls at things. It's a throwback to the skeuomorphic iPhone of 2008 to 2010, so the accelerometer slides things around the screen the way apps did before everyone got serious.</p>
+              <AppLinks app="pingpongcowboy" />
+            </article>
+          </div>
+        </div>
+
+        <article class="case case--spaced" data-reveal>
+          <CaseHead num="02" meta={['Chipstack', 'AI for microchip design, inside VS Code', '2025–26']}>Design <i>can</i> save the world.</CaseHead>
+          <div class="media push bleed-r" style="--push-md:1; --tint:var(--p-chip); aspect-ratio:16/10">
+            <span class="sticker">Acquired by Cadence</span>
+            <!-- Add src/assets/work/chipstack/actionbar.png and it appears here. -->
+            <Shot name="work/chipstack/actionbar" alt="Chipstack — the AI action bar, in VS Code" widths={[640, 960, 1280, 1920, 2560]} sizes="(max-width: 719px) 100vw, 92vw" />
+          </div>
+          <Beats id="chip" beats={CHIPSTACK_BEATS} pushLg={3} />
+        </article>
+
+        <article class="case case--spaced" data-reveal>
+          <CaseHead num="03" meta={['Simpler PG&E Outages', 'Self-directed, web', '2025']}>Less map. More battery.</CaseHead>
+          <Stage tint="var(--p-pge)" bleed="right" indent={2} tightTop>
+            <Phone src="work/pge/light" alt="PG&E Outages, light mode" sizes={stagePhone} />
+            <Phone src="work/pge/dark" alt="PG&E Outages, dark mode" sizes={stagePhone} />
+          </Stage>
+          <Beats id="pge" beats={PGE_BEATS} pushLg={3} />
+        </article>
+
+        <MoreWork />
+      </Section>
+
+      <Section id="career" label="Career" aside="Twenty years, no single domain" word="Career" class="section--spaced">
+        <h2 class="t-display-2 career-intro">No domain is the domain.</h2>
+        <p class="t-intro career-lede">Telephony, rideshare, meditation, games, chip design. The job doesn't change. I absorb the complexity so the person using it doesn't have to.</p>
+        <div class="career" data-reveal>
+          {CAREER.map((c) => <CareerRow {...c} />)}
+        </div>
+        <div class="tags">{DOMAINS.map((d) => <span class="tag">{d}</span>)}</div>
+      </Section>
+
+      <Section id="me" label="How I work" aside="And what I won't do" word="Me" class="section--spaced">
+        <div class="me-intro">
+          <h2 class="t-display-3">My solutions don't have an ego.</h2>
+          <div class="me-intro__copy">
+            <p>I like making things and giving them to people. That's most of why I do this. The products I like best get out of the way completely, so all you notice at the end is that it was easy.</p>
+            <p>Before I moved to San Francisco I designed experiences in the real world, trade show stands and events and PR stunts, the kind of thing you walk into rather than look at. Zynga made sense after that because games are built to make you feel something. Then I spent a long stretch in SaaS, like a lot of the industry did, and these apps are me going back to the work I started with.</p>
+          </div>
+        </div>
+        <div class="pillars">
+          <Features items={PILLARS} variant="plain" min={280} steps={4} reveal />
+        </div>
+        <div class="band bleed-l bleed-r">
+          <span class="band__label">Help, not take</span>
+          <div class="principles">
+            {
+              PRINCIPLES.map((p) => (
+                <div class="principle" data-reveal>
+                  <h3 class="t-title-l" set:html={p.head} />
+                  <p>{p.text}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </Section>
+
+      <Section id="hello" label="Contact" aside="San Rafael, CA" class="contact">
+        <a href={`mailto:${EMAIL}`} class="say-hello">Say hello<span class="t-accent">.</span></a>
+        <div class="contact__links">
+          <a href={`mailto:${EMAIL}`} class="link-u">{EMAIL}</a>
+          <a href="https://linkedin.com/in/holtawaydesign" class="link-u">LinkedIn</a>
+        </div>
+        <div class="colophon">
+          <span>© 2026 Spencer Holtaway</span>
+          <span>Like MyBus SF, this site would like you to leave. Ideally for your inbox.</span>
+        </div>
+      </Section>
+    </main>
+
+    <WorkSheet />
+  </div>
+
+  <script>
+    import '../scripts/reveal';
+
+    // The hero headline fills the width: measure the longest line at 100px and scale.
+    const hero = document.querySelector<HTMLElement>('[data-fit]')!;
+    function fit() {
+      hero.style.fontSize = '100px';
+      const w = Math.max(...[...hero.children].map((c) => c.getBoundingClientRect().width));
+      if (w > 0 && hero.clientWidth > 0) hero.style.fontSize = (100 * hero.clientWidth) / w + 'px';
+      else hero.style.fontSize = '';
+    }
+    fit();
+    new ResizeObserver(fit).observe(hero);
+    document.fonts?.ready.then(fit);
+  </script>
+</Base>
