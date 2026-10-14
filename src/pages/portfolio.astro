@@ -4,6 +4,7 @@
 import Base from '../layouts/Base.astro';
 import Shot from '../components/Shot.astro';
 import SiteNav from '../components/SiteNav.astro';
+import RecentWork from '../components/RecentWork.astro';
 import Section from '../components/portfolio/Section.astro';
 import CaseHead from '../components/portfolio/CaseHead.astro';
 import Stage from '../components/portfolio/Stage.astro';
@@ -21,6 +22,7 @@ import {
 } from '../data/portfolio';
 import tokens from '../styles/tokens.css?raw';
 import system from '../styles/system.css?raw';
+import recent from '../styles/recent.css?raw';
 import portfolio from '../styles/portfolio.css?raw';
 import { schibstedCss, schibstedPreload } from '../styles/fonts';
 
@@ -34,7 +36,7 @@ const shortPhone = '(max-width: 719px) 50vw, (max-width: 1099px) 22vw, 240px';
   description="Staff Product Designer and game designer in the San Francisco Bay Area. AI-native: I design and ship my own iOS apps by directing Claude Code."
   path="/portfolio"
   preloadFonts={schibstedPreload}
-  css={schibstedCss + tokens + system + portfolio}
+  css={schibstedCss + tokens + system + recent + portfolio}
   ogFile="/og/home.png?v=2"
   themeColor="#FAFAF7"
   noindex
@@ -44,6 +46,7 @@ const shortPhone = '(max-width: 719px) 50vw, (max-width: 1099px) 22vw, 240px';
       activeBy="middle"
       email={EMAIL}
       sections={[
+        { id: 'recent', label: 'Recent work' },
         { id: 'work', label: 'Work' },
         { id: 'career', label: 'Career' },
         { id: 'me', label: 'Me' },
@@ -70,11 +73,22 @@ const shortPhone = '(max-width: 719px) 50vw, (max-width: 1099px) 22vw, 240px';
         </div>
       </section>
 
+      <RecentWork id="recent" />
+
       <Section id="work" label="Selected work" aside="Career work and a visual practice, side by side" word="Work" class="section--work">
-        <!-- 01: the five apps lead, as the newest work. -->
-        <div class="apps" id="apps">
+        <article class="case case--spaced" data-reveal>
+          <CaseHead num="01" meta={['Chipstack', 'AI for microchip design, inside VS Code', '2025–26']}>Design <i>can</i> save the world.</CaseHead>
+          <div class="media push bleed-r" style="--push-md:1; --tint:var(--p-chip); aspect-ratio:16/10">
+            <span class="sticker">Acquired by Cadence</span>
+            <!-- Add src/assets/work/chipstack/actionbar.png and it appears here. -->
+            <Shot name="work/chipstack/actionbar" alt="Chipstack — the AI action bar, in VS Code" widths={[640, 960, 1280, 1920, 2560]} sizes="(max-width: 719px) 100vw, 92vw" />
+          </div>
+          <Beats id="chip" beats={CHIPSTACK_BEATS} pushLg={3} />
+        </article>
+
+        <div class="apps" id="independent">
           <div class="apps-intro" data-reveal>
-            <span class="t-number apps-intro__num" aria-hidden="true">01</span>
+            <span class="t-number apps-intro__num" aria-hidden="true">02</span>
             <div class="apps-intro__body">
               <div class="t-meta"><span>Independent work</span><span>Product and game design</span><span>iOS</span></div>
               <h2 class="t-display-1">Back to experiences<span class="t-accent">.</span></h2>
@@ -138,16 +152,6 @@ const shortPhone = '(max-width: 719px) 50vw, (max-width: 1099px) 22vw, 240px';
             </article>
           </div>
         </div>
-
-        <article class="case case--spaced" data-reveal>
-          <CaseHead num="02" meta={['Chipstack', 'AI for microchip design, inside VS Code', '2025–26']}>Design <i>can</i> save the world.</CaseHead>
-          <div class="media push bleed-r" style="--push-md:1; --tint:var(--p-chip); aspect-ratio:16/10">
-            <span class="sticker">Acquired by Cadence</span>
-            <!-- Add src/assets/work/chipstack/actionbar.png and it appears here. -->
-            <Shot name="work/chipstack/actionbar" alt="Chipstack — the AI action bar, in VS Code" widths={[640, 960, 1280, 1920, 2560]} sizes="(max-width: 719px) 100vw, 92vw" />
-          </div>
-          <Beats id="chip" beats={CHIPSTACK_BEATS} pushLg={3} />
-        </article>
 
         <article class="case case--spaced" data-reveal>
           <CaseHead num="03" meta={['Simpler PG&E Outages', 'Self-directed, web', '2025']}>Less map. More battery.</CaseHead>

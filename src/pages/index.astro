@@ -1,10 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
-import Shot from '../components/Shot.astro';
 import SiteNav from '../components/SiteNav.astro';
-import { APPS } from '../data/apps';
+import RecentWork from '../components/RecentWork.astro';
 import tokens from '../styles/tokens.css?raw';
 import system from '../styles/system.css?raw';
+import recent from '../styles/recent.css?raw';
 import css from '../styles/index.css?raw';
 
 const EMAIL = 'spencer@holtawaydesign.com';
@@ -33,7 +33,7 @@ const sections = [
   description="Spencer Holtaway, Staff Product Designer."
   path="/"
   fonts="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-  css={tokens + system + css}
+  css={tokens + system + recent + css}
   ogFile="/og/home.png?v=2"
   themeColor="#FAFAF7"
 >
@@ -47,57 +47,7 @@ const sections = [
     <main id="top" class="container home-main">
       <h1 class="home-title"><span>Spencer Holtaway<span class="t-accent">,</span></span><span>Staff Product Designer</span></h1>
 
-      <section id="work" class="recent">
-        <h2 class="recent__title">What I've been working on recently</h2>
-        <p class="recent__lede">Five apps, designed and built end to end. With AI doing more of the building, I spend more of my time on the parts I care about: how it feels in your hand, what it does when you’re not looking, and whether it’s worth coming back to.</p>
-        <div data-bento>
-          <a href="/fishingforcompliments" data-tile="ffc">
-            <div data-panel style="--tint:#3A2D4A">
-              <Shot name="fishingforcompliments/isles" alt="Fishing for Compliments: Isles gameplay" widths={[480, 720, 960, 1280, 1600, 1920, 2400]} sizes="(max-width: 900px) 127vw, min(72vw, 980px)" style="object-position:50% 60%; transform:scale(1.03)" />
-            </div>
-            <div class="tile__text">
-              <span class="tile__name">{APPS.fishingforcompliments.name}</span>
-              <span class="tile__line">A game with no finish line →</span>
-            </div>
-          </a>
-          <a href="/breathebody" data-tile="bb">
-            <div data-panel style="--tint:#0B0B10">
-              <Shot name="breathebody/01" alt="Breath Body screen" widths={[240, 360, 480, 640, 900]} sizes="(max-width: 560px) 50vw, (max-width: 900px) 34vw, 440px" style="object-position:50% 45%" />
-            </div>
-            <div class="tile__text">
-              <span class="tile__name">{APPS.breathebody.name}</span>
-              <span class="tile__line">Breathwork for less than a cup of coffee →</span>
-            </div>
-          </a>
-          <a href="/mybussf" data-tile="mb">
-            <div data-panel style="--tint:#FFB000">
-              <Shot name="mybussf/saved-stops" alt="My Bus SF Home Screen widgets" widths={[240, 360, 480, 640, 900]} sizes="(max-width: 560px) 50vw, (max-width: 900px) 34vw, 330px" style="object-position:50% 0%" />
-            </div>
-            <div class="tile__text">
-              <span class="tile__name">{APPS.mybussf.name}</span>
-              <span class="tile__line">Real-time Muni arrivals →</span>
-            </div>
-          </a>
-          <a href="/olivers-train" data-tile="ot">
-            <div data-panel style="--tint:#1F4D3A">
-              <Shot name="olivers-train/01" alt="Oliver’s Train window view" widths={[480, 720, 960, 1280, 1600, 1920]} sizes="(max-width: 900px) 100vw, 680px" style="object-position:50% 0%" />
-            </div>
-            <div class="tile__text">
-              <span class="tile__name">{APPS['olivers-train'].name}</span>
-              <span class="tile__line">A game you can’t win, lose, or cheat →</span>
-            </div>
-          </a>
-          <a href="/pingpongcowboy" data-tile="pp">
-            <div data-panel style="--tint:#4A2C19">
-              <Shot name="pingpongcowboy/01" alt="Ping Pong Cowboy screen" widths={[240, 360, 480, 640, 900, 1200]} sizes="(max-width: 560px) 100vw, (max-width: 900px) 34vw, 330px" style="object-position:50% 0%" />
-            </div>
-            <div class="tile__text">
-              <span class="tile__name">{APPS.pingpongcowboy.name}</span>
-              <span class="tile__line">Remember when phones were toys? →</span>
-            </div>
-          </a>
-        </div>
-      </section>
+      <RecentWork id="work" />
 
       <div class="home-pair">
         <section id="about" class="home-section">
@@ -138,32 +88,4 @@ const sections = [
     </footer>
   </div>
 
-  <script is:inline>
-    // Bento tiles: the card tilts toward the cursor for mouse/trackpad users.
-    (function () {
-      if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      document.querySelectorAll('[data-tile]').forEach(function (tile) {
-        var panel = tile.querySelector('[data-panel]');
-        var x = 0.5, y = 0.5, frame = 0;
-        function apply() {
-          frame = 0;
-          panel.style.setProperty('--rx', ((0.5 - y) * 8).toFixed(2) + 'deg');
-          panel.style.setProperty('--ry', ((x - 0.5) * 10).toFixed(2) + 'deg');
-        }
-        tile.addEventListener('pointerenter', function () { panel.setAttribute('data-tilting', ''); });
-        tile.addEventListener('pointermove', function (e) {
-          var r = panel.getBoundingClientRect();
-          x = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-          y = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
-          if (!frame) frame = requestAnimationFrame(apply);
-        });
-        tile.addEventListener('pointerleave', function () {
-          panel.removeAttribute('data-tilting');
-          x = 0.5; y = 0.5;
-          if (!frame) frame = requestAnimationFrame(apply);
-        });
-      });
-    })();
-  </script>
 </Base>
