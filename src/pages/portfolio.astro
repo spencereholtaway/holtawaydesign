@@ -164,16 +164,31 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
     import '../scripts/reveal';
     import '../scripts/float-3d';
 
-    // The hero headline fills the width: measure the longest line at 100px and scale.
+    // The hero headline fills the width (measure the longest line at 100px and
+    // scale), unless that would make it taller than the first screen; then it
+    // shrinks to fit the height, down to a floor so short landscape windows
+    // don't get a tiny headline.
     const hero = document.querySelector<HTMLElement>('[data-fit]')!;
+    const heroSection = hero.parentElement!;
+    const header = document.querySelector<HTMLElement>('.site-header');
     function fit() {
       hero.style.fontSize = '100px';
-      const w = Math.max(...[...hero.children].map((c) => c.getBoundingClientRect().width));
-      if (w > 0 && hero.clientWidth > 0) hero.style.fontSize = (100 * hero.clientWidth) / w + 'px';
-      else hero.style.fontSize = '';
+      // The last letter overhangs its box by about the (negative) tracking.
+      const w = Math.max(...[...hero.children].map((c) => c.getBoundingClientRect().width)) + 6;
+      const h = hero.getBoundingClientRect().height;
+      if (!(w > 6 && h > 0 && hero.clientWidth > 0)) {
+        hero.style.fontSize = '';
+        return;
+      }
+      const byWidth = (100 * hero.clientWidth) / w;
+      const cs = getComputedStyle(heroSection);
+      const room = innerHeight - (header?.offsetHeight ?? 0) - parseFloat(cs.paddingTop) - 48;
+      const byHeight = (100 * room) / h;
+      hero.style.fontSize = Math.min(byWidth, Math.max(byHeight, 56)) + 'px';
     }
     fit();
     new ResizeObserver(fit).observe(hero);
+    addEventListener('resize', fit, { passive: true });
     document.fonts?.ready.then(fit);
   </script>
 </Base>

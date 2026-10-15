@@ -1,6 +1,7 @@
 /* Portfolio page layouts, built on tokens.css and system.css. */
 
 .page--portfolio { overflow-x: clip }
+.page--portfolio a:not(.btn, .menu__link) { transition: color 0.2s ease }
 .page--portfolio a:not(.btn, .menu__link):hover { color: var(--c-accent) }
 ::selection { background: var(--c-accent); color: var(--c-on-accent) }
 html:has(dialog[open]) { overflow: hidden }
@@ -23,7 +24,7 @@ html:has(dialog[open]) { overflow: hidden }
 }
 
 /* Hero */
-.hero { padding: clamp(72px, 14vw, 200px) 0 clamp(56px, 9vw, 120px); display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(32px, 5vw, 56px) }
+.hero { padding: clamp(48px, min(14vw, 12vh), 200px) 0 clamp(56px, 9vw, 120px); display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(32px, 5vw, 56px) }
 .hero__title { margin-left: max(calc(-100% / 12), calc((100% - 100vw) / 2 + 6px)); width: min(calc(100% * 14 / 12), calc(100vw - 12px)); white-space: nowrap; text-wrap: nowrap }
 .hero__title > span { display: block; width: max-content }
 .hero__sub { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px 0; align-items: end }
