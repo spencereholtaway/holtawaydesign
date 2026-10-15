@@ -93,7 +93,15 @@ export const CAREER: {
       '<strong>Why this job.</strong> Everyone there was a chip engineering nerd and genuinely pleased someone had turned up to help. And if I was going to work on AI, I wanted it to be the kind that makes this mess less wasteful rather than more. Cadence acquired them.',
     ],
   },
-  { key: 'red9', when: '2023–24', role: 'Red9 · Product &amp; brand', headline: null, todo: 'Placeholder. Spencer to write the constraint, move and insight.' },
+  {
+    key: 'red9', when: '2023–24', role: 'Red9 · Product &amp; brand',
+    headline: null,
+    notes: [
+      '<strong>The hard part.</strong> They hired me for a growth website and a light rebrand, but every change still had to come through me. Then came the Health Check, which has to tell people their database is in worse shape than they thought.',
+      '<strong>Decision.</strong> I turned the rebrand into a full design system so they could keep building without me. For the Health Check, I made it read like a doctor, not a car alarm: what’s wrong, what to fix first, and no scare tactics.',
+      '<strong>Why it worked.</strong> It showed people problems they didn’t know they had, and Red9 was the company that could fix them. It’s still on their site.',
+    ],
+  },
   {
     key: 'calm', when: '2020–24', role: 'Calm · Staff Product Designer, Consumer',
     headline: 'Retention, for people who came here to relax.',
