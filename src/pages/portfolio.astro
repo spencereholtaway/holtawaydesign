@@ -9,11 +9,13 @@ import Section from '../components/portfolio/Section.astro';
 import CaseHead from '../components/portfolio/CaseHead.astro';
 import Stage from '../components/portfolio/Stage.astro';
 import Phone from '../components/portfolio/Phone.astro';
+import AppLinks from '../components/portfolio/AppLinks.astro';
 import Beats from '../components/portfolio/Beats.astro';
 import Features from '../components/portfolio/Features.astro';
 import MoreWork from '../components/portfolio/MoreWork.astro';
 import WorkSheet from '../components/portfolio/WorkSheet.astro';
 import CareerRow from '../components/portfolio/CareerRow.astro';
+import { APPS, priceOf } from '../data/apps';
 import {
   CHIPSTACK_BEATS, PGE_BEATS,
   CAREER, DOMAINS, PILLARS, PRINCIPLES,
@@ -84,7 +86,19 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
         </article>
 
         <article class="case case--spaced" data-reveal>
-          <CaseHead num="02" meta={['Simpler PG&E Outages', 'Self-directed, web', '2025']}>Less map. More battery.</CaseHead>
+          <CaseHead num="02" meta={[APPS.mybussf.name, 'iOS', priceOf('mybussf')]}>An app that wants you to leave.</CaseHead>
+          <Stage tint="var(--p-bus)" bleed="left" indent={2}>
+            <Phone src="mybussf/map" alt="My Bus SF: stop view" sizes={stagePhone} />
+            <Phone src="mybussf/bus-details" alt="My Bus SF: arrivals for one bus" sizes={stagePhone} />
+          </Stage>
+          <div class="copy push" style="--push-md:3">
+            <p class="t-body-l">Real-time Muni arrivals. I first made it about fourteen years ago with an engineer friend, and now I've rebuilt it and shipped it. Most bus apps list every line through a stop, so this one asks what you need at that stop and cuts the rest.</p>
+            <AppLinks app="mybussf" />
+          </div>
+        </article>
+
+        <article class="case case--spaced" data-reveal>
+          <CaseHead num="03" meta={['Simpler PG&E Outages', 'Self-directed, web', '2025']}>Less map. More battery.</CaseHead>
           <Stage tint="var(--p-pge)" bleed="right" indent={2} tightTop>
             <Phone src="work/pge/light" alt="PG&E Outages, light mode" sizes={stagePhone} />
             <Phone src="work/pge/dark" alt="PG&E Outages, dark mode" sizes={stagePhone} />
