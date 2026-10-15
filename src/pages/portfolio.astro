@@ -87,12 +87,12 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
 
         <article class="case case--spaced" data-reveal>
           <CaseHead num="02" meta={[APPS.mybussf.name, 'iOS', priceOf('mybussf')]}>An app that wants you to leave.</CaseHead>
-          <Stage tint="var(--p-bus)" bleed="left" indent={2}>
+          <Stage tint="var(--p-bus)" bleed="right" indent={2}>
             <Phone src="mybussf/map" alt="My Bus SF: stop view" sizes={stagePhone} />
             <Phone src="mybussf/bus-details" alt="My Bus SF: arrivals for one bus" sizes={stagePhone} />
           </Stage>
           <Beats id="bus" beats={MYBUS_BEATS} pushLg={3} />
-          <div class="push" style="--push-md:3"><AppLinks app="mybussf" /></div>
+          <div class="push" style="--push-lg:3"><AppLinks app="mybussf" /></div>
         </article>
 
         <article class="case case--spaced" data-reveal>
