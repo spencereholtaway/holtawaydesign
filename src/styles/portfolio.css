@@ -38,7 +38,7 @@ html:has(dialog[open]) { overflow: hidden }
 .recent + .section { margin-top: clamp(56px, 9vw, 120px) }
 .section--work .section__bar { margin-bottom: clamp(48px, 7vw, 96px) }
 .section__aside { color: var(--c-muted) }
-.section__word { text-align: right; margin: calc(-1 * clamp(24px, 5vw, 72px)) -0.05em clamp(40px, 6vw, 88px) 0 }
+.section__word { white-space: nowrap; text-align: right; margin: calc(-1 * clamp(24px, 5vw, 72px)) -0.05em clamp(40px, 6vw, 88px) 0 }
 
 /* Case studies */
 .case { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-stack) }

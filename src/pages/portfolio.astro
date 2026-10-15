@@ -143,14 +143,13 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
       </Section>
 
       <Section id="hello" label="Contact" aside="San Rafael, CA" class="contact">
-        <a href={`mailto:${EMAIL}`} class="say-hello">Say hello<span class="t-accent t-3d">.</span></a>
+        <a href={`mailto:${EMAIL}`} class="say-hello" data-fit-width>Say hello<span class="t-accent t-3d">.</span></a>
         <div class="contact__links">
           <a href={`mailto:${EMAIL}`} class="link-u">{EMAIL}</a>
           <a href="https://linkedin.com/in/holtawaydesign" class="link-u">LinkedIn</a>
         </div>
         <div class="colophon">
           <span>© 2026 Spencer Holtaway</span>
-          <span>Like MyBus SF, this site would like you to leave. Ideally for your inbox.</span>
         </div>
       </Section>
     </main>
@@ -161,6 +160,7 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
   <script>
     import '../scripts/reveal';
     import '../scripts/float-3d';
+    import '../scripts/fit-width';
 
     // The hero headline fills the width (measure the longest line at 100px and
     // scale), unless that would make it taller than the first screen; then it
