@@ -1,7 +1,10 @@
-// The big case numbers lean toward the mouse: each tilts a few degrees and its
-// 3D sides swing the other way. Eased every frame so it drifts rather than
-// snaps. Mouse and trackpad only, and off under prefers-reduced-motion.
-const nums = [...document.querySelectorAll<HTMLElement>('[data-float]')];
+// The 3D magenta pieces (.t-3d: case numbers and heading full stops) lean
+// toward the mouse: each tilts a few degrees and its sides swing the other
+// way. Eased every frame so it drifts rather than snaps. Mouse and trackpad
+// only, and off under prefers-reduced-motion.
+const nums = [...document.querySelectorAll<HTMLElement>('.t-3d')];
+// Puts each one's bob out of step with the others.
+nums.forEach((el, i) => el.style.setProperty('--i', String(i % 4)));
 const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 

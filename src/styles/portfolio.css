@@ -48,10 +48,11 @@ html:has(dialog[open]) { overflow: hidden }
 .case-head--plain { display: grid; gap: 16px }
 @media (min-width: 720px) { .case-head__num { flex-basis: 25% } }
 
-/* 3D case numbers: a solid magenta block with deeper sides. The sides swing
-   with --ex/--ey and the block tilts with --rx/--ry (both set by
-   scripts/float-numbers.ts from the mouse), and it bobs gently on its own. */
-.case-head__num {
+/* 3D magenta: the case numbers and the full stops on the big headings. A
+   solid block with deeper sides; the sides swing with --ex/--ey and the block
+   tilts with --rx/--ry (both set by scripts/float-3d.ts from the mouse), and
+   it bobs gently on its own, each one a little out of step (--i). */
+.t-3d {
   --ex: 0.6; --ey: 0.7; --rx: 0deg; --ry: 0deg; /* at rest, with no mouse */
   display: inline-block;
   transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
@@ -69,8 +70,7 @@ html:has(dialog[open]) { overflow: hidden }
     calc(var(--ex) * 0.06em) calc(var(--ey) * 0.09em) 0.11em rgba(17, 17, 17, 0.16);
 }
 @media (prefers-reduced-motion: no-preference) {
-  .case-head__num { animation: bob 6s ease-in-out infinite }
-  .case:nth-of-type(2n) .case-head__num { animation-duration: 7s; animation-delay: -2s }
+  .t-3d { animation: bob calc(6s + var(--i, 0) * 0.7s) ease-in-out calc(var(--i, 0) * -1.9s) infinite }
 }
 @keyframes bob {
   0%, 100% { translate: 0 0 }

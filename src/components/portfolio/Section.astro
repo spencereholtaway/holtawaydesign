@@ -18,6 +18,6 @@ const { id, label, aside, word, class: className } = Astro.props;
     <span>{label}</span>
     <span class="section__aside">{aside}</span>
   </div>
-  {word && <div class="t-section section__word" aria-hidden="true">{word}<span class="t-accent">.</span></div>}
+  {word && <div class="t-section section__word" aria-hidden="true">{word}<span class="t-accent t-3d">.</span></div>}
   <slot />
 </section>
