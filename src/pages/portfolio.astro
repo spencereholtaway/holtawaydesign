@@ -1,0 +1,192 @@
+---
+// The full portfolio. Lives at /portfolio, out of search, until it replaces the
+// holding page at /.
+import Base from '../layouts/Base.astro';
+import Shot from '../components/Shot.astro';
+import SiteNav from '../components/SiteNav.astro';
+import RecentWork from '../components/RecentWork.astro';
+import Section from '../components/portfolio/Section.astro';
+import CaseHead from '../components/portfolio/CaseHead.astro';
+import Stage from '../components/portfolio/Stage.astro';
+import Phone from '../components/portfolio/Phone.astro';
+import AppLinks from '../components/portfolio/AppLinks.astro';
+import Beats from '../components/portfolio/Beats.astro';
+import Features from '../components/portfolio/Features.astro';
+import MoreWork from '../components/portfolio/MoreWork.astro';
+import WorkSheet from '../components/portfolio/WorkSheet.astro';
+import CareerRow from '../components/portfolio/CareerRow.astro';
+import { APPS, priceOf } from '../data/apps';
+import {
+  CHIPSTACK_BEATS, MYBUS_BEATS, CALM_BEATS,
+  CAREER, DOMAINS, PILLARS, PRINCIPLES,
+} from '../data/portfolio';
+import tokens from '../styles/tokens.css?raw';
+import system from '../styles/system.css?raw';
+import recent from '../styles/recent.css?raw';
+import portfolio from '../styles/portfolio.css?raw';
+import { schibstedCss, schibstedPreload } from '../styles/fonts';
+
+const EMAIL = 'spencer@holtawaydesign.com';
+const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
+---
+
+<Base
+  title="Spencer Holtaway — Staff Product Designer & Game Designer"
+  description="Staff Product Designer and game designer in the San Francisco Bay Area. AI-native: I design and ship my own iOS apps by directing Claude Code."
+  path="/portfolio"
+  preloadFonts={schibstedPreload}
+  css={schibstedCss + tokens + system + recent + portfolio}
+  ogFile="/og/home.png?v=2"
+  themeColor="#FAFAF7"
+  noindex
+>
+  <div class="page page--portfolio">
+    <SiteNav
+      activeBy="middle"
+      email={EMAIL}
+      sections={[
+        { id: 'recent', label: 'Recent work' },
+        { id: 'work', label: 'Work' },
+        { id: 'career', label: 'Career' },
+        { id: 'me', label: 'Me' },
+        { id: 'hello', label: 'Hello' },
+      ]}
+      nav={[
+        { href: '#work', label: 'Work', section: 'work' },
+        { href: '#career', label: 'Career', section: 'career' },
+        { href: '#me', label: 'Me', section: 'me' },
+        { href: '#hello', label: 'Say hello', menuLabel: 'Say hello.', cta: true },
+      ]}
+    />
+
+    <main id="top" class="container main">
+      <div class="grid-lines" aria-hidden="true"></div>
+
+      <section class="hero">
+        <h1 class="t-hero hero__title" data-fit aria-label="Intelligently oppose the expected.">
+          <span>Intelligently</span><span>oppose the</span><span>expected<span class="t-accent t-3d">.</span></span>
+        </h1>
+        <div class="hero__sub push" style="--push-md:6">
+          <p class="t-lede hero__lede">I'm Spencer Holtaway. I make complicated things simple for the people who have to use them.</p>
+          <p class="hero__note">Staff and lead product design. Head of design, when the team is small enough that the head still designs. San Rafael, CA.</p>
+        </div>
+      </section>
+
+      <RecentWork id="recent" />
+
+      <Section id="work" label="Selected work" aside="Career work and a visual practice, side by side" word="Work" class="section--work">
+        <article class="case case--spaced" data-reveal>
+          <CaseHead num="01" meta={['Chipstack', 'AI for microchip design, inside VS Code', '2025–26']}>Design <i>can</i> save the world.</CaseHead>
+          <div class="media push bleed-r" style="--push-md:1; --tint:var(--p-chip); aspect-ratio:16/10">
+            <span class="sticker">Acquired by Cadence</span>
+            <!-- Add src/assets/work/chipstack/actionbar.png and it appears here. -->
+            <Shot name="work/chipstack/actionbar" alt="Chipstack — the AI action bar, in VS Code" widths={[640, 960, 1280, 1920, 2560]} sizes="(max-width: 719px) 100vw, 92vw" />
+          </div>
+          <Beats id="chip" beats={CHIPSTACK_BEATS} pushLg={3} />
+        </article>
+
+        <article class="case case--spaced" data-reveal>
+          <CaseHead num="02" meta={[APPS.mybussf.name, 'iOS', priceOf('mybussf')]}>An app that wants you to leave.</CaseHead>
+          <Stage tint="var(--p-bus)" bleed="right" indent={2}>
+            <Phone src="mybussf/map" alt="My Bus SF: stop view" sizes={stagePhone} />
+            <Phone src="mybussf/bus-details" alt="My Bus SF: arrivals for one bus" sizes={stagePhone} />
+          </Stage>
+          <Beats id="bus" beats={MYBUS_BEATS} pushLg={3} />
+          <div class="push" style="--push-lg:3"><AppLinks app="mybussf" /></div>
+        </article>
+
+        <article class="case case--spaced" data-reveal>
+          <CaseHead num="03" meta={['Calm', 'Staff Product Designer, Consumer', '2020–24']}>Retention, for people who came here to relax.</CaseHead>
+          <div class="media push bleed-r" style="--push-md:1; --tint:var(--p-calm); aspect-ratio:16/10">
+            <!-- Add src/assets/work/calm-consumer/hero.png and it appears here. -->
+            <Shot name="work/calm-consumer/hero" alt="Calm: the consumer app" widths={[640, 960, 1280, 1920, 2560]} sizes="(max-width: 719px) 100vw, 92vw" />
+          </div>
+          <Beats id="calm" beats={CALM_BEATS} pushLg={3} />
+        </article>
+
+        <MoreWork />
+      </Section>
+
+      <Section id="career" label="Career" aside="Twenty years, no single domain" word="Career" class="section--spaced">
+        <h2 class="t-display-2 career-intro">No domain is the domain.</h2>
+        <p class="t-intro career-lede">Telephony, rideshare, meditation, games, chip design. The job doesn't change. I absorb the complexity so the person using it doesn't have to.</p>
+        <div class="career" data-reveal>
+          {CAREER.map((c) => <CareerRow {...c} />)}
+        </div>
+        <div class="tags">{DOMAINS.map((d) => <span class="tag">{d}</span>)}</div>
+      </Section>
+
+      <Section id="me" label="How I work" aside="And what I won't do" word="Me" class="section--spaced">
+        <div class="me-intro">
+          <h2 class="t-display-3">My solutions don't have an ego.</h2>
+          <div class="me-intro__copy">
+            <p>I like making things and giving them to people. That's most of why I do this. The products I like best get out of the way completely, so all you notice at the end is that it was easy.</p>
+            <p>Before I moved to San Francisco I designed experiences in the real world, trade show stands and events and PR stunts, the kind of thing you walk into rather than look at. Zynga made sense after that because games are built to make you feel something. Then I spent a long stretch in SaaS, like a lot of the industry did, and these apps are me going back to the work I started with.</p>
+          </div>
+        </div>
+        <div class="pillars">
+          <Features items={PILLARS} variant="plain" min={280} steps={4} reveal />
+        </div>
+        <div class="band bleed-l bleed-r">
+          <span class="band__label">Help, not take</span>
+          <div class="principles">
+            {
+              PRINCIPLES.map((p) => (
+                <div class="principle" data-reveal>
+                  <h3 class="t-title-l" set:html={p.head} />
+                  <p>{p.text}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </Section>
+
+      <Section id="hello" label="Contact" aside="San Rafael, CA" class="contact">
+        <a href={`mailto:${EMAIL}`} class="say-hello" data-fit-width>Say hello<span class="t-accent t-3d">.</span></a>
+        <div class="contact__links">
+          <a href={`mailto:${EMAIL}`} class="link-u">{EMAIL}</a>
+          <a href="https://linkedin.com/in/holtawaydesign" class="link-u">LinkedIn</a>
+        </div>
+        <div class="colophon">
+          <span>© 2026 Spencer Holtaway</span>
+        </div>
+      </Section>
+    </main>
+
+    <WorkSheet />
+  </div>
+
+  <script>
+    import '../scripts/reveal';
+    import '../scripts/float-3d';
+    import '../scripts/fit-width';
+
+    // The hero headline fills the width (measure the longest line at 100px and
+    // scale), unless that would make it taller than the first screen; then it
+    // shrinks to fit the height, down to a floor so short landscape windows
+    // don't get a tiny headline.
+    const hero = document.querySelector<HTMLElement>('[data-fit]')!;
+    const heroSection = hero.parentElement!;
+    const header = document.querySelector<HTMLElement>('.site-header');
+    function fit() {
+      hero.style.fontSize = '100px';
+      // The last letter overhangs its box by about the (negative) tracking.
+      const w = Math.max(...[...hero.children].map((c) => c.getBoundingClientRect().width)) + 6;
+      const h = hero.getBoundingClientRect().height;
+      if (!(w > 6 && h > 0 && hero.clientWidth > 0)) {
+        hero.style.fontSize = '';
+        return;
+      }
+      const byWidth = (100 * hero.clientWidth) / w;
+      const cs = getComputedStyle(heroSection);
+      const room = innerHeight - (header?.offsetHeight ?? 0) - parseFloat(cs.paddingTop) - 48;
+      const byHeight = (100 * room) / h;
+      hero.style.fontSize = Math.min(byWidth, Math.max(byHeight, 56)) + 'px';
+    }
+    fit();
+    new ResizeObserver(fit).observe(hero);
+    addEventListener('resize', fit, { passive: true });
+    document.fonts?.ready.then(fit);
+  </script>
+</Base>

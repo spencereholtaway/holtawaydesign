@@ -1,0 +1,120 @@
+---
+// Side sheet with the whole story for each "Six more." project. A native
+// <dialog>: it traps focus, Escape closes it, and clicking the dimmed page
+// closes it too. "Next" steps through the projects in order.
+import Shot from '../Shot.astro';
+import Phone from './Phone.astro';
+import { PROJECTS } from '../../data/portfolio';
+
+const wide = '(max-width: 759px) 90vw, 680px';
+const half = '(max-width: 759px) 45vw, 330px';
+const phone = '(max-width: 759px) 42vw, 320px';
+const third = '(max-width: 759px) 28vw, 210px';
+const faCrop = 'top:0; left:-36.82%; width:189.55%; height:auto';
+const psShots = [
+  ['ps-4', 'home'], ['ps-2', 'news post'], ['ps-5', 'event'],
+  ['ps-6', 'messages'], ['ps-7', 'conversation'], ['ps-3', 'events'],
+];
+---
+
+<dialog class="sheet" data-sheet>
+  {
+    PROJECTS.map((p, n) => {
+      const next = PROJECTS[(n + 1) % PROJECTS.length];
+      return (
+        <article class="sheet__body" data-project={p.key} aria-labelledby={`sheet-${p.key}`} hidden>
+          <div class="sheet__top">
+            <span class="t-meta">{p.name} · {p.meta}</span>
+            <button type="button" class="icon-btn icon-btn--s" aria-label="Close" data-close-sheet>×</button>
+          </div>
+          <div class="sheet__title">
+            <span class="t-number-s" aria-hidden="true">{p.num}</span>
+            <h2 class="t-title-xl" id={`sheet-${p.key}`}>{p.head}</h2>
+          </div>
+
+          {p.key === 'calmb2b' && (
+            <div class="sheet__media sheet__media--pad" style={`--tint:${p.tint}`}>
+              <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/calm/get-set-up" alt="Calm for Business: Get set up" widths={[640, 960, 1360]} sizes={wide} /></div>
+              <div class="sheet__pair">
+                <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/calm/users-upload" alt="Calm for Business: Users, upload" widths={[480, 720]} sizes={half} /></div>
+                <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/calm/plan-payment" alt="Calm for Business: Plan and payment" widths={[480, 720]} sizes={half} /></div>
+              </div>
+              <div class="sheet__shot" style="aspect-ratio:100/103"><Shot name="work/calm/users-populated" alt="Calm for Business: Users, populated" widths={[640, 960, 1360]} sizes={wide} /></div>
+            </div>
+          )}
+          {p.key === 'bliss' && (
+            <div class="sheet__media sheet__media--fill" style={`--tint:${p.tint}`}>
+              <Shot name="work/blisspool/card" alt="blisspool" widths={[640, 960, 1360]} sizes={wide} />
+            </div>
+          )}
+          {p.key === 'flight' && (
+            <div class="sheet__media sheet__media--pad sheet__phones" style={`--tint:${p.tint}`}>
+              <Phone src="work/flightaware/home" alt="FlightAware: alerts and recent searches" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+              <Phone src="work/flightaware/map" alt="FlightAware: map" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+              <Phone src="work/flightaware/map-selected" alt="FlightAware: map, flight selected" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+              <Phone src="work/flightaware/flight-card" alt="FlightAware: flight card" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+              <Phone src="work/flightaware/details" alt="FlightAware: details" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} widths={[480, 720, 1080]} imgStyle={faCrop} />
+              <Phone src="work/flightaware/flight-times" alt="FlightAware: flight times" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} widths={[480, 720, 1080]} imgStyle={faCrop} />
+            </div>
+          )}
+          {p.key === 'parent' && (
+            <div class="sheet__media sheet__media--pad sheet__shots3" style={`--tint:${p.tint}`}>
+              {psShots.map(([f, label]) => (
+                <div><Shot name={`work/parentsquare/${f}`} alt={`ParentSquare: ${label}`} widths={[240, 360, 480, 720]} sizes={third} /></div>
+              ))}
+            </div>
+          )}
+          {p.key === 'pge' && (
+            <div class="sheet__media sheet__media--pad sheet__phones" style={`--tint:${p.tint}`}>
+              <Phone src="work/pge/light" alt="PG&E Outages, light mode" shadow="detail" sizes={phone} />
+              <Phone src="work/pge/dark" alt="PG&E Outages, dark mode" shadow="detail" sizes={phone} />
+            </div>
+          )}
+          {p.key === 'divorce' && (
+            <div class="sheet__media sheet__media--fill" style={`--tint:${p.tint}`}>
+              <Shot name="work/divorce/workbook" alt="California Divorce Workbook" widths={[640, 960, 1360]} sizes={wide} />
+            </div>
+          )}
+
+          <div class="sheet__beats">
+            <div><span class="t-label">The constraint</span><p>{p.c}</p></div>
+            <div><span class="t-label">The move</span><p>{p.m}</p></div>
+            <div><span class="t-label">The insight</span><p>{p.i}</p></div>
+          </div>
+          <button type="button" class="sheet__next" data-open-sheet={next.key}>
+            <span class="sheet__next-label">Next</span>
+            <span class="sheet__next-name">{next.name} →</span>
+          </button>
+        </article>
+      );
+    })
+  }
+</dialog>
+
+<script>
+  const sheet = document.querySelector<HTMLDialogElement>('[data-sheet]')!;
+  const bodies = [...sheet.querySelectorAll<HTMLElement>('[data-project]')];
+  let opener: HTMLElement | null = null;
+
+  function open(key: string) {
+    bodies.forEach((b) => (b.hidden = b.dataset.project !== key));
+    const body = bodies.find((b) => b.dataset.project === key)!;
+    sheet.setAttribute('aria-labelledby', body.getAttribute('aria-labelledby')!);
+    if (!sheet.open) sheet.showModal();
+    sheet.scrollTop = 0;
+    body.querySelector<HTMLElement>('[data-close-sheet]')!.focus();
+  }
+
+  document.addEventListener('click', (e) => {
+    const t = (e.target as HTMLElement).closest<HTMLElement>('[data-open-sheet]');
+    if (!t) return;
+    if (!sheet.open) opener = t;
+    open(t.dataset.openSheet!);
+  });
+  sheet.querySelectorAll('[data-close-sheet]').forEach((b) => b.addEventListener('click', () => sheet.close()));
+  // A click on the dialog itself (not its contents) is a click on the backdrop.
+  sheet.addEventListener('click', (e) => {
+    if (e.target === sheet) sheet.close();
+  });
+  sheet.addEventListener('close', () => opener?.focus());
+</script>

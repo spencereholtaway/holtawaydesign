@@ -1,0 +1,41 @@
+---
+// A screenshot in a device frame. Without `src` (or when the file hasn't been
+// added yet) the empty frame shows in its background colour.
+import Shot from '../Shot.astro';
+
+interface Props {
+  src?: string;
+  alt?: string;
+  /** phone: 1185/2576. narrow: 804/1748 (FlightAware). landscape: a phone on its side. */
+  shape?: 'phone' | 'narrow' | 'landscape';
+  /** Colour behind the screenshot while it loads. */
+  frame?: string;
+  shadow?: 'phone' | 'card' | 'detail';
+  sizes?: string;
+  widths?: number[];
+  /** Overrides for the <img>, e.g. a crop that isn't object-fit: cover. */
+  imgStyle?: string;
+  class?: string;
+  style?: string;
+}
+
+const {
+  src,
+  alt = '',
+  shape = 'phone',
+  frame,
+  shadow = 'phone',
+  sizes = '(max-width: 719px) 45vw, 420px',
+  widths = [240, 360, 480, 720, 960],
+  imgStyle,
+  class: className,
+  style = '',
+} = Astro.props;
+---
+
+<div
+  class:list={['phone', `phone--${shape}`, `phone--shadow-${shadow}`, className]}
+  style={frame ? `--frame:${frame}; ${style}` : style}
+>
+  {src && <Shot name={src} alt={alt} widths={widths} sizes={sizes} style={imgStyle} />}
+</div>
