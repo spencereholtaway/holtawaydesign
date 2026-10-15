@@ -1,5 +1,5 @@
 ---
-// "Five more." A scroll-snap carousel of project cards. "The whole story"
+// "Six more." A scroll-snap carousel of project cards. "The whole story"
 // opens the project in WorkSheet.
 import Shot from '../Shot.astro';
 import Phone from './Phone.astro';
@@ -11,7 +11,7 @@ const phoneSizes = '(max-width: 719px) 30vw, 150px';
 
 <div class="more" id="more-work" data-carousel>
   <div class="more__head">
-    <h2 class="t-title-l more__title">Five more.</h2>
+    <h2 class="t-title-l more__title">Six more.</h2>
     <div class="more__controls">
       <span class="more__count" data-count aria-live="polite">1 / {PROJECTS.length}</span>
       <button type="button" class="icon-btn" aria-label="Previous" data-prev aria-disabled="true">←</button>
@@ -39,6 +39,12 @@ const phoneSizes = '(max-width: 719px) 30vw, 150px';
               <div class="card__phones">
                 <Phone src="work/parentsquare/ps-4" shape="narrow" frame="#F1F2F8" shadow="card" sizes={phoneSizes} imgStyle="top:0; left:-6%; width:112%; height:auto" class="card__phone" />
                 <Phone src="work/parentsquare/ps-2" shape="narrow" frame="#F1F2F8" shadow="card" sizes={phoneSizes} imgStyle="top:0; left:-6%; width:112%; height:auto" class="card__phone card__phone--low" />
+              </div>
+            )}
+            {p.key === 'pge' && (
+              <div class="card__phones">
+                <Phone src="work/pge/light" alt="PG&E Outages, light mode" shadow="card" sizes={phoneSizes} class="card__phone" />
+                <Phone src="work/pge/dark" alt="PG&E Outages, dark mode" shadow="card" sizes={phoneSizes} class="card__phone card__phone--low" />
               </div>
             )}
             {p.key === 'divorce' && (

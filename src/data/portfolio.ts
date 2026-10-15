@@ -14,13 +14,19 @@ export const CHIPSTACK_BEATS = beat(
   "The obvious move is a big AI panel that sits there asking for attention. Nobody working in VS Code wants that. And I wanted this one to exist — if I'm going to work on AI at all, it should be the kind that makes the mess more efficient instead of worse. Better chips need less water for cooling. Cadence acquired Chipstack.",
 );
 
+export const MYBUS_BEATS = beat(
+  'Tap a stop in a bus app and it lists every line that runs through it. All of them. It’s the lazy default, and it hands you the sorting.',
+  'So I asked what you actually need at that stop, at that moment, and cut the rest. Set it up once. After that it just tells you.',
+  'The measure of it is how fast you close the app. No PM, no roadmap, just an API and an opinion.',
+);
+
 export const PGE_BEATS = beat(
   'The official map shows you everything, because they have everything. Somewhere in all of it is the one thing you want, which is when your lights come back.',
   'One progress meter for your outage. Nearby outages if you want the context. Light and dark.',
   "During an outage your battery is the thing you're rationing, so the app is built to use as little of it as it can. Most of the work was deciding what not to build.",
 );
 
-/** "Five more." Each one has a card in the carousel and a side sheet. */
+/** "Six more." Each one has a card in the carousel and a side sheet. */
 export const PROJECTS = [
   {
     key: 'calmb2b', num: '04', name: 'Calm for Business', year: '2026', tint: 'var(--p-calm)',
@@ -55,11 +61,20 @@ export const PROJECTS = [
     head: 'Designed for messages nobody designed.',
     teaser: 'Built for whatever a teacher pastes in.',
     c: 'A school app that works fine and looks ten years old, carrying teacher posts in every format you can imagine.',
-    m: 'A clean, modern refresh that keeps the brand colours.',
+    m: 'A clean, modern refresh that keeps the brand colors.',
     i: 'The layout is built for the variety. Mixed text, images, whatever a teacher pastes in.',
   },
   {
-    key: 'divorce', num: '08', name: 'CA Divorce Disclosures Workbook', year: 'Holtaway Design', tint: 'var(--p-divorce)',
+    key: 'pge', num: '08', name: 'Simpler PG&E Outages', year: '2025', tint: 'var(--p-pge)',
+    meta: 'Self-directed, web · 2025',
+    head: 'Less map. More battery.',
+    teaser: 'One progress meter for your outage, built to use as little of your battery as it can.',
+    c: PGE_BEATS[0].text,
+    m: PGE_BEATS[1].text,
+    i: PGE_BEATS[2].text,
+  },
+  {
+    key: 'divorce', num: '09', name: 'CA Divorce Disclosures Workbook', year: 'Holtaway Design', tint: 'var(--p-divorce)',
     meta: 'Local-first app, shipped under Holtaway Design',
     head: 'Hundreds of fields, and now it knows where you left off.',
     teaser: "Same as PG&E. Work out what's running low and protect it.",
@@ -95,7 +110,7 @@ export const CAREER: {
   },
   {
     key: 'red9', when: '2023–24', role: 'Red9 · Product &amp; brand',
-    headline: null,
+    headline: 'I designed myself out of a job.',
     notes: [
       '<strong>The hard part.</strong> They hired me for a growth website and a light rebrand, but every change still had to come through me. Then came the Health Check, which has to tell people their database is in worse shape than they thought.',
       '<strong>Decision.</strong> I turned the rebrand into a full design system so they could keep building without me. For the Health Check, I made it read like a doctor, not a car alarm: what’s wrong, what to fix first, and no scare tactics.',
@@ -106,7 +121,7 @@ export const CAREER: {
     key: 'calm', when: '2020–24', role: 'Calm · Staff Product Designer, Consumer',
     headline: 'Retention, for people who came here to relax.',
     notes: [
-      "<strong>The hard part.</strong> People were cancelling as normal life came back, and my team got handed engagement. In a wellness app that's a dangerous word.",
+      "<strong>The hard part.</strong> People were canceling as normal life came back, and my team got handed engagement. In a wellness app that's a dangerous word.",
       '<strong>Decision.</strong> I ran the exploration across the company with research behind it. Programs, plans, pathways, all of it, then we cut back to what people would actually use. Nothing in it nags.',
       "<strong>What people felt.</strong> A bit of achievement, never guilt about a broken streak. Building a habit is fine as long as there's something worth being habitual about. Calm shipped the sleep pathway later, as Calm Sleep.",
     ],
@@ -122,10 +137,10 @@ export const CAREER: {
   },
   {
     key: 'dialpad', when: '2016–20', role: 'Dialpad · Head of Design',
-    headline: "How to modernise a plane while it's flying.",
+    headline: "How to modernize a plane while it's flying.",
     notes: [
       '<strong>The hard part.</strong> A small-business phone system had grown into an enterprise platform with sales, support and early voice AI, all sitting on old code where moving one thing broke another.',
-      '<strong>Decision.</strong> Information architecture first, then modernise in pieces. You never get a clean slate. Most of the job is managing the seam between the new system and the parts nobody can touch yet.',
+      '<strong>Decision.</strong> Information architecture first, then modernize in pieces. You never get a clean slate. Most of the job is managing the seam between the new system and the parts nobody can touch yet.',
       "<strong>The team.</strong> I inherited a feral art studio and pointed it at the business. In B2B, what's good for the business and what's good for the user are mostly the same thing. It grew to seven designers.",
     ],
   },
@@ -171,3 +186,12 @@ export const PRINCIPLES = [
     text: 'Chipstack helps design better chips. Better chips need less cooling, which means less water and less power. That was most of why I took it.',
   },
 ];
+
+/** The career row's three notes as beats, for a featured case study. */
+function beatsFromNotes(key: string) {
+  return CAREER.find((c) => c.key === key)!.notes!.map((n) => {
+    const [, label, text] = n.match(/^<strong>(.+?)\.<\/strong> (.+)$/)!;
+    return { label, tab: label.replace(/^The /, '').toLowerCase(), text };
+  });
+}
+export const CALM_BEATS = beatsFromNotes('calm');

@@ -124,7 +124,7 @@ html:has(dialog[open]) { overflow: hidden }
   .beat p { font-size: 18px }
 }
 
-/* Five more */
+/* Six more */
 .more { padding-bottom: var(--space-section); display: grid; gap: var(--space-stack); scroll-margin-top: var(--header-h) }
 .more__head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap }
 .more__title { line-height: 1 }

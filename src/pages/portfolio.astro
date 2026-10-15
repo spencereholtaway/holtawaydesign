@@ -17,7 +17,7 @@ import WorkSheet from '../components/portfolio/WorkSheet.astro';
 import CareerRow from '../components/portfolio/CareerRow.astro';
 import { APPS, priceOf } from '../data/apps';
 import {
-  CHIPSTACK_BEATS, PGE_BEATS,
+  CHIPSTACK_BEATS, MYBUS_BEATS, CALM_BEATS,
   CAREER, DOMAINS, PILLARS, PRINCIPLES,
 } from '../data/portfolio';
 import tokens from '../styles/tokens.css?raw';
@@ -91,21 +91,17 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
             <Phone src="mybussf/map" alt="My Bus SF: stop view" sizes={stagePhone} />
             <Phone src="mybussf/bus-details" alt="My Bus SF: arrivals for one bus" sizes={stagePhone} />
           </Stage>
-          <div class="copy push" style="--push-md:3">
-            <p class="t-body-l">Tap a stop in a bus app and it lists every line that runs through it. All of them. It’s the lazy default, and it hands you the sorting.</p>
-            <p class="t-body-l">So I asked what you actually need at that stop, at that moment, and cut the rest. Set it up once. After that it just tells you.</p>
-            <p class="t-body-l">The measure of it is how fast you close the app. No PM, no roadmap, just an API and an opinion.</p>
-            <AppLinks app="mybussf" />
-          </div>
+          <Beats id="bus" beats={MYBUS_BEATS} pushLg={3} />
+          <div class="push" style="--push-md:3"><AppLinks app="mybussf" /></div>
         </article>
 
         <article class="case case--spaced" data-reveal>
-          <CaseHead num="03" meta={['Simpler PG&E Outages', 'Self-directed, web', '2025']}>Less map. More battery.</CaseHead>
-          <Stage tint="var(--p-pge)" bleed="right" indent={2} tightTop>
-            <Phone src="work/pge/light" alt="PG&E Outages, light mode" sizes={stagePhone} />
-            <Phone src="work/pge/dark" alt="PG&E Outages, dark mode" sizes={stagePhone} />
-          </Stage>
-          <Beats id="pge" beats={PGE_BEATS} pushLg={3} />
+          <CaseHead num="03" meta={['Calm', 'Staff Product Designer, Consumer', '2020–24']}>Retention, for people who came here to relax.</CaseHead>
+          <div class="media push bleed-r" style="--push-md:1; --tint:var(--p-calm); aspect-ratio:16/10">
+            <!-- Add src/assets/work/calm-consumer/hero.png and it appears here. -->
+            <Shot name="work/calm-consumer/hero" alt="Calm: the consumer app" widths={[640, 960, 1280, 1920, 2560]} sizes="(max-width: 719px) 100vw, 92vw" />
+          </div>
+          <Beats id="calm" beats={CALM_BEATS} pushLg={3} />
         </article>
 
         <MoreWork />

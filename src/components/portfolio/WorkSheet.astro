@@ -1,5 +1,5 @@
 ---
-// Side sheet with the whole story for each "Five more." project. A native
+// Side sheet with the whole story for each "Six more." project. A native
 // <dialog>: it traps focus, Escape closes it, and clicking the dimmed page
 // closes it too. "Next" steps through the projects in order.
 import Shot from '../Shot.astro';
@@ -62,6 +62,12 @@ const psShots = [
               {psShots.map(([f, label]) => (
                 <div><Shot name={`work/parentsquare/${f}`} alt={`ParentSquare: ${label}`} widths={[240, 360, 480, 720]} sizes={third} /></div>
               ))}
+            </div>
+          )}
+          {p.key === 'pge' && (
+            <div class="sheet__media sheet__media--pad sheet__phones" style={`--tint:${p.tint}`}>
+              <Phone src="work/pge/light" alt="PG&E Outages, light mode" shadow="detail" sizes={phone} />
+              <Phone src="work/pge/dark" alt="PG&E Outages, dark mode" shadow="detail" sizes={phone} />
             </div>
           )}
           {p.key === 'divorce' && (
