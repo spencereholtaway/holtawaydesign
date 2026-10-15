@@ -131,7 +131,6 @@ export const CAREER: {
     ],
   },
   { key: 'zynga', when: '2010–14', role: 'Zynga · Lead UI Designer, Words With Friends and Boggle', headline: null, todo: 'Placeholder. Spencer to write the constraint, move and insight.' },
-  { key: 'pond', when: 'Freelance', role: 'Pond Farm · Web design and photography', headline: null, todo: 'Placeholder. Spencer to write the constraint, move and insight.' },
   {
     key: 'early', when: '2003–10', role: 'Central Saint Martins, then agencies · Visual communication, spatial and print',
     headline: 'Type first. Screens later.',
