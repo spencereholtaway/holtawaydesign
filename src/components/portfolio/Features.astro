@@ -1,0 +1,35 @@
+---
+// A row of short notes under a rule, each a step lower than the last on wider
+// screens. "label" notes have an uppercase label; "plain" ones a bold title.
+interface Item {
+  label: string;
+  text: string;
+}
+interface Props {
+  items: Item[];
+  variant?: 'label' | 'plain';
+  /** Narrowest a column gets before the row wraps. */
+  min?: number;
+  /** Steps before the pattern repeats. */
+  steps?: 3 | 4;
+  /** Columns (of 12) to indent from 1100px up. */
+  pushLg?: number;
+  reveal?: boolean;
+}
+
+const { items, variant = 'label', min = 260, steps = 3, pushLg = 0, reveal = false } = Astro.props;
+---
+
+<div
+  class:list={['features', `features--${variant}`, `stagger-${steps}`, pushLg && 'push']}
+  style={`--min:${min}px; --push-lg:${pushLg}`}
+>
+  {
+    items.map((f) => (
+      <div class="feature" data-reveal={reveal || undefined}>
+        <span class={variant === 'label' ? 't-label' : 'feature__title'}>{f.label}</span>
+        <p class="t-body">{f.text}</p>
+      </div>
+    ))
+  }
+</div>
