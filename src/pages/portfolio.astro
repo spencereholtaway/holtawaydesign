@@ -97,10 +97,11 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
 
         <article class="case case--spaced" data-reveal>
           <CaseHead num="03" meta={['Calm', 'Staff Product Designer, Consumer', '2020–24']}>Retention, for people who came here to relax.</CaseHead>
-          <div class="media push bleed-r" style="--push-md:1; --tint:var(--p-calm); aspect-ratio:16/10">
-            <!-- Add src/assets/work/calm-consumer/hero.png and it appears here. -->
-            <Shot name="work/calm-consumer/hero" alt="Calm: the consumer app" widths={[640, 960, 1280, 1920, 2560]} sizes="(max-width: 719px) 100vw, 92vw" />
-          </div>
+          <Stage tint="var(--p-calm)" bleed="right" indent={2}>
+            <Phone src="work/calm-consumer/home" alt="Calm: home, with the week's streak" sizes={stagePhone} widths={[240, 360, 480, 750]} />
+            <!-- Second screen to come: add src/assets/work/calm-consumer/second.png (or .jpg). -->
+            <Phone src="work/calm-consumer/second" alt="Calm" sizes={stagePhone} />
+          </Stage>
           <Beats id="calm" beats={CALM_BEATS} pushLg={3} />
         </article>
 
