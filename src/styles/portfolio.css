@@ -210,7 +210,6 @@ html:has(dialog[open]) { overflow: hidden }
 .pillars { margin-bottom: clamp(72px, 10vw, 140px) }
 
 .band { background: var(--c-dark); color: var(--c-on-dark); padding: clamp(48px, 8vw, 128px) var(--gutter); display: grid; gap: clamp(24px, 4vw, 48px) }
-.band__label { font-family: var(--font-detail); font-size: var(--fs-meta); font-weight: 500; color: var(--c-on-dark-muted) }
 .principles { display: grid; gap: clamp(48px, 7vw, 104px) }
 .principle { display: flex; flex-wrap: wrap; gap: 16px 0; align-items: flex-end; border-top: 1px solid var(--c-dark-line); padding-top: clamp(20px, 2.4vw, 32px) }
 .principle h3 { flex: 1 1 280px; padding-right: var(--col-pad); color: var(--c-on-dark); max-width: 14ch }

@@ -171,7 +171,7 @@ export const PILLARS = [
   { label: 'Mentorship', text: 'Head of Design at Dialpad, Staff at Calm. Growing designers has been as much of the job as shipping.' },
 ];
 
-/** "Help, not take." Headlines carry inline HTML for the accent. */
+/** The three principles in the dark band. Headlines carry inline HTML for the accent. */
 export const PRINCIPLES = [
   {
     head: 'The most I could charge you was <span class="t-accent">99 cents</span>.',
