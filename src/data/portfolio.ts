@@ -153,7 +153,7 @@ export const CAREER: {
       '<strong>What stuck.</strong> Multifamily carpools. Who hosts, who drives, who drops out, and who gets re-routed when they do. I came back to the same problem ten years later with <a href="#more-work" class="link-u">blisspool</a>.',
     ],
   },
-  { key: 'zynga', when: '2010–14', role: 'Zynga · Lead UI Designer, Words With Friends and Boggle', headline: null, todo: 'Placeholder. Spencer to write the constraint, move and insight.' },
+  { key: 'zynga', when: '2010–14', role: 'Zynga · Lead UI Designer, Words With Friends and Boggle', headline: 'Worked With Friends', todo: 'Placeholder. Spencer to write the constraint, move and insight.' },
   {
     key: 'early', when: '2003–10', role: 'Central Saint Martins, then agencies · Visual communication, spatial and print',
     headline: 'Type first. Screens later.',
