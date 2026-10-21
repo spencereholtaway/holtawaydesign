@@ -2,6 +2,7 @@
 // The top of a case study: big accent number, meta line and a knockout
 // headline that overlaps the panel below. Without a number it's just the
 // meta and headline, indented by `push` or `pull` columns from 720px up.
+// `flip` puts the number on the right, for cases whose panel runs off the left.
 import Knockout from './Knockout.astro';
 
 interface Props {
@@ -9,13 +10,14 @@ interface Props {
   meta: string[];
   push?: number;
   pull?: number;
+  flip?: boolean;
 }
 
-const { num, meta, push = 0, pull = 0 } = Astro.props;
+const { num, meta, push = 0, pull = 0, flip = false } = Astro.props;
 ---
 
 <div
-  class:list={['case-head', !num && 'case-head--plain', push && 'push', pull && 'pull']}
+  class:list={['case-head', !num && 'case-head--plain', flip && 'case-head--flip', push && 'push', pull && 'pull']}
   style={`--push-md:${push}; --pull-md:${pull}`}
 >
   {num && <span class="t-number t-3d case-head__num" aria-hidden="true">{num}</span>}

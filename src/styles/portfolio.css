@@ -48,6 +48,8 @@ html:has(dialog[open]) { overflow: hidden }
 .case-head__body { flex: 1 1 50%; display: grid; gap: 16px; min-width: 0 }
 .case-head--plain { display: grid; gap: 16px }
 @media (min-width: 720px) { .case-head__num { flex-basis: 25% } }
+.case-head--flip { flex-direction: row-reverse }
+.case-head--flip .case-head__num { text-align: right; left: auto; right: -0.04em }
 
 /* 3D magenta: the case numbers and the full stops on the big headings. A
    solid block with deeper sides; the sides swing with --ex/--ey and the block
