@@ -1,10 +1,11 @@
 ---
-// A top-level section: a heavy rule, a small label row, and (optionally) the
-// section's name set huge and right-aligned.
+// A top-level section: a heavy rule, a small label row (left out when there's
+// no label or aside), and (optionally) the section's name set huge and
+// right-aligned.
 interface Props {
   id: string;
-  label: string;
-  aside: string;
+  label?: string;
+  aside?: string;
   /** The huge word, e.g. "Work". Gets an accent full stop. */
   word?: string;
   class?: string;
@@ -14,10 +15,14 @@ const { id, label, aside, word, class: className } = Astro.props;
 ---
 
 <section id={id} class:list={['section', className]}>
-  <div class="section__bar t-detail">
-    <span>{label}</span>
-    <span class="section__aside">{aside}</span>
-  </div>
+  {
+    (label || aside) && (
+      <div class="section__bar t-detail">
+        <span>{label}</span>
+        <span class="section__aside">{aside}</span>
+      </div>
+    )
+  }
   {word && <div class="t-section section__word" aria-hidden="true" data-fit-width>{word}<span class="t-accent t-3d">.</span></div>}
   <slot />
 </section>
