@@ -154,10 +154,10 @@ export const CAREER: {
 ];
 
 export const PILLARS = [
-  { label: 'Service and systems', text: 'Ten years building software for specialists. Telephony, chip design, HR. People who already know their field and have no interest in learning mine.' },
-  { label: 'Craft', text: "I started on a Mac SE as a kid, then trained in typography at Central Saint Martins. When something here is plain, it's plain on purpose." },
-  { label: 'Honesty in the room', text: "If the research says people won't care, however good it feels to build, I'll say so out loud." },
-  { label: 'Mentorship', text: 'Head of Design at Dialpad, Staff at Calm. Growing designers has been as much of the job as shipping.' },
+  { label: 'Service and systems', text: 'Ten years building software for specialists. Telephony, microchip design, the stressed and anxious. People who know how complex their problems are, and need a design lens to help achieve their goals more easily.' },
+  { label: 'Craft', text: 'It all started with Hypercard stacks in 1986. I trained in typography under Phil Baines at Central Saint Martins, and broke out into experiential marketing as a graduate. The balance of high craft and rich experience design is the constant in my career.' },
+  { label: 'Building to be better', text: 'I hate to see people build for building’s sake. If we’re not learning from what we build or building to deliver something we know will be valuable to customers (through research), I’ll be the one in the room to say we’re on the wrong path.' },
+  { label: 'Mentorship', text: 'Head of Design at Dialpad, Staff Designer at Calm. Growing designers and sharing my 20+ years of experience has been as much of the job as shipping.' },
 ];
 
 /** The three principles in the dark band. Headlines carry inline HTML for the accent. */
