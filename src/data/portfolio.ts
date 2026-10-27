@@ -163,8 +163,8 @@ export const PILLARS = [
 /** The three principles in the dark band. Headlines carry inline HTML for the accent. */
 export const PRINCIPLES = [
   {
-    head: 'The most I could charge you was <span class="t-accent">99 cents</span>.',
-    text: "I resubmitted MyBus SF at 99 cents with no subscription. It's a bus app. You use it for eleven seconds and close it. Charging someone monthly for that would be taking money off people for nothing.",
+    head: 'The most I can charge you is <span class="t-accent">99 cents</span>.',
+    text: "MyBus SF and Breath Body are 99 cents with no subscription: not because they’re “only worth $0.99” but because my belief is simple solutions deserve simple, honest pricing as opposed to the mental gymnastics “less than a cup of coffee” or subscription plans cause potential customers.",
   },
   {
     head: 'They asked for engagement. I gave them permission to leave.',
