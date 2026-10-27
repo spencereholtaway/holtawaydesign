@@ -26,7 +26,7 @@ export const PGE_BEATS = beat(
   "During an outage your battery is the thing you're rationing, so the app is built to use as little of it as it can. Most of the work was deciding what not to build.",
 );
 
-/** "Six more." Each one has a card in the carousel and a side sheet. */
+/** "Five more." Each one has a card in the carousel and a side sheet. */
 export const PROJECTS = [
   {
     key: 'calmb2b', num: '04', name: 'Calm for Business', year: '2026', tint: 'var(--p-calm)',
@@ -38,16 +38,7 @@ export const PROJECTS = [
     i: "This is one where the feeling is doing real work. Someone buying Calm for their company should get a bit of the thing they're buying, even in an admin dashboard.",
   },
   {
-    key: 'bliss', num: '05', name: 'blisspool', year: '2026', tint: 'var(--p-bliss)',
-    meta: 'Self-directed, carpools for families · 2026',
-    head: 'I solved carpooling in 2015. Then I had kids.',
-    teaser: 'The Shuddle problem, ten years later, for my own kids.',
-    c: 'School started and the soccer and piano carpools went into group texts. Every decision got buried in them within a day.',
-    m: "Someone asks if you can take Caroline to piano this week. That becomes one entry, and it's in your calendar. Families join specific carpools on specific days.",
-    i: "At Shuddle I had an engineering team for this. This time it's the same dependency web and it's just me, for my own kids.",
-  },
-  {
-    key: 'flight', num: '06', name: 'FlightAware', year: '2025', tint: 'var(--p-flight)',
+    key: 'flight', num: '05', name: 'FlightAware', year: '2025', tint: 'var(--p-flight)',
     meta: 'Self-directed redesign · 2025',
     head: 'Dark mode, for a reason.',
     teaser: 'They patched. I designed.',
@@ -56,7 +47,7 @@ export const PROJECTS = [
     i: 'Flight alerts and recent searches get somewhere proper to live. They patched. I designed.',
   },
   {
-    key: 'parent', num: '07', name: 'ParentSquare', year: '2025', tint: 'var(--p-parent)',
+    key: 'parent', num: '06', name: 'ParentSquare', year: '2025', tint: 'var(--p-parent)',
     meta: 'Self-directed refresh · 2025',
     head: 'Designed for messages nobody designed.',
     teaser: 'Built for whatever a teacher pastes in.',
@@ -65,7 +56,7 @@ export const PROJECTS = [
     i: 'The layout is built for the variety. Mixed text, images, whatever a teacher pastes in.',
   },
   {
-    key: 'pge', num: '08', name: 'Simpler PG&E Outages', year: '2025', tint: 'var(--p-pge)',
+    key: 'pge', num: '07', name: 'Simpler PG&E Outages', year: '2025', tint: 'var(--p-pge)',
     meta: 'Self-directed, web · 2025',
     head: 'Less map. More battery.',
     teaser: 'One progress meter for your outage, built to use as little of your battery as it can.',
@@ -74,7 +65,7 @@ export const PROJECTS = [
     i: PGE_BEATS[2].text,
   },
   {
-    key: 'divorce', num: '09', name: 'CA Divorce Disclosures Workbook', year: 'Holtaway Design', tint: 'var(--p-divorce)',
+    key: 'divorce', num: '08', name: 'CA Divorce Disclosures Workbook', year: 'Holtaway Design', tint: 'var(--p-divorce)',
     meta: 'Local-first app, shipped under Holtaway Design',
     head: 'Hundreds of fields, and now it knows where you left off.',
     teaser: "Same as PG&E. Work out what's running low and protect it.",
@@ -150,7 +141,7 @@ export const CAREER: {
     notes: [
       "<strong>The hard part.</strong> I was the only UX designer. A bare-bones back end and a lot of live logistics: where's the kid, where do I need to be, when do I leave.",
       '<strong>Decision.</strong> A driver app that turned a set of raw functions into something you could follow, including what happens when a ride falls through at the last minute.',
-      '<strong>What stuck.</strong> Multifamily carpools. Who hosts, who drives, who drops out, and who gets re-routed when they do. I came back to the same problem ten years later with <a href="#more-work" class="link-u">blisspool</a>.',
+      '<strong>What stuck.</strong> Multifamily carpools. Who hosts, who drives, who drops out, and who gets re-routed when they do. I came back to the same problem ten years later with blisspool.',
     ],
   },
   { key: 'zynga', when: '2010–14', role: 'Zynga · Lead UI Designer, Words With Friends and Boggle', headline: 'Worked With Friends', todo: 'Placeholder. Spencer to write the constraint, move and insight.' },

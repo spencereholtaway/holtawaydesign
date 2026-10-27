@@ -1,5 +1,5 @@
 ---
-// Side sheet with the whole story for each "Six more." project. A native
+// Side sheet with the whole story for each "Five more." project. A native
 // <dialog>: it traps focus, Escape closes it, and clicking the dimmed page
 // closes it too. "Next" steps through the projects in order.
 import Shot from '../Shot.astro';
@@ -39,11 +39,6 @@ const psShots = [
                 <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/calm/users-upload" alt="Calm for Business: Users, upload" widths={[480, 720]} sizes={half} /></div>
                 <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/calm/plan-payment" alt="Calm for Business: Plan and payment" widths={[480, 720]} sizes={half} /></div>
               </div>
-            </div>
-          )}
-          {p.key === 'bliss' && (
-            <div class="sheet__media sheet__media--fill" style={`--tint:${p.tint}`}>
-              <Shot name="work/blisspool/card" alt="blisspool" widths={[640, 960, 1360]} sizes={wide} />
             </div>
           )}
           {p.key === 'flight' && (
