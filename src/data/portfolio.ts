@@ -172,7 +172,7 @@ export const PRINCIPLES = [
   },
   {
     head: 'I took the AI job that uses less water.',
-    text: 'In 2025 I had mixed feelings about the AI boom and was hesitant to be a part of it without really thinking about the why. ChipStack helps designers make more efficient chips. Better chips need less cooling, which means less water and less power. That’s a product I could get behind.',
+    text: 'In early 2025 I had mixed feelings about the AI boom and was hesitant to be a part of it without really thinking about the why. ChipStack helps designers make more efficient chips. Better chips need less cooling, which means less water and less power. That’s a product I could get behind.',
   },
 ];
 
