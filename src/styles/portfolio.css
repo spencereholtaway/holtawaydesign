@@ -132,7 +132,7 @@ html:has(dialog[open]) { overflow: hidden }
 .more__title { line-height: 1 }
 .more__controls { display: flex; align-items: center; gap: 12px }
 .more__count { font-weight: 600; font-family: var(--font-detail); font-size: var(--fs-meta); min-width: 48px; text-align: right }
-.more__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; margin: 0 calc(-1 * var(--bleed)); padding: 0 var(--bleed); scroll-padding: 0 var(--bleed) }
+.more__track { display: flex; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; margin: 0 calc(-1 * var(--bleed)); padding: 0 var(--bleed); scroll-padding: 0 var(--bleed) }
 .more__track::-webkit-scrollbar { display: none }
 .card { flex: none; width: 83.3333%; padding-right: var(--col-pad); scroll-snap-align: start; display: grid; gap: 14px; align-content: start }
 @media (min-width: 720px) { .card { width: 50% } }
