@@ -9,9 +9,9 @@ const beat = (c: string, m: string, i: string) => [
 ];
 
 export const CHIPSTACK_BEATS = beat(
-  'Chipstack is an AI tool for chip designers. It reads through decades of documentation, some of it older than the people using it, and catches problems before they reach silicon. It was built by engineers, for engineers, inside a VS Code panel. ChipStack wanted to inject modern user experience principles to their product',
+  'ChipStack is an AI tool for chip designers. It reads through decades of documentation, some of it older than the people using it, and catches problems before they reach silicon. It was built by engineers, for engineers, inside a VS Code panel. ChipStack wanted to inject modern user experience principles to their product.',
   "I rebuilt it around an action bar. It shows the controls that make sense for wherever you are, gets out of the way when you're not using it, and works entirely from the keyboard, because chip engineers live on the keyboard. It uses VS Code's own design system, so it never feels bolted on.",
-  "The obvious move is a big AI panel that sits there asking for attention. Nobody working in VS Code wants that. And I wanted this one to exist — if I'm going to work on AI at all, it should be the kind that makes the mess more efficient instead of worse. Better chips need less water for cooling. Cadence acquired Chipstack.",
+  "The obvious move is a big AI panel that sits there asking for attention. Nobody working in VS Code wants that. And I wanted this one to exist — if I'm going to work on AI at all, it should be the kind that makes the mess more efficient instead of worse. Better chips need less water for cooling. Cadence acquired ChipStack.",
 );
 
 export const MYBUS_BEATS = beat(
@@ -91,7 +91,7 @@ export const CAREER: {
   todo?: string;
 }[] = [
   {
-    key: 'chipstack', when: '2025–26', role: 'Chipstack · Product &amp; brand, head-of-design track',
+    key: 'chipstack', when: '2025–26', role: 'ChipStack · Product &amp; brand, head-of-design track',
     headline: 'I asked the dumb question in a room of PhDs for months.',
     notes: [
       '<strong>The hard part.</strong> I got dropped into chip design knowing none of the words. Most of the first few months was catching up fast enough to be useful in the room.',
@@ -174,7 +174,7 @@ export const PRINCIPLES = [
   },
   {
     head: 'I took the AI job that uses less water.',
-    text: 'Chipstack helps design better chips. Better chips need less cooling, which means less water and less power. That was most of why I took it.',
+    text: 'ChipStack helps design better chips. Better chips need less cooling, which means less water and less power. That was most of why I took it.',
   },
 ];
 
