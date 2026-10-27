@@ -8,12 +8,13 @@ interface Props {
   /** May contain &amp; and similar entities. */
   role: string;
   headline: string | null;
+  line?: string;
   notes?: string[];
   body?: string;
   todo?: string;
 }
 
-const { when, role, headline, notes, body, todo } = Astro.props;
+const { when, role, headline, line, notes, body, todo } = Astro.props;
 ---
 
 {
@@ -24,6 +25,7 @@ const { when, role, headline, notes, body, todo } = Astro.props;
         <span class="career-row__main">
           <span class="t-meta" set:html={role} />
           {headline ? <span class="career-row__title">{headline}</span> : <span class="placeholder placeholder--title">Headline to come</span>}
+          {line ? <span class="career-row__line">{line}</span> : <span class="placeholder career-row__line">Line to come</span>}
         </span>
       </div>
     </div>

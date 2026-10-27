@@ -189,6 +189,8 @@ html:has(dialog[open]) { overflow: hidden }
 .career-row > summary::-webkit-details-marker { display: none }
 .career-row__main { display: grid; gap: 4px }
 .career-row__title { font-weight: 600; font-size: var(--fs-row-title); line-height: 1.1; letter-spacing: -0.03em }
+.career-row__line { margin-top: 6px; color: var(--c-text); font-size: var(--fs-body-s); max-width: 60ch; text-wrap: pretty }
+.career-row__line.placeholder { justify-self: start; padding: 4px 10px }
 .career-row__sign { font-size: 24px; text-align: right; color: var(--c-accent) }
 .career-row__sign::before { content: "+" }
 .career-row[open] .career-row__sign::before { content: "–" }

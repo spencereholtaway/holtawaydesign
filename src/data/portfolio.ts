@@ -103,6 +103,8 @@ export const CAREER: {
   when: string;
   role: string;
   headline: string | null;
+  /** One line under the headline that explains it. Shown while the notes are hidden. */
+  line?: string;
   notes?: string[];
   body?: string;
   todo?: string;
