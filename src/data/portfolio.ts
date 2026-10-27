@@ -86,9 +86,9 @@ export const FEATURED: {
   key: string; num: string; name: string; meta: string; head: string; tint: string;
   c?: string; m?: string; i?: string;
 }[] = [
-  { key: 'chipstack', num: '01', name: 'ChipStack', meta: 'AI for microchip design, inside VS Code · 2025–26', head: 'Design <i>can</i> save the world.', tint: 'var(--p-chip)' },
+  { key: 'chipstack', num: '01', name: 'ChipStack', meta: 'AI for microchip design, inside VS Code · 2025 – 2026', head: 'Design <i>can</i> save the world.', tint: 'var(--p-chip)' },
   { key: 'mybussf', num: '02', name: 'My Bus SF', meta: 'iOS · $0.99', head: 'An app that wants you to leave.', tint: 'var(--p-bus)' },
-  { key: 'calm', num: '03', name: 'Calm', meta: 'Staff Product Designer, Consumer · 2020–24', head: 'Retention, for people who came here to relax.', tint: 'var(--p-calm)' },
+  { key: 'calm', num: '03', name: 'Calm', meta: 'Staff Product Designer, Consumer · 2020 – 2024', head: 'Retention, for people who came here to relax.', tint: 'var(--p-calm)' },
 ];
 
 /** Every side sheet in order, so "Next" runs 01 through 08. */
@@ -110,7 +110,7 @@ export const CAREER: {
   todo?: string;
 }[] = [
   {
-    key: 'chipstack', when: '2025–26', role: 'ChipStack · Product &amp; brand, head-of-design track',
+    key: 'chipstack', when: '2025 – 2026', role: 'ChipStack · Product &amp; brand, head-of-design track',
     headline: 'I asked the dumb question in a room of PhDs for months.', line: 'Regular user research with microchip designers led to simple solutions for complex problems.',
     notes: [
       '<strong>The hard part.</strong> I got dropped into chip design knowing none of the words. Most of the first few months was catching up fast enough to be useful in the room.',
@@ -119,7 +119,7 @@ export const CAREER: {
     ],
   },
   {
-    key: 'red9', when: '2023–24', role: 'Red9 · Product &amp; brand',
+    key: 'red9', when: '2023 – 2024', role: 'Red9 · Product &amp; brand',
     headline: 'I designed myself out of a job.', line: 'A full design system including responsive page elements and dashboard widget components allowed the client to iterate on their site long after the engagement.',
     notes: [
       '<strong>The hard part.</strong> They hired me for a growth website and a light rebrand, but every change still had to come through me. Then came the Health Check, which has to tell people their database is in worse shape than they thought.',
@@ -128,7 +128,7 @@ export const CAREER: {
     ],
   },
   {
-    key: 'calm', when: '2020–24', role: 'Calm · Staff Product Designer, Consumer',
+    key: 'calm', when: '2020 – 2024', role: 'Calm · Staff Product Designer, Consumer',
     headline: 'Growth hacked, for people who came here to relax.', line: 'Careful communication and deep research meant growth didn’t have to look like a notification center full of nags and guilt.',
     notes: [
       "<strong>The hard part.</strong> People were canceling as normal life came back, and my team got handed engagement. In a wellness app that's a dangerous word.",
@@ -137,7 +137,7 @@ export const CAREER: {
     ],
   },
   {
-    key: 'calmb2b', when: '2020–22', role: 'Calm for Business · Staff Product Designer, zero-to-one',
+    key: 'calmb2b', when: '2020 – 2022', role: 'Calm for Business · Staff Product Designer, zero-to-one',
     headline: "The least glamorous work I'm proudest of.", line: 'A zero-to-one project with a tiny team and very little internal visibility turned into a huge revenue source.',
     notes: [
       '<strong>The hard part.</strong> Demand went through the roof and every partnership still ran through an engineer. Adding 50,000 American Express users was done by hand.',
@@ -146,7 +146,7 @@ export const CAREER: {
     ],
   },
   {
-    key: 'dialpad', when: '2016–20', role: 'Dialpad · Head of Design',
+    key: 'dialpad', when: '2016 – 2020', role: 'Dialpad · Head of Design',
     headline: "How to modernize a plane while it's flying.", line: 'From an employee phone system for small businesses to enterprise-grade, AI-enabled communication platform for sales, support and large distributed teams. In 4 years.',
     notes: [
       '<strong>The hard part.</strong> A small-business phone system had grown into an enterprise platform with sales, support and early voice AI, all sitting on old code where moving one thing broke another.',
@@ -155,7 +155,7 @@ export const CAREER: {
     ],
   },
   {
-    key: 'shuddle', when: '2014–16', role: 'Shuddle · Senior UX Designer, rideshare for families',
+    key: 'shuddle', when: '2014 – 2016', role: 'Shuddle · Senior UX Designer, rideshare for families',
     headline: 'Where I learned how to design software instead of screens.', line: 'Working with a small team on multi-family, multi-leg carpools meant I had to go deep with back end engineers to understand how every UI change snowballed on the back end in order to create a service for busy families that felt like an assist and not a chore.',
     notes: [
       "<strong>The hard part.</strong> I was the only UX designer. A bare-bones back end and a lot of live logistics: where's the kid, where do I need to be, when do I leave.",
@@ -163,12 +163,12 @@ export const CAREER: {
       '<strong>What stuck.</strong> Multifamily carpools. Who hosts, who drives, who drops out, and who gets re-routed when they do. I came back to the same problem ten years later with blisspool.',
     ],
   },
-  { key: 'zynga', when: '2010–14', role: 'Zynga · Lead UI Designer, Words With Friends and Boggle', headline: 'Worked With Friends', line: 'Translated my graphic design background to UI and UX and learned how to work with and balance the needs of design, engineering and product management. Shipped Words With Friends for iPad and many more with friends products and projects.', todo: 'Placeholder. Spencer to write the constraint, move and insight.' },
+  { key: 'zynga', when: '2010 – 2014', role: 'Zynga · Lead UI Designer, Words With Friends and Boggle', headline: 'Worked With Friends', line: 'Translated my graphic design background to UI and UX and learned how to work with and balance the needs of design, engineering and product management. Shipped Words With Friends for iPad and many more with friends products and projects.', todo: 'Placeholder. Spencer to write the constraint, move and insight.' },
   {
-    key: 'early', when: '2003–10', role: 'Central Saint Martins, then agencies · Visual communication, spatial and print',
+    key: 'early', when: '2003 – 2010', role: 'Central Saint Martins, then agencies · Visual communication, spatial and print',
     headline: 'Type first. Screens later.', line: 'Created live marketing experiences for Orange Telecom, Samsung, Skype, HSBC and American Express.',
-    body: 'Visual Communication at Central Saint Martins, 2003–06. The grid and the type on this page come from there.',
-    todo: 'Agencies, 2006–10, spatial and print. Placeholder. Spencer to write the framing.',
+    body: 'Visual Communication at Central Saint Martins, 2003 – 2006. The grid and the type on this page come from there.',
+    todo: 'Agencies, 2006 – 2010, spatial and print. Placeholder. Spencer to write the framing.',
   },
 ];
 
