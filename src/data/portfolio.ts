@@ -168,7 +168,7 @@ export const PRINCIPLES = [
   },
   {
     head: 'They asked for engagement. I gave them permission to leave.',
-    text: "My team got handed engagement after the pandemic, which in a wellness app is the dangerous end. So we built something that gives you a bit of achievement and never guilts you about a broken streak. Nothing in it nags. Building a habit is fine, as long as there's something worth being habitual about.",
+    text: "We were asked to growth-hack a wellness app. So we made something that encourages the right amount of achievement and doesn’t rely on guilt to garner engagement. Encouragement and being ok with being an imperfect human is great; nagging and a sense of dread from under-achievement is not.",
   },
   {
     head: 'I took the AI job that uses less water.',
