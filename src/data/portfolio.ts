@@ -2,22 +2,35 @@
 // One-off copy lives in src/pages/portfolio.astro. A few strings carry inline
 // HTML (<strong>, <a>); they're written here, never user input.
 
-const beat = (c: string, m: string, i: string) => [
-  { label: 'The constraint', tab: 'constraint', text: c },
-  { label: 'The move', tab: 'move', text: m },
-  { label: 'The insight', tab: 'insight', text: i },
-];
+/** Default headings for the three beats. A case can name its own. */
+export const BEAT_LABELS = ['The constraint', 'The move', 'The insight'] as const;
+type Labels = readonly [string, string, string];
+
+/** Tab name below 720px: the heading without its "The". */
+const tabFor = (label: string) => label.replace(/^The /, '').toLowerCase();
+
+const beat = (c: string, m: string, i: string, labels: Labels = BEAT_LABELS) =>
+  [c, m, i].map((text, n) => ({ label: labels[n], tab: tabFor(labels[n]), text }));
 
 export const CHIPSTACK_BEATS = beat(
   'ChipStack is an AI tool for chip designers. It reads through decades of documentation, some of it older than the people using it, and catches problems before they reach silicon. It was built by engineers, for engineers, inside a VS Code panel. ChipStack wanted to inject modern user experience principles to their product.',
-  'Along with high level architecture and storytelling design decisions to improve findability and user flow, I developed an action bar that shows contextually relevant controls and easy access to agent interaction. The bar can be invoked and operated entirely by keyboard or mouse, and automatically gets out of the way when not in use.',
+  'Along with high level architecture and storytelling design decisions to improve feature findability and user flow, I developed an action bar that shows contextually relevant controls and easy access to agent interaction. The bar can be invoked and operated entirely by keyboard or mouse, and automatically gets out of the way when not in use.',
   "The obvious move would have been to center the design around ChipStack's chat capabilities, but in microchip design, context is key for designers, so an augmented, optional experience is far more suitable for the user. ChipStack was acquired by Cadence in late 2025.",
+  ['The constraint', 'The work', 'The insight'],
 );
 
 export const MYBUS_BEATS = beat(
-  'Tap a stop in a bus app and it lists every line that runs through it. All of them. It’s the lazy default, and it hands you the sorting.',
-  'So I asked what you actually need at that stop, at that moment, and cut the rest. Set it up once. After that it just tells you.',
-  'The measure of it is how fast you close the app. No PM, no roadmap, just an API and an opinion.',
+  'This is a project of self constraint. It’s hard to find a transit app that does one thing well, and that was my frustration as a daily commuter in SF from 2010–2019. 3+ taps to find the simple information I needed, then surprise subscription plans showing up when I found one I liked.',
+  'Originally released in 2014, the solution was to create a simple list for daily transit users: the buses they take every day, from the bus stops they go to every day. No extras. A bus app truly designed for the daily commute.',
+  'Keeping a strong opinion on features when an API can do basically anything is harder than it sounds. Apple’s SDKs in the last 10 years have made this simple solution even more powerful with widgets and live activities: features worth adding, unlike trip planning.',
+  ['The constraint', 'The solution', 'The insight'],
+);
+
+export const CALM_BEATS = beat(
+  'Calm was facing churn challenges as the mindfulness industry took a downturn in the months following the 2020 pandemic. With a growth veteran leading the product team, we transitioned our energy from content-focused development to growth-focused development.',
+  'While the end result is a simple daily engagement pattern, it was important to engage users in deep research to ensure we chose the right path for users from a plethora of strategies and tactics generated from company-wide workshops led by yours truly.',
+  'Weekly engagement lifted to healthy levels. UX research participants and reviewers enjoyed the addition of encouraging reminders and a low effort way to keep to their intention of using Calm daily.',
+  ['The challenge', 'Simple on the surface', 'What people felt'],
 );
 
 export const PGE_BEATS = beat(
@@ -30,12 +43,13 @@ export const PGE_BEATS = beat(
 export const PROJECTS = [
   {
     key: 'calmb2b', num: '04', name: 'Calm for Business', year: '2026', tint: 'var(--p-calm)',
-    meta: 'My 2020 zero-to-one, revisited · 2026',
+    meta: '2020 zero-to-one, revisited · 2026',
     head: 'A dashboard that lives up to the name.',
-    teaser: 'An HR admin should feel the thing they just bought.',
-    c: "I built Calm's B2B product from nothing in 2020, fast, while demand was peaking. It shipped and it scaled.",
-    m: "The same system, redrawn in Calm's brand and register. Same jobs, same data, calmer.",
-    i: "This is one where the feeling is doing real work. Someone buying Calm for their company should get a bit of the thing they're buying, even in an admin dashboard.",
+    teaser: 'An HR admin should feel what they just bought.',
+    labels: ['The constraint', 'The purpose', 'The insight'],
+    c: "I designed Calm's B2B product from nothing in 2020, fast, while demand for mindfulness tools was peaking during the pandemic. We shipped within 2 months of starting work, and continued to develop the business & partnerships and Calm Health offering through 2022 when I moved to the consumer team.",
+    m: 'As user expectations of UI polish shifted between 2024 and 2025, I wanted to revisit the visual design for Calm for Business. Originally, a 2020 SaaS-inspired UI suddenly felt incredibly dated and it was time for me to brush up on modern visual design.',
+    i: 'Just how much visual design can make a difference to the emotive response a user can feel. Comparatively, this visual approach instills a sense of depth and calm, a place I’d hope HR administrators would look forward to visiting as part of their job.',
   },
   {
     key: 'flight', num: '05', name: 'FlightAware', year: '2025', tint: 'var(--p-flight)',
@@ -88,7 +102,7 @@ export const FEATURED: {
 }[] = [
   { key: 'chipstack', num: '01', name: 'ChipStack', meta: 'AI for microchip design, inside VS Code · 2025 – 2026', head: 'Design <i>can</i> save the world.', tint: 'var(--p-chip)' },
   { key: 'mybussf', num: '02', name: 'My Bus SF', meta: 'iOS · $0.99', head: 'An app that wants you to leave.', tint: 'var(--p-bus)' },
-  { key: 'calm', num: '03', name: 'Calm', meta: 'Staff Product Designer, Consumer · 2020 – 2024', head: 'Retention, for people who came here to relax.', tint: 'var(--p-calm)' },
+  { key: 'calm', num: '03', name: 'Calm', meta: 'Staff Product Designer, Consumer · 2022 – 2024', head: 'Retention, for people who came here to relax.', tint: 'var(--p-calm)' },
 ];
 
 /** Every side sheet in order, so "Next" runs 01 through 08. */
@@ -194,12 +208,3 @@ export const PRINCIPLES = [
     text: 'In early 2025 I had mixed feelings about the AI boom and was hesitant to be a part of it without really thinking about the why. ChipStack helps designers make more efficient chips. Better chips need less cooling, which means less water and less power. That’s a product I could get behind.',
   },
 ];
-
-/** The career row's three notes as beats, for a featured case study. */
-function beatsFromNotes(key: string) {
-  return CAREER.find((c) => c.key === key)!.notes!.map((n) => {
-    const [, label, text] = n.match(/^<strong>(.+?)\.<\/strong> (.+)$/)!;
-    return { label, tab: label.replace(/^The /, '').toLowerCase(), text };
-  });
-}
-export const CALM_BEATS = beatsFromNotes('calm');

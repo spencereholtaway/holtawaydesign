@@ -5,7 +5,9 @@
 // closes it too. "Next" steps through the projects in order.
 import Shot from '../Shot.astro';
 import Phone from './Phone.astro';
-import { STORIES } from '../../data/portfolio';
+import { STORIES, BEAT_LABELS } from '../../data/portfolio';
+
+const labelsFor = (p: (typeof STORIES)[number]) => ('labels' in p && p.labels) || BEAT_LABELS;
 
 const wide = '(max-width: 759px) 90vw, 680px';
 const half = '(max-width: 759px) 45vw, 330px';
@@ -90,9 +92,9 @@ const psShots = [
 
           {p.c ? (
             <div class="sheet__beats">
-              <div><span class="t-label">The constraint</span><p>{p.c}</p></div>
-              <div><span class="t-label">The move</span><p>{p.m}</p></div>
-              <div><span class="t-label">The insight</span><p>{p.i}</p></div>
+              {[p.c, p.m, p.i].map((text, i) => (
+                <div><span class="t-label">{labelsFor(p)[i]}</span><p>{text}</p></div>
+              ))}
             </div>
           ) : (
             <p class="placeholder">Placeholder. Spencer to write the whole story.</p>
