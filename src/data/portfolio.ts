@@ -78,6 +78,23 @@ export const PROJECTS = [
 export type ProjectKey = (typeof PROJECTS)[number]['key'];
 
 /**
+ * The three featured cases in Work also open a side sheet ("The whole story").
+ * Their longer write-ups are Spencer's to write; until then `c`/`m`/`i` are
+ * absent and the sheet shows a placeholder. `head` may carry inline HTML.
+ */
+export const FEATURED: {
+  key: string; num: string; name: string; meta: string; head: string; tint: string;
+  c?: string; m?: string; i?: string;
+}[] = [
+  { key: 'chipstack', num: '01', name: 'ChipStack', meta: 'AI for microchip design, inside VS Code · 2025–26', head: 'Design <i>can</i> save the world.', tint: 'var(--p-chip)' },
+  { key: 'mybussf', num: '02', name: 'My Bus SF', meta: 'iOS · $0.99', head: 'An app that wants you to leave.', tint: 'var(--p-bus)' },
+  { key: 'calm', num: '03', name: 'Calm', meta: 'Staff Product Designer, Consumer · 2020–24', head: 'Retention, for people who came here to relax.', tint: 'var(--p-calm)' },
+];
+
+/** Every side sheet in order, so "Next" runs 01 through 08. */
+export const STORIES = [...FEATURED, ...PROJECTS];
+
+/**
  * Career rows. `notes` are the three paragraphs when the row is opened
  * (HTML allowed). `headline: null` and `todo` mark copy Spencer hasn't written yet.
  */
