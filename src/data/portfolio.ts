@@ -153,8 +153,6 @@ export const CAREER: {
   },
 ];
 
-export const DOMAINS = ['Consumer wellness', 'AI tools', 'SaaS', 'Business communication', 'Rideshare', 'Social games'];
-
 export const PILLARS = [
   { label: 'Service and systems', text: 'Ten years building software for specialists. Telephony, chip design, HR. People who already know their field and have no interest in learning mine.' },
   { label: 'Craft', text: "I started on a Mac SE as a kid, then trained in typography at Central Saint Martins. When something here is plain, it's plain on purpose." },

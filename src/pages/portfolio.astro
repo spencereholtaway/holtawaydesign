@@ -18,7 +18,7 @@ import CareerRow from '../components/portfolio/CareerRow.astro';
 import { APPS, priceOf } from '../data/apps';
 import {
   CHIPSTACK_BEATS, MYBUS_BEATS, CALM_BEATS,
-  CAREER, DOMAINS, PILLARS, PRINCIPLES,
+  CAREER, PILLARS, PRINCIPLES,
 } from '../data/portfolio';
 import tokens from '../styles/tokens.css?raw';
 import system from '../styles/system.css?raw';
@@ -112,7 +112,6 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
         <div class="career" data-reveal>
           {CAREER.map((c) => <CareerRow {...c} />)}
         </div>
-        <div class="tags">{DOMAINS.map((d) => <span class="tag">{d}</span>)}</div>
       </Section>
 
       <Section id="me" label="How I work" aside="And what I won't do" word="Me" class="section--spaced">
