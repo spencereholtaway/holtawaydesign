@@ -193,7 +193,14 @@ html:has(dialog[open]) { overflow: hidden }
 .career-row__body { padding: 0 0 32px; margin-left: var(--lead); color: var(--c-text); font-size: var(--fs-body-s); max-width: 60ch }
 .career-row__body > p { margin: 0 }
 .career-row__body > p + p { margin-top: 12px }
-.career-row__body--cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 20px 0; max-width: none }
+.career-row__body--cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px 0; max-width: none }
+/* Notes sit on the page grid: the body starts after the 2-column lead, so it
+   spans 10 columns; each note takes 5 of them on medium screens, 3 on wide. */
+@media (min-width: 720px) {
+  .career-row__body--cols { grid-template-columns: repeat(10, minmax(0, 1fr)) }
+  .career-row__body--cols > p { grid-column: span 5 }
+}
+@media (min-width: 1100px) { .career-row__body--cols > p { grid-column: span 3 } }
 .career-row__body--cols > p { padding-right: var(--col-pad) }
 .career-row__body--cols > p + p { margin-top: 0 }
 .career-row__body strong { color: var(--c-ink) }
