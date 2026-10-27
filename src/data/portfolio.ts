@@ -11,7 +11,7 @@ const beat = (c: string, m: string, i: string) => [
 export const CHIPSTACK_BEATS = beat(
   'ChipStack is an AI tool for chip designers. It reads through decades of documentation, some of it older than the people using it, and catches problems before they reach silicon. It was built by engineers, for engineers, inside a VS Code panel. ChipStack wanted to inject modern user experience principles to their product.',
   'Along with high level architecture and storytelling design decisions to improve findability and user flow, I developed an action bar that shows contextually relevant controls and easy access to agent interaction. The bar can be invoked and operated entirely by keyboard or mouse, and automatically gets out of the way when not in use.',
-  "The obvious move is a big AI panel that sits there asking for attention. Nobody working in VS Code wants that. And I wanted this one to exist — if I'm going to work on AI at all, it should be the kind that makes the mess more efficient instead of worse. Better chips need less water for cooling. Cadence acquired ChipStack.",
+  "The obvious move would have been to center the design around ChipStack's chat capabilities, but in microchip design, context is key for designers, so an augmented, optional experience is far more suitable for the user.",
 );
 
 export const MYBUS_BEATS = beat(
