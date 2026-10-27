@@ -1,6 +1,8 @@
 ---
-// One row of the career list: an accordion built on <details>, so it opens
-// with the keyboard and works without JavaScript.
+// One row of the career list. With EXPANDABLE on it's an accordion built on
+// <details> that opens to the row's notes; for launch it's off, so rows are
+// just date, role and headline. The notes stay in src/data/portfolio.ts.
+const EXPANDABLE = false;
 interface Props {
   when: string;
   /** May contain &amp; and similar entities. */
@@ -14,25 +16,42 @@ interface Props {
 const { when, role, headline, notes, body, todo } = Astro.props;
 ---
 
-<details class="career-row">
-  <summary>
-    <span class="t-meta">{when}</span>
-    <span class="career-row__main">
-      <span class="t-meta" set:html={role} />
-      {headline ? <span class="career-row__title">{headline}</span> : <span class="placeholder placeholder--title">Headline to come</span>}
-    </span>
-    <span class="career-row__sign" aria-hidden="true"></span>
-  </summary>
-  {
-    notes ? (
-      <div class="career-row__body career-row__body--cols">
-        {notes.map((n) => <p set:html={n} />)}
+{
+  !EXPANDABLE && (
+    <div class="career-row">
+      <div class="career-row__summary">
+        <span class="t-meta">{when}</span>
+        <span class="career-row__main">
+          <span class="t-meta" set:html={role} />
+          {headline ? <span class="career-row__title">{headline}</span> : <span class="placeholder placeholder--title">Headline to come</span>}
+        </span>
       </div>
-    ) : (
-      <div class="career-row__body">
-        {body && <p>{body}</p>}
-        {todo && <p class="placeholder">{todo}</p>}
-      </div>
-    )
-  }
-</details>
+    </div>
+  )
+}
+{
+  EXPANDABLE && (
+    <details class="career-row">
+      <summary>
+        <span class="t-meta">{when}</span>
+        <span class="career-row__main">
+          <span class="t-meta" set:html={role} />
+          {headline ? <span class="career-row__title">{headline}</span> : <span class="placeholder placeholder--title">Headline to come</span>}
+        </span>
+        <span class="career-row__sign" aria-hidden="true"></span>
+      </summary>
+      {
+        notes ? (
+          <div class="career-row__body career-row__body--cols">
+            {notes.map((n) => <p set:html={n} />)}
+          </div>
+        ) : (
+          <div class="career-row__body">
+            {body && <p>{body}</p>}
+            {todo && <p class="placeholder">{todo}</p>}
+          </div>
+        )
+      }
+    </details>
+  )
+}

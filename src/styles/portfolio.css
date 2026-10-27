@@ -184,7 +184,8 @@ html:has(dialog[open]) { overflow: hidden }
 .career { border-bottom: 1px solid var(--c-line) }
 .career-row { border-top: 1px solid var(--c-line); --lead: 25% }
 @media (min-width: 720px) { .career-row { --lead: 16.6667% } }
-.career-row > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: var(--lead) minmax(0, 1fr) 28px; padding: 22px 0; align-items: baseline }
+.career-row > summary, .career-row__summary { display: grid; grid-template-columns: var(--lead) minmax(0, 1fr) 28px; padding: 22px 0; align-items: baseline }
+.career-row > summary { list-style: none; cursor: pointer }
 .career-row > summary::-webkit-details-marker { display: none }
 .career-row__main { display: grid; gap: 4px }
 .career-row__title { font-weight: 600; font-size: var(--fs-row-title); line-height: 1.1; letter-spacing: -0.03em }
