@@ -13,7 +13,6 @@ const wide = '(max-width: 759px) 90vw, 680px';
 const half = '(max-width: 759px) 45vw, 330px';
 const phone = '(max-width: 759px) 42vw, 320px';
 const third = '(max-width: 759px) 28vw, 210px';
-const faCrop = 'top:0; left:-36.82%; width:189.55%; height:auto';
 const psShots = [
   ['ps-4', 'home'], ['ps-2', 'news post'], ['ps-5', 'event'],
   ['ps-6', 'messages'], ['ps-7', 'conversation'], ['ps-3', 'events'],
@@ -67,8 +66,8 @@ const psShots = [
               <Phone src="work/flightaware/map" alt="FlightAware: map" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
               <Phone src="work/flightaware/map-selected" alt="FlightAware: map, flight selected" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
               <Phone src="work/flightaware/flight-card" alt="FlightAware: flight card" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
-              <Phone src="work/flightaware/details" alt="FlightAware: details" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} widths={[480, 720, 1080]} imgStyle={faCrop} />
-              <Phone src="work/flightaware/flight-times" alt="FlightAware: flight times" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} widths={[480, 720, 1080]} imgStyle={faCrop} />
+              <Phone src="work/flightaware/details" alt="FlightAware: details" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+              <Phone src="work/flightaware/flight-times" alt="FlightAware: flight times" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
             </div>
           )}
           {p.key === 'parent' && (
