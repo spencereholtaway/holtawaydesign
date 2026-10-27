@@ -89,7 +89,6 @@ html:has(dialog[open]) { overflow: hidden }
 
 .media { position: relative; background: var(--tint) }
 .media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain }
-.sticker { position: absolute; z-index: 2; top: clamp(64px, 8vw, 120px); right: clamp(40px, 8vw, 140px); transform: rotate(-4deg); background: var(--c-ink); color: var(--c-bg); font-weight: 700; font-size: clamp(13px, 1.2vw, 16px); letter-spacing: 0.02em; padding: 8px 14px; pointer-events: none }
 
 .stage { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: clamp(12px, 2vw, 24px); background: var(--tint); padding: clamp(56px, 8vw, 128px) clamp(16px, 10vw, 200px) clamp(56px, 10vw, 160px) }
 .stage--tight-top { padding-top: clamp(24px, 6vw, 96px) }
