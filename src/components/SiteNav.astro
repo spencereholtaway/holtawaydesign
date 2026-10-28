@@ -1,0 +1,146 @@
+---
+// Sticky header for the homepage and the portfolio.
+// Wide screens: name, "/ Section" crumb and the nav, with an accent underline
+// on the section you're in. Below 720px: a Menu button that opens a
+// full-screen sheet, and once you scroll past a section's top the name rolls
+// up to show that section's name.
+interface Section {
+  id: string;
+  /** Shown in the roll-up and the crumb. */
+  label: string;
+}
+interface NavItem {
+  href: string;
+  label: string;
+  /** Label in the mobile menu, if different. */
+  menuLabel?: string;
+  /** Accent call to action (no underline). */
+  cta?: boolean;
+  /** Section id this link underlines. */
+  section?: string;
+}
+interface Props {
+  sections: Section[];
+  nav: NavItem[];
+  email: string;
+  /** Which section the crumb and underline follow: the one that has reached
+   *  the header ("top"), or the one in the middle of the screen ("middle"). */
+  activeBy?: 'top' | 'middle';
+}
+
+const { sections, nav, email, activeBy = 'top' } = Astro.props;
+---
+
+<header class="site-header" data-site-nav data-active-by={activeBy} data-sections={JSON.stringify(sections)}>
+  <div class="site-header__row">
+    <a href="#top" class="site-header__name" data-totop>
+      <span class="roll">
+        <span class="roll__track" data-roll>
+          <span>Spencer Holtaway</span>
+          <span aria-hidden="true"><span data-roll-label>{sections[0].label}</span><span class="t-accent">.</span></span>
+        </span>
+      </span>
+      <span class="site-header__crumb is-wide-only" data-crumb></span>
+    </a>
+    <nav class="site-nav is-wide-only" aria-label="Sections">
+      {nav.map((n) => (
+        <a href={n.href} class={n.cta ? 'site-nav__cta' : undefined} data-nav={n.section}>
+          <span>{n.label}</span>
+        </a>
+      ))}
+    </nav>
+    <button type="button" class="menu-btn is-narrow-only" data-menu-btn aria-expanded="false" aria-controls="menu">
+      <span data-menu-label>Menu</span><span class="dot"></span>
+    </button>
+  </div>
+</header>
+<div id="menu" class="menu" hidden>
+  {nav.map((n) => (
+    <a href={n.href} class:list={['menu__link', n.cta && 'menu__link--cta']} data-close>{n.menuLabel ?? n.label}</a>
+  ))}
+  <a href={`mailto:${email}`} class="menu__email">{email}</a>
+</div>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-nav]')!;
+  const sections: { id: string; label: string }[] = JSON.parse(header.dataset.sections!);
+  const byMiddle = header.dataset.activeBy === 'middle';
+  const roll = header.querySelector<HTMLElement>('[data-roll]')!;
+  const rollLabel = header.querySelector<HTMLElement>('[data-roll-label]')!;
+  const crumb = header.querySelector<HTMLElement>('[data-crumb]')!;
+  const navLinks = header.querySelectorAll<HTMLElement>('[data-nav]');
+  const menu = document.getElementById('menu')!;
+  const btn = header.querySelector<HTMLElement>('[data-menu-btn]')!;
+  const btnLabel = header.querySelector<HTMLElement>('[data-menu-label]')!;
+  const narrowMq = matchMedia('(max-width: 719px)');
+  const reduceMq = matchMedia('(prefers-reduced-motion: reduce)');
+  const last = sections[sections.length - 1];
+
+  let past = ''; // the last section whose top has reached the header
+  let lastPast = '';
+  let middle = ''; // the section in the middle of the screen
+  let open = false;
+
+  function render() {
+    const narrow = narrowMq.matches;
+    if (!narrow && open) setMenu(false);
+    const active = byMiddle ? middle : past;
+    roll.toggleAttribute('data-rolled', narrow && !!past && !open);
+    rollLabel.textContent = past || lastPast || sections[0].label;
+    crumb.textContent = active ? '/ ' + active : '';
+    navLinks.forEach((a) => {
+      const s = sections.find((x) => x.id === a.dataset.nav);
+      if (s && s.label === active) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  }
+
+  // Worked out fresh on every scroll, so nothing is left over from where you
+  // were before: above the first section (the hero) there's no crumb at all.
+  function onScroll() {
+    const line = header.offsetHeight + 24;
+    const mid = innerHeight * 0.475;
+    let cur = '';
+    let inMiddle = '';
+    for (const s of sections) {
+      const r = document.getElementById(s.id)?.getBoundingClientRect();
+      if (!r) continue;
+      if (r.top < line) cur = s.label;
+      if (r.top <= mid && r.bottom > mid) inMiddle = s.label;
+    }
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = inMiddle = last.label;
+    if (cur) lastPast = cur;
+    if (cur !== past || inMiddle !== middle) {
+      past = cur;
+      middle = inMiddle;
+      render();
+    }
+  }
+
+  function setMenu(next: boolean) {
+    open = next;
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btnLabel.textContent = open ? 'Close' : 'Menu';
+    render();
+  }
+
+  btn.addEventListener('click', () => setMenu(!open));
+  menu.querySelectorAll('[data-close]').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && open) {
+      setMenu(false);
+      btn.focus();
+    }
+  });
+  header.querySelector('[data-totop]')!.addEventListener('click', (e) => {
+    e.preventDefault();
+    setMenu(false);
+    scrollTo({ top: 0, behavior: reduceMq.matches ? 'auto' : 'smooth' });
+  });
+  narrowMq.addEventListener('change', render);
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+  render();
+</script>

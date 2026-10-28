@@ -1,0 +1,22 @@
+---
+// Tinted panel holding two phones, the second one stepped down. It runs off one
+// edge of the page and is indented from the other on wider screens.
+interface Props {
+  tint: string;
+  bleed: 'left' | 'right';
+  /** Columns (of 12) to indent from the other side, from 720px up. */
+  indent?: number;
+  /** Less room above the phones. */
+  tightTop?: boolean;
+}
+
+const { tint, bleed, indent = 0, tightTop = false } = Astro.props;
+const side = bleed === 'right' ? 'push' : 'pull';
+---
+
+<div
+  class:list={['stage', bleed === 'right' ? 'bleed-r' : 'bleed-l', side, tightTop && 'stage--tight-top']}
+  style={`--tint:${tint}; --${side}-md:${indent}`}
+>
+  <slot />
+</div>

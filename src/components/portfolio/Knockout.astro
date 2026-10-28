@@ -1,0 +1,17 @@
+---
+// Headline that sits over the screenshot below it. Each line gets a page-coloured
+// block behind it, so the words stay readable where they overlap the panel.
+interface Props {
+  as?: 'h2' | 'h3';
+  /** Type style, e.g. "t-display-2". */
+  class?: string;
+}
+
+const { as: Tag = 'h2', class: className = 't-display-2' } = Astro.props;
+const html = await Astro.slots.render('default');
+---
+
+<Tag class:list={['knockout', className]}>
+  <span class="knockout__bg" aria-hidden="true"><span set:html={html} /></span>
+  <span class="knockout__text" set:html={html} />
+</Tag>

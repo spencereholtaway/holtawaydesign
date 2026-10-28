@@ -1,0 +1,141 @@
+---
+// Side sheet with the whole story for each project: the three featured cases
+// and the "Five more." carousel. A native
+// <dialog>: it traps focus, Escape closes it, and clicking the dimmed page
+// closes it too. "Next" steps through the projects in order.
+import Shot from '../Shot.astro';
+import Phone from './Phone.astro';
+import { STORIES, BEAT_LABELS } from '../../data/portfolio';
+
+const labelsFor = (p: (typeof STORIES)[number]) => ('labels' in p && p.labels) || BEAT_LABELS;
+
+const wide = '(max-width: 759px) 90vw, 680px';
+const half = '(max-width: 759px) 45vw, 330px';
+const phone = '(max-width: 759px) 42vw, 320px';
+const third = '(max-width: 759px) 28vw, 210px';
+const psShots = [
+  ['ps-4', 'home'], ['ps-2', 'news post'], ['ps-5', 'event'],
+  ['ps-6', 'messages'], ['ps-7', 'conversation'], ['ps-3', 'events'],
+];
+---
+
+<dialog class="sheet" data-sheet>
+  {
+    STORIES.map((p, n) => {
+      const next = STORIES[(n + 1) % STORIES.length];
+      return (
+        <article class="sheet__body" data-project={p.key} aria-labelledby={`sheet-${p.key}`} hidden>
+          <div class="sheet__top">
+            <span class="t-meta">{p.name} · {p.meta}</span>
+            <button type="button" class="icon-btn icon-btn--s" aria-label="Close" data-close-sheet>×</button>
+          </div>
+          <div class="sheet__title">
+            <span class="t-number-s" aria-hidden="true">{p.num}</span>
+            <h2 class="t-title-xl" id={`sheet-${p.key}`} set:html={p.head} />
+          </div>
+
+          {p.key === 'chipstack' && (
+            <div class="sheet__media sheet__media--fill" style={`--tint:${p.tint}`}>
+              <Shot name="work/chipstack/actionbar" alt="ChipStack: the AI action bar, in VS Code" widths={[640, 960, 1360]} sizes={wide} style="mix-blend-mode:multiply; object-fit:contain" />
+            </div>
+          )}
+          {p.key === 'mybussf' && (
+            <div class="sheet__media sheet__media--pad sheet__phones" style={`--tint:${p.tint}`}>
+              <Phone src="mybussf/map" alt="My Bus SF: stop view" shadow="detail" sizes={phone} />
+              <Phone src="mybussf/widgets" alt="My Bus SF: Home Screen widgets" shadow="detail" sizes={phone} widths={[240, 360, 480, 720, 920]} />
+            </div>
+          )}
+          {p.key === 'calm' && (
+            <div class="sheet__media sheet__media--pad sheet__phones" style={`--tint:${p.tint}`}>
+              <Phone src="work/calm-consumer/home" alt="Calm: home, with the week's streak" shadow="detail" sizes={phone} widths={[240, 360, 480, 750]} />
+              <Phone src="work/calm-consumer/second" alt="Calm: “Win your week”, a three-day goal" shadow="detail" sizes={phone} widths={[240, 360, 480, 750]} />
+            </div>
+          )}
+          {p.key === 'calmb2b' && (
+            <div class="sheet__media sheet__media--pad" style={`--tint:${p.tint}`}>
+              <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/calm/get-set-up" alt="Calm for Business: Get set up" widths={[640, 960, 1360]} sizes={wide} /></div>
+              <div class="sheet__pair">
+                <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/calm/users-upload" alt="Calm for Business: Users, upload" widths={[480, 720]} sizes={half} /></div>
+                <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/calm/plan-payment" alt="Calm for Business: Plan and payment" widths={[480, 720]} sizes={half} /></div>
+              </div>
+            </div>
+          )}
+          {p.key === 'flight' && (
+            <div class="sheet__media sheet__media--pad sheet__phones" style={`--tint:${p.tint}`}>
+              <Phone src="work/flightaware/home" alt="FlightAware: alerts and recent searches" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+              <Phone src="work/flightaware/map" alt="FlightAware: map" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+              <Phone src="work/flightaware/map-selected" alt="FlightAware: map, flight selected" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+              <Phone src="work/flightaware/flight-card" alt="FlightAware: flight card" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+              <Phone src="work/flightaware/details" alt="FlightAware: details" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+              <Phone src="work/flightaware/flight-times" alt="FlightAware: flight times" shape="narrow" frame="#16255F" shadow="detail" sizes={phone} />
+            </div>
+          )}
+          {p.key === 'parent' && (
+            <div class="sheet__media sheet__media--pad sheet__shots3" style={`--tint:${p.tint}`}>
+              {psShots.map(([f, label]) => (
+                <div><Shot name={`work/parentsquare/${f}`} alt={`ParentSquare: ${label}`} widths={[240, 360, 480, 720]} sizes={third} /></div>
+              ))}
+            </div>
+          )}
+          {p.key === 'pge' && (
+            <div class="sheet__media sheet__media--pad sheet__phones" style={`--tint:${p.tint}`}>
+              <Phone src="work/pge/light" alt="PG&E Outages, light mode" shadow="detail" sizes={phone} />
+              <Phone src="work/pge/dark" alt="PG&E Outages, dark mode" shadow="detail" sizes={phone} />
+            </div>
+          )}
+          {p.key === 'divorce' && (
+            <div class="sheet__media sheet__media--pad" style={`--tint:${p.tint}`}>
+              <div class="sheet__shot" style="aspect-ratio:1842/1100"><Shot name="work/divorce/workbook" alt="CA Divorce Disclosures Workbook: Monthly Expenses, with overall progress" widths={[640, 960, 1360]} sizes={wide} /></div>
+              <div class="sheet__pair">
+                <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/divorce/checklist" alt="CA Divorce Disclosures Workbook: section checklist" widths={[480]} sizes={half} /></div>
+                <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/divorce/export" alt="CA Divorce Disclosures Workbook: saved, 100% complete, print view for lawyer" widths={[480, 640]} sizes={half} /></div>
+              </div>
+            </div>
+          )}
+
+          {p.c ? (
+            <div class="sheet__beats">
+              {[p.c, p.m, p.i].map((text, i) => (
+                <div><span class="t-label">{labelsFor(p)[i]}</span><p>{text}</p></div>
+              ))}
+            </div>
+          ) : (
+            <p class="placeholder">Placeholder. Spencer to write the whole story.</p>
+          )}
+          <button type="button" class="sheet__next" data-open-sheet={next.key}>
+            <span class="sheet__next-label">Next</span>
+            <span class="sheet__next-name">{next.name} →</span>
+          </button>
+        </article>
+      );
+    })
+  }
+</dialog>
+
+<script>
+  const sheet = document.querySelector<HTMLDialogElement>('[data-sheet]')!;
+  const bodies = [...sheet.querySelectorAll<HTMLElement>('[data-project]')];
+  let opener: HTMLElement | null = null;
+
+  function open(key: string) {
+    bodies.forEach((b) => (b.hidden = b.dataset.project !== key));
+    const body = bodies.find((b) => b.dataset.project === key)!;
+    sheet.setAttribute('aria-labelledby', body.getAttribute('aria-labelledby')!);
+    if (!sheet.open) sheet.showModal();
+    sheet.scrollTop = 0;
+    body.querySelector<HTMLElement>('[data-close-sheet]')!.focus();
+  }
+
+  document.addEventListener('click', (e) => {
+    const t = (e.target as HTMLElement).closest<HTMLElement>('[data-open-sheet]');
+    if (!t) return;
+    if (!sheet.open) opener = t;
+    open(t.dataset.openSheet!);
+  });
+  sheet.querySelectorAll('[data-close-sheet]').forEach((b) => b.addEventListener('click', () => sheet.close()));
+  // A click on the dialog itself (not its contents) is a click on the backdrop.
+  sheet.addEventListener('click', (e) => {
+    if (e.target === sheet) sheet.close();
+  });
+  sheet.addEventListener('close', () => opener?.focus());
+</script>

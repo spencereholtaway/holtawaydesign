@@ -1,0 +1,113 @@
+/*
+  Shared building blocks for the homepage and the portfolio, built on tokens.css.
+  Page-specific layouts live in portfolio.css.
+*/
+
+/* Base */
+html { scroll-behavior: smooth }
+html, body { margin: 0; background: var(--c-bg); color: var(--c-ink); -webkit-font-smoothing: antialiased }
+* { box-sizing: border-box }
+a { color: var(--c-ink); text-decoration: none }
+img { max-width: 100% }
+.page { font-family: var(--font-sans); font-synthesis-weight: none; font-size: var(--fs-body); line-height: var(--lh-body); min-height: 100vh }
+
+/* Layout */
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter) }
+/* Offsets in twelfths of the parent, from 720px (md) and 1100px (lg) up.
+   Set --push-md / --push-lg (left) or --pull-md / --pull-lg (right) to a column count. */
+@media (min-width: 720px) {
+  .push { margin-left: calc(100% * var(--push-md, 0) / 12) }
+  .pull { margin-right: calc(100% * var(--pull-md, 0) / 12) }
+}
+@media (min-width: 1100px) {
+  .push { margin-left: calc(100% * var(--push-lg, var(--push-md, 0)) / 12) }
+  .pull { margin-right: calc(100% * var(--pull-lg, var(--pull-md, 0)) / 12) }
+}
+/* Panels that run off the edge of the container to the edge of the window. */
+.bleed-r { margin-right: calc(-1 * var(--bleed)) }
+.bleed-l { margin-left: calc(-1 * var(--bleed)) }
+/* Columns that step down one after another on wider screens. */
+.stagger-3 > :nth-child(3n+2), .stagger-4 > :nth-child(4n+2) { margin-top: var(--stagger) }
+.stagger-3 > :nth-child(3n), .stagger-4 > :nth-child(4n+3) { margin-top: calc(var(--stagger) * 2) }
+.stagger-4 > :nth-child(4n) { margin-top: calc(var(--stagger) * 3) }
+
+/* Type */
+.t-detail { font-family: var(--font-detail) }
+.t-meta { display: flex; flex-wrap: wrap; gap: 10px 20px; font-family: var(--font-detail); font-size: var(--fs-meta); color: var(--c-muted) }
+.t-label { font-family: var(--font-detail); font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase }
+.t-accent { color: var(--c-accent) }
+.t-hero, .t-section, .t-number, .t-number-s, .t-display-1, .t-display-2, .t-display-3,
+.t-title-xl, .t-title-l, .t-title-m, .t-title-s { margin: 0; font-family: var(--font-sans); font-weight: 700; text-wrap: balance }
+.t-hero { font-size: var(--fs-hero); line-height: 0.9; letter-spacing: -0.055em }
+.t-section { font-size: var(--fs-section); font-weight: 800; line-height: 0.76; letter-spacing: -0.075em }
+.t-number, .t-number-s { font-weight: 800; line-height: 0.74; letter-spacing: -0.07em; color: var(--c-accent) }
+.t-number { font-size: var(--fs-number) }
+.t-number-s { font-size: var(--fs-number-s) }
+.t-display-1 { font-size: var(--fs-display-1); line-height: 0.9; letter-spacing: -0.055em }
+.t-display-2 { font-size: var(--fs-display-2); line-height: 0.95; letter-spacing: -0.05em }
+.t-display-3 { font-size: var(--fs-display-3); line-height: 0.95; letter-spacing: -0.05em }
+.t-title-xl { font-size: var(--fs-title-xl); line-height: 0.98; letter-spacing: -0.045em }
+.t-title-l { font-size: var(--fs-title-l); line-height: 0.98; letter-spacing: -0.045em }
+.t-title-m { font-size: var(--fs-title-m); line-height: 0.98; letter-spacing: -0.045em }
+.t-title-s { font-size: var(--fs-title-s); line-height: 1.02; letter-spacing: -0.035em }
+.t-lede { margin: 0; font-size: var(--fs-lede); line-height: 1.3; letter-spacing: -0.015em; text-wrap: pretty }
+.t-intro { margin: 0; font-size: var(--fs-intro); line-height: 1.4; color: var(--c-text); text-wrap: pretty }
+.t-body-l { margin: 0; font-size: var(--fs-body-l); line-height: 1.45; text-wrap: pretty }
+.t-body { margin: 0; text-wrap: pretty }
+
+/* Links and buttons */
+.link-u { text-decoration: underline; text-decoration-color: var(--c-accent); text-underline-offset: 4px }
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; justify-self: start }
+.btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; font-family: var(--font-detail); font-size: var(--fs-label) }
+.btn--solid { background: var(--c-ink); color: var(--c-bg) }
+.btn--outline { border: 1px solid var(--c-ink); color: var(--c-ink) }
+.btn--pending { border: 1px dashed var(--c-faint); color: var(--c-muted); cursor: default }
+.icon-btn { all: unset; box-sizing: border-box; cursor: pointer; width: 48px; height: 48px; border: 1.5px solid var(--c-ink); border-radius: 50%; display: grid; place-items: center; font-size: 20px; transition: background .15s, color .15s, opacity .15s }
+.icon-btn:hover { background: var(--c-ink); color: var(--c-bg) }
+.icon-btn--s { width: 44px; height: 44px; font-size: 22px }
+.icon-btn[aria-disabled="true"] { opacity: 0.3 }
+.icon-btn[aria-disabled="true"]:hover { background: none; color: inherit }
+:where(a, button, summary, [tabindex]):focus-visible { outline: 2px solid var(--c-accent); outline-offset: 3px }
+
+/* Site header: nav on wide screens, Menu button and a full-screen sheet below 720px. */
+.site-header { position: sticky; top: 0; z-index: 10; background: var(--c-bg-glass); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--c-line-header) }
+.site-header__row { max-width: var(--container); margin: 0 auto; padding: 14px var(--gutter); display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: var(--header-h) }
+.site-header__name { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; display: flex; gap: 8px; white-space: nowrap; min-height: 44px; align-items: center }
+.roll { display: block; height: 1.3em; line-height: 1.3; overflow: hidden }
+.roll__track { display: flex; flex-direction: column; transition: transform var(--dur-roll) var(--ease-out) }
+.roll__track[data-rolled] { transform: translateY(-50%) }
+.site-header__crumb { font-weight: 500; color: var(--c-muted) }
+.site-nav { display: flex; gap: clamp(14px, 2.5vw, 32px); font-size: var(--fs-ui); font-weight: 500 }
+.site-nav a { display: inline-flex; align-items: center; min-height: 44px }
+.site-nav a > span { border-bottom: 2px solid transparent; padding-bottom: 2px }
+.site-nav a[aria-current] > span { border-bottom-color: var(--c-accent) }
+.site-nav .site-nav__cta { color: var(--c-accent) }
+.site-nav .site-nav__cta > span { border: 0 }
+.menu-btn { all: unset; cursor: pointer; min-height: 44px; padding: 0 4px; display: flex; align-items: center; gap: 8px; font-weight: 600; font-family: var(--font-detail); font-size: var(--fs-ui) }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c-accent) }
+.menu { position: fixed; inset: 0; top: var(--header-h); z-index: 9; background: var(--c-dark); color: var(--c-on-dark); padding: 32px var(--gutter); display: grid; align-content: start; gap: 4px; animation: sheetIn var(--dur-menu) var(--ease-out) }
+.menu__link { color: var(--c-on-dark); font-weight: 700; font-size: clamp(44px, 13vw, 56px); line-height: 1.05; letter-spacing: -0.05em }
+.menu .menu__link--cta { color: var(--c-accent) }
+.menu__email { color: var(--c-on-dark-muted); font-size: var(--fs-body-s); margin-top: 32px }
+.menu[hidden], .is-narrow-only { display: none !important }
+@media (max-width: 719px) {
+  .is-wide-only { display: none !important }
+  .is-narrow-only { display: flex !important }
+}
+@media (min-width: 720px) { .menu { display: none !important } }
+@keyframes sheetIn { from { transform: translateX(40px); opacity: 0 } to { transform: none; opacity: 1 } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto }
+}
+
+/* Hover tilt (src/scripts/tilt.ts): the [data-tilt-panel] inside a [data-tilt]
+   leans toward the cursor and lifts a touch. The screenshot itself never moves
+   or crops. Touch: a light press fade. */
+@media (hover: none) { [data-tilt]:active { opacity: .88 } }
+@media (hover: hover) and (pointer: fine) {
+  [data-tilt] { position: relative }
+  [data-tilt]:hover { z-index: 1 }
+  [data-tilt-panel] { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--s, 1)); clip-path: inset(0 round var(--tilt-radius, 0px)); transition: transform .6s var(--ease-out) }
+  [data-tilt-panel][data-tilting] { --s: 1.03; transition: transform .15s ease-out; will-change: transform }
+}

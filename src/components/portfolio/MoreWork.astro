@@ -1,0 +1,104 @@
+---
+// "Five more." A scroll-snap carousel of project cards. The whole card is
+// the "The whole story" button (its hit area stretches over the card) and
+// opens the project in WorkSheet.
+import Shot from '../Shot.astro';
+import Phone from './Phone.astro';
+import { PROJECTS } from '../../data/portfolio';
+
+const deskSizes = '(max-width: 719px) 75vw, (max-width: 1099px) 46vw, 440px';
+const phoneSizes = '(max-width: 719px) 30vw, 150px';
+---
+
+<div class="more" id="more-work" data-carousel>
+  <div class="more__head">
+    <h2 class="t-title-l more__title">Five more.</h2>
+    <div class="more__controls">
+      <span class="more__count" data-count aria-live="polite">1 / {PROJECTS.length}</span>
+      <button type="button" class="icon-btn" aria-label="Previous" data-prev aria-disabled="true">←</button>
+      <button type="button" class="icon-btn" aria-label="Next" data-next>→</button>
+    </div>
+  </div>
+  <div class="more__track" data-track>
+    {
+      PROJECTS.map((p) => (
+        <article class="card" data-card data-reveal data-tilt>
+          <div class="card__media" data-tilt-panel style={`--tint:${p.tint}`}>
+            {p.key === 'calmb2b' && (
+              <div class="card__desk" style="aspect-ratio:2380/1547">
+                <Shot name="work/calm/get-set-up" alt="Calm for Business: Get set up" widths={[480, 720, 960, 1280]} sizes={deskSizes} />
+              </div>
+            )}
+            {p.key === 'flight' && (
+              <div class="card__phones">
+                <Phone src="work/flightaware/home" alt="FlightAware: home" shape="narrow" frame="#16255F" shadow="card" sizes={phoneSizes} class="card__phone" />
+                <Phone src="work/flightaware/map-selected" alt="FlightAware: map with a flight selected" shape="narrow" frame="#16255F" shadow="card" sizes={phoneSizes} class="card__phone card__phone--low" />
+              </div>
+            )}
+            {p.key === 'parent' && (
+              <div class="card__phones">
+                <Phone src="work/parentsquare/ps-4" frame="#F1F2F8" shadow="card" sizes={phoneSizes} class="card__phone" />
+                <Phone src="work/parentsquare/ps-2" frame="#F1F2F8" shadow="card" sizes={phoneSizes} class="card__phone card__phone--low" />
+              </div>
+            )}
+            {p.key === 'pge' && (
+              <div class="card__phones">
+                <Phone src="work/pge/light" alt="PG&E Outages, light mode" shadow="card" sizes={phoneSizes} class="card__phone" />
+                <Phone src="work/pge/dark" alt="PG&E Outages, dark mode" shadow="card" sizes={phoneSizes} class="card__phone card__phone--low" />
+              </div>
+            )}
+            {p.key === 'divorce' && (
+              <div class="card__desk" style="aspect-ratio:1152/720">
+                <Shot name="work/divorce/workbook-card" alt="CA Divorce Disclosures Workbook" widths={[480, 720, 960, 1280]} sizes={deskSizes} />
+              </div>
+            )}
+          </div>
+          <div class="t-meta card__meta">
+            <span class="card__num">{p.num}</span>
+            <span>{p.name}</span>
+            <span>{p.year}</span>
+          </div>
+          <h3 class="t-title-s">{p.head}</h3>
+          <p class="t-body card__teaser">{p.teaser}</p>
+          <button type="button" class="story-btn" data-open-sheet={p.key} aria-haspopup="dialog">The whole story</button>
+        </article>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  import '../../scripts/tilt';
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]')!;
+    const cards = [...track.querySelectorAll<HTMLElement>('[data-card]')];
+    const prev = root.querySelector<HTMLElement>('[data-prev]')!;
+    const next = root.querySelector<HTMLElement>('[data-next]')!;
+    const count = root.querySelector<HTMLElement>('[data-count]')!;
+    let index = 0;
+
+    function show(n: number) {
+      index = n;
+      count.textContent = `${n + 1} / ${cards.length}`;
+      prev.setAttribute('aria-disabled', String(n === 0));
+      next.setAttribute('aria-disabled', String(n >= cards.length - 1));
+    }
+    function go(n: number) {
+      const i = Math.max(0, Math.min(cards.length - 1, n));
+      const pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+      const left = cards[i].getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft - pad;
+      track.scrollTo({ left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      show(i);
+    }
+    prev.addEventListener('click', () => go(index - 1));
+    next.addEventListener('click', () => go(index + 1));
+    track.addEventListener(
+      'scroll',
+      () => {
+        const n = Math.round(track.scrollLeft / cards[0].offsetWidth);
+        if (n !== index) show(Math.min(n, cards.length - 1));
+      },
+      { passive: true },
+    );
+  });
+</script>
