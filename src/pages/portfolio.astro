@@ -17,7 +17,7 @@ import WorkSheet from '../components/portfolio/WorkSheet.astro';
 import CareerRow from '../components/portfolio/CareerRow.astro';
 import { APPS, priceOf } from '../data/apps';
 import {
-  CHIPSTACK_BEATS, MYBUS_BEATS, CALM_BEATS,
+  CHIPSTACK_BEATS, MYBUS_BEATS, CALM_BEATS, FEATURED_SHEETS,
   CAREER, PILLARS, PRINCIPLES,
 } from '../data/portfolio';
 import tokens from '../styles/tokens.css?raw';
@@ -82,7 +82,7 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
             <Shot name="work/chipstack/actionbar" alt="ChipStack — the AI action bar, in VS Code" widths={[640, 960, 1280, 1920]} sizes="(max-width: 719px) 100vw, 92vw" style="mix-blend-mode:multiply" />
           </div>
           <Beats id="chip" beats={CHIPSTACK_BEATS} pushLg={3} />
-          <div class="push" style="--push-lg:3"><button type="button" class="story-btn" data-open-sheet="chipstack" aria-haspopup="dialog">The whole story</button></div>
+          {FEATURED_SHEETS && <div class="push" style="--push-lg:3"><button type="button" class="story-btn" data-open-sheet="chipstack" aria-haspopup="dialog">The whole story</button></div>}
         </article>
 
         <article class="case case--spaced" data-reveal>
@@ -92,7 +92,7 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
             <Phone src="mybussf/widgets" alt="My Bus SF: Home Screen widgets" sizes={stagePhone} widths={[240, 360, 480, 720, 920]} />
           </Stage>
           <Beats id="bus" beats={MYBUS_BEATS} pullLg={3} />
-          <div class="case-links"><AppLinks app="mybussf" /><button type="button" class="story-btn" data-open-sheet="mybussf" aria-haspopup="dialog">The whole story</button></div>
+          <div class="case-links"><AppLinks app="mybussf" />{FEATURED_SHEETS && <button type="button" class="story-btn" data-open-sheet="mybussf" aria-haspopup="dialog">The whole story</button>}</div>
         </article>
 
         <article class="case case--spaced" data-reveal>
@@ -102,7 +102,7 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
             <Phone src="work/calm-consumer/second" alt="Calm: “Win your week”, a three-day goal" sizes={stagePhone} widths={[240, 360, 480, 750]} />
           </Stage>
           <Beats id="calm" beats={CALM_BEATS} pushLg={3} />
-          <div class="push" style="--push-lg:3"><button type="button" class="story-btn" data-open-sheet="calm" aria-haspopup="dialog">The whole story</button></div>
+          {FEATURED_SHEETS && <div class="push" style="--push-lg:3"><button type="button" class="story-btn" data-open-sheet="calm" aria-haspopup="dialog">The whole story</button></div>}
         </article>
 
         <MoreWork />

@@ -99,8 +99,14 @@ export const FEATURED: {
   { key: 'calm', num: '03', name: 'Calm', meta: 'Staff Product Designer, Consumer · 2022 – 2024', head: 'Retention, for people who came here to relax.', tint: 'var(--p-calm)' },
 ];
 
-/** Every side sheet in order, so "Next" runs 01 through 08. */
-export const STORIES = [...FEATURED, ...PROJECTS];
+/**
+ * Off for launch: the featured cases show their beats only, with no "The whole
+ * story" button. Flip to true once their write-ups exist.
+ */
+export const FEATURED_SHEETS = false;
+
+/** Every side sheet in order, so "Next" runs through them all and wraps. */
+export const STORIES = FEATURED_SHEETS ? [...FEATURED, ...PROJECTS] : [...PROJECTS];
 
 /**
  * Career rows. `notes` are the three paragraphs when the row is opened
