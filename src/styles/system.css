@@ -100,3 +100,14 @@ img { max-width: 100% }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto }
 }
+
+/* Hover tilt (src/scripts/tilt.ts): the [data-tilt-panel] inside a [data-tilt]
+   leans toward the cursor and lifts a touch. The screenshot itself never moves
+   or crops. Touch: a light press fade. */
+@media (hover: none) { [data-tilt]:active { opacity: .88 } }
+@media (hover: hover) and (pointer: fine) {
+  [data-tilt] { position: relative }
+  [data-tilt]:hover { z-index: 1 }
+  [data-tilt-panel] { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--s, 1)); clip-path: inset(0 round var(--tilt-radius, 0px)); transition: transform .6s var(--ease-out) }
+  [data-tilt-panel][data-tilting] { --s: 1.03; transition: transform .15s ease-out; will-change: transform }
+}

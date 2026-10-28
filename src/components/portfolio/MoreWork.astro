@@ -1,5 +1,6 @@
 ---
-// "Five more." A scroll-snap carousel of project cards. "The whole story"
+// "Five more." A scroll-snap carousel of project cards. The whole card is
+// the "The whole story" button (its hit area stretches over the card) and
 // opens the project in WorkSheet.
 import Shot from '../Shot.astro';
 import Phone from './Phone.astro';
@@ -21,8 +22,8 @@ const phoneSizes = '(max-width: 719px) 30vw, 150px';
   <div class="more__track" data-track>
     {
       PROJECTS.map((p) => (
-        <article class="card" data-card data-reveal>
-          <div class="card__media" style={`--tint:${p.tint}`}>
+        <article class="card" data-card data-reveal data-tilt>
+          <div class="card__media" data-tilt-panel style={`--tint:${p.tint}`}>
             {p.key === 'calmb2b' && (
               <div class="card__desk" style="aspect-ratio:2380/1547">
                 <Shot name="work/calm/get-set-up" alt="Calm for Business: Get set up" widths={[480, 720, 960, 1280]} sizes={deskSizes} />
@@ -47,8 +48,8 @@ const phoneSizes = '(max-width: 719px) 30vw, 150px';
               </div>
             )}
             {p.key === 'divorce' && (
-              <div class="card__desk" style="aspect-ratio:1842/1100">
-                <Shot name="work/divorce/workbook" alt="CA Divorce Disclosures Workbook" widths={[480, 720, 960, 1280]} sizes={deskSizes} />
+              <div class="card__desk" style="aspect-ratio:1152/720">
+                <Shot name="work/divorce/workbook-card" alt="CA Divorce Disclosures Workbook" widths={[480, 720, 960, 1280]} sizes={deskSizes} />
               </div>
             )}
           </div>
@@ -67,6 +68,7 @@ const phoneSizes = '(max-width: 719px) 30vw, 150px';
 </div>
 
 <script>
+  import '../../scripts/tilt';
   document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
     const track = root.querySelector<HTMLElement>('[data-track]')!;
     const cards = [...track.querySelectorAll<HTMLElement>('[data-card]')];

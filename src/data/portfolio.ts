@@ -20,7 +20,7 @@ export const CHIPSTACK_BEATS = beat(
 );
 
 export const MYBUS_BEATS = beat(
-  'This is a project of self constraint. It’s hard to find a transit app that does one thing well, and that was my frustration as a daily commuter in SF from 2010–2019. 3+ taps to find the simple information I needed, then surprise subscription plans showing up when I found one I liked.',
+  'This is a project of self-restraint. It’s hard to find a transit app that does one thing well, and that was my frustration as a daily commuter in SF from 2010–⁠2019. 3+ taps to find the simple information I needed, then surprise subscription plans showing up when I found one I liked.',
   'Originally released in 2014, the solution was to create a simple list for daily transit users: the buses they take every day, from the bus stops they go to every day. No extras. A bus app truly designed for the daily commute.',
   'Keeping a strong opinion on features when an API can do basically anything is harder than it sounds. Apple’s SDKs in the last 10 years have made this simple solution even more powerful with widgets and live activities: features worth adding, unlike trip planning.',
   ['The constraint', 'The solution', 'The insight'],

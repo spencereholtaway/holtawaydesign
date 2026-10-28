@@ -84,8 +84,12 @@ const psShots = [
             </div>
           )}
           {p.key === 'divorce' && (
-            <div class="sheet__media sheet__media--fill" style={`--tint:${p.tint}; aspect-ratio:1842 / 1100`}>
-              <Shot name="work/divorce/workbook" alt="California Divorce Workbook" widths={[640, 960, 1360]} sizes={wide} />
+            <div class="sheet__media sheet__media--pad" style={`--tint:${p.tint}`}>
+              <div class="sheet__shot" style="aspect-ratio:1842/1100"><Shot name="work/divorce/workbook" alt="CA Divorce Disclosures Workbook: Monthly Expenses, with overall progress" widths={[640, 960, 1360]} sizes={wide} /></div>
+              <div class="sheet__pair">
+                <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/divorce/checklist" alt="CA Divorce Disclosures Workbook: section checklist" widths={[480]} sizes={half} /></div>
+                <div class="sheet__shot" style="aspect-ratio:100/65"><Shot name="work/divorce/form" alt="CA Divorce Disclosures Workbook: housing expenses form" widths={[480, 720]} sizes={half} /></div>
+              </div>
             </div>
           )}
 
