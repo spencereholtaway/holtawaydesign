@@ -33,12 +33,6 @@ export const CALM_BEATS = beat(
   ['The challenge', 'Simple on the surface', 'What people felt'],
 );
 
-export const PGE_BEATS = beat(
-  'The official map shows you everything, because they have everything. Somewhere in all of it is the one thing you want, which is when your lights come back.',
-  'One progress meter for your outage. Nearby outages if you want the context. Light and dark.',
-  "During an outage your battery is the thing you're rationing, so the app is built to use as little of it as it can. Most of the work was deciding what not to build.",
-);
-
 /** "Five more." Each one has a card in the carousel and a side sheet. */
 export const PROJECTS = [
   {
@@ -54,38 +48,38 @@ export const PROJECTS = [
   {
     key: 'flight', num: '05', name: 'FlightAware', year: '2025', tint: 'var(--p-flight)',
     meta: 'Self-directed redesign · 2025',
-    head: 'Dark mode, for a reason.',
-    teaser: 'They patched. I designed.',
-    c: 'A dense, nerdy flight tracker whose information architecture had been patched for years rather than designed.',
-    m: "A dark mode built on FlightAware's own dark brand blue, for balance. The trend was permission, not the reason.",
-    i: 'Flight alerts and recent searches get somewhere proper to live. They patched. I designed.',
+    head: 'Dark mode, for good reason.',
+    teaser: 'A beloved brand of mine, redesigned.',
+    c: 'A dense, nerdy flight tracker whose information architecture and visual design had been patched for years rather than fully reconsidered.',
+    m: 'Incorporation of modern iOS design patterns and FlightAware’s brand color to improve overall user experience and make the app feel truly FlightAware.',
+    i: 'It takes more than patching to fully resolve a digital experience. Bigger changes than a coat of paint are inevitable and crucial to the ongoing improvement of experiences.',
   },
   {
     key: 'parent', num: '06', name: 'ParentSquare', year: '2025', tint: 'var(--p-parent)',
     meta: 'Self-directed refresh · 2025',
-    head: 'Designed for messages nobody designed.',
-    teaser: 'Built for whatever a teacher pastes in.',
-    c: 'A school app that works fine and looks ten years old, carrying teacher posts in every format you can imagine.',
-    m: 'A clean, modern refresh that keeps the brand colors.',
-    i: 'The layout is built for the variety. Mixed text, images, whatever a teacher pastes in.',
+    head: 'Designed for the messages nobody designs.',
+    teaser: 'Making endless school communications digestible.',
+    c: 'A service that needs to exist and parents and teachers need to use. Fully featured, ParentSquare users suffer from information overload and challenges with user-generated content.',
+    m: 'Reconsidered the experience to simplify the visual language to reduce information density and increase readability. Improved the events display from a 2 month calendar to upcoming, more contextually relevant events.',
+    i: 'The investment in design is always important. Features matter but full functionality can get in the way of a supportive experience for the people who need it the most.',
   },
   {
     key: 'pge', num: '07', name: 'Simpler PG&E Outages', year: '2025', tint: 'var(--p-pge)',
     meta: 'Self-directed, web · 2025',
     head: 'Less map. More battery.',
     teaser: 'One progress meter for your outage, built to use as little of your battery as it can.',
-    c: PGE_BEATS[0].text,
-    m: PGE_BEATS[1].text,
-    i: PGE_BEATS[2].text,
+    c: 'Similar to MyBus SF, the challenge here is a fully-featured API that can provide anything and everything about outages in your area.',
+    m: 'While fully featured, PG&E’s own outages product suffers from information overload and longer-than needed paths to get to the information you need: in turn, draining battery from web calls and screen time. This simplified service uses location services to quickly pull your location and give an at-a-glance summary of the information you need during an outage.',
+    i: 'Design goes far beyond the screen. Outages are moments of stress and the time users are most aware of their batteries. Putting yourself in the shoes of your users can provide unexpected results when your focus has been on features and functionality.',
   },
   {
     key: 'divorce', num: '08', name: 'CA Divorce Disclosures Workbook', year: 'Holtaway Design', tint: 'var(--p-divorce)',
-    meta: 'Local-first app, shipped under Holtaway Design',
-    head: 'Hundreds of fields, and now it knows where you left off.',
-    teaser: "Same as PG&E. Work out what's running low and protect it.",
-    c: "California divorce disclosures turn up as PDF worksheets from your lawyer. Hundreds of fields and no memory of what you've done. You're filling them in at the worst point in your life and nothing tells you where you are.",
-    m: "I built the part that was missing. It tracks what's finished and takes you straight to what isn't.",
-    i: "Same instinct as the PG&E one. There the thing running out is battery. Here it's attention, because nobody doing this is at their best. Work out what's scarce and protect it.",
+    meta: 'Web · 2026',
+    head: 'From scrappy PDFs to SaaS, for people who are hurting.',
+    teaser: 'Divorce isn’t easy, but this makes it easier.',
+    c: 'California divorce disclosures usually come into your life as PDF worksheets from your lawyer. Hundreds of fields, some repetitive, and often requiring deep dives into your financial history. It’s easy to get lost, miss details and avoid them at all costs.',
+    m: 'I utilized Claude Code to ingest the California disclosures form and transform them into a completion tracker with intuitive wayfinding and clear sections: making it easy to bite off meaningful chunks of work and avoid overwhelm. The tool outputs a lawyer-friendly PDF with your data.',
+    i: 'There are still entire industries under-utilizing technology in ways that make difficult situations less stressful. While this product is a simple paper-to-digital transformation, it vastly improves engagement and completion.',
   },
 ] as const;
 
