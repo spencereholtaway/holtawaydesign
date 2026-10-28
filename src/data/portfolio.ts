@@ -1,5 +1,5 @@
-// Copy for /portfolio that repeats a pattern (beats, notes, cards, career rows).
-// One-off copy lives in src/pages/portfolio.astro. A few strings carry inline
+// Copy for the portfolio (the homepage) that repeats a pattern (beats, notes, cards, career rows).
+// One-off copy lives in src/pages/index.astro. A few strings carry inline
 // HTML (<strong>, <a>); they're written here, never user input.
 
 /** Default headings for the three beats. A case can name its own. */

@@ -37,3 +37,9 @@
   from = "/pingpongcowboy/"
   to = "/pingpongcowboy.html"
   status = 200
+
+# The portfolio was previewed at /portfolio before it became the homepage.
+[[redirects]]
+  from = "/portfolio"
+  to = "/"
+  status = 301
