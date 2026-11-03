@@ -47,7 +47,7 @@
 # The SMART trains app lives on GitHub Pages; proxy it so it's served from this
 # domain. It loads assets by relative path, so it needs the trailing slash. Netlify
 # matches rules with or without a trailing slash, so a /smart -> /smart/ rule here
-# loops; netlify/edge-functions/smart-slash.js adds the slash instead.
+# loops; netlify/edge-functions/smart-base.js handles it instead.
 [[redirects]]
   from = "/smart/*"
   to = "https://spencereholtaway.github.io/don-t-get-smart-trained/web/app/:splat"
