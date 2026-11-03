@@ -43,3 +43,16 @@
   from = "/portfolio"
   to = "/"
   status = 301
+
+# The SMART trains app lives on GitHub Pages; proxy it so it's served from this
+# domain. It loads assets by relative path, so it needs the trailing slash.
+[[redirects]]
+  from = "/smart"
+  to = "/smart/"
+  status = 301
+
+[[redirects]]
+  from = "/smart/*"
+  to = "https://spencereholtaway.github.io/don-t-get-smart-trained/web/app/:splat"
+  status = 200
+  force = true
