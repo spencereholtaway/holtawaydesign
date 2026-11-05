@@ -3,8 +3,10 @@
 // source editor that saves posts and images straight to the GitHub repo. Each
 // save is a commit, which Netlify then builds and deploys.
 //
-// Sign in with a GitHub fine-grained personal access token that can only
-// read and write this repository's contents. The token stays in your browser.
+// Sign in with GitHub: Netlify's OAuth service checks you're allowed to write
+// to the repo. Setup: a GitHub OAuth app (callback URL
+// https://api.netlify.com/auth/done) installed as the GitHub provider under the
+// Netlify site's Access & security → OAuth settings.
 ---
 
 <!doctype html>
@@ -34,7 +36,17 @@
 
       const config: CmsConfig = {
         load_config_file: false,
-        backend: { name: 'github', repo: 'spencereholtaway/holtawaydesign', branch: 'main' },
+        backend: {
+          name: 'github',
+          repo: 'spencereholtaway/holtawaydesign',
+          branch: 'main',
+          // "Sign In with GitHub", through Netlify's OAuth service (a GitHub OAuth app
+          // installed as a provider in the Netlify site's settings).
+          auth_methods: ['oauth'],
+          // The repo is public, so the narrower public_repo scope is enough. If the repo
+          // is made private, change this to 'repo' or sign-in will stop working.
+          auth_scope: 'public_repo',
+        },
         // Leave out optional fields that are empty (no `cover: ''` in a post without a cover).
         output: { omit_empty_optional_fields: true },
         site_url: 'https://www.holtawaydesign.com',
