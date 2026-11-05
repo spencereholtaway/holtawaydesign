@@ -1,0 +1,40 @@
+---
+// Posts with one tag, at /blog/tag/<tag>.
+import Base from '../../../layouts/Base.astro';
+import BlogNav from '../../../components/BlogNav.astro';
+import PostList from '../../../components/PostList.astro';
+import { getTags, tagPath } from '../../../data/blog';
+import tokens from '../../../styles/tokens.css?raw';
+import system from '../../../styles/system.css?raw';
+import blog from '../../../styles/blog.css?raw';
+import { schibstedCss, schibstedPreload } from '../../../styles/fonts';
+
+export async function getStaticPaths() {
+  return (await getTags()).map((tag) => ({ params: { tag: tag.slug }, props: { tag } }));
+}
+
+const { tag } = Astro.props as { tag: Awaited<ReturnType<typeof getTags>>[number] };
+---
+
+<Base
+  title={`${tag.name} — Blog — Spencer Holtaway`}
+  description={`Posts by Spencer Holtaway tagged ${tag.name}.`}
+  path={tagPath(tag.name)}
+  preloadFonts={schibstedPreload}
+  css={schibstedCss + tokens + system + blog}
+  ogFile="/og/home.png?v=2"
+  themeColor="#FAFAF7"
+>
+  <link slot="head" rel="alternate" type="application/rss+xml" title="Spencer Holtaway — Blog" href="/blog/rss.xml" />
+  <div class="page page--blog">
+    <BlogNav section={{ id: 'posts', label: 'Blog' }} />
+    <main id="top" class="container">
+      <header class="blog-head">
+        <a href="/blog" class="blog-head__rss link-u">All posts</a>
+        <h1 class="t-display-2">{tag.name}<span class="t-accent">.</span></h1>
+        <p class="t-intro blog-head__lede">{tag.posts.length} {tag.posts.length === 1 ? 'post' : 'posts'}</p>
+      </header>
+      <PostList posts={tag.posts} id="posts" />
+    </main>
+  </div>
+</Base>

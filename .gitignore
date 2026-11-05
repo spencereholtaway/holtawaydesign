@@ -3,3 +3,5 @@ dist/
 .astro/
 .netlify/
 .DS_Store
+# Copied from node_modules by scripts/copy-cms.mjs
+public/cms/

@@ -1,0 +1,48 @@
+---
+// The blog: every post, newest first.
+import Base from '../../layouts/Base.astro';
+import BlogNav from '../../components/BlogNav.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts, getTags, tagPath } from '../../data/blog';
+import tokens from '../../styles/tokens.css?raw';
+import system from '../../styles/system.css?raw';
+import blog from '../../styles/blog.css?raw';
+import { schibstedCss, schibstedPreload } from '../../styles/fonts';
+
+const posts = await getPosts();
+const tags = await getTags();
+---
+
+<Base
+  title="Blog — Spencer Holtaway"
+  description="Writing by Spencer Holtaway on product design, games and building apps with AI."
+  path="/blog"
+  preloadFonts={schibstedPreload}
+  css={schibstedCss + tokens + system + blog}
+  ogFile="/og/home.png?v=2"
+  themeColor="#FAFAF7"
+  noindex={posts.length === 0}
+>
+  <link slot="head" rel="alternate" type="application/rss+xml" title="Spencer Holtaway — Blog" href="/blog/rss.xml" />
+  <div class="page page--blog">
+    <BlogNav section={{ id: 'posts', label: 'Blog' }} />
+
+    <main id="top" class="container">
+      <header class="blog-head">
+        <h1 class="t-display-2">Blog<span class="t-accent">.</span></h1>
+        <p class="t-intro blog-head__lede">Notes on product design, games and building apps with AI.</p>
+        <a href="/blog/rss.xml" class="blog-head__rss link-u">RSS feed</a>
+      </header>
+
+      <PostList posts={posts} id="posts" />
+      {
+        tags.length > 0 && (
+          <nav class="tag-cloud" aria-label="Tags">
+            <span class="t-label">Tags</span>
+            {tags.map((t) => <a href={tagPath(t.name)} class="link-u">{t.name}</a>)}
+          </nav>
+        )
+      }
+    </main>
+  </div>
+</Base>

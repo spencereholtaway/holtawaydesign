@@ -18,18 +18,25 @@ interface Props {
   og?: string;
   /** A ready-made 1200x630 share image in public/, e.g. "/og/home.png". Wins over `og`. */
   ogFile?: string;
+  /** An imported image to crop to a 1200x630 share image, e.g. a blog post's cover. Wins over both. */
+  ogSrc?: ImageMetadata;
+  /** "article" for blog posts. */
+  ogType?: 'website' | 'article';
   /** Background colour for the browser chrome on mobile. */
   themeColor: string;
   /** Keep the page out of search results (and the sitemap) until it launches. */
   noindex?: boolean;
 }
 
-const { title, description, path, fonts, preloadFonts = [], css, og, ogFile, themeColor, noindex = false } = Astro.props;
+const { title, description, path, fonts, preloadFonts = [], css, og, ogFile, ogSrc, ogType = 'website', themeColor, noindex = false } = Astro.props;
 const canonical = new URL(path, Astro.site).href;
 
 // Share image: a 1200x630 crop of the first screenshot until real OG art exists.
 let ogImage: string | undefined = ogFile && new URL(ogFile, Astro.site).href;
-if (og && !ogFile) {
+if (ogSrc) {
+  const img = await getImage({ src: ogSrc, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 80 });
+  ogImage = new URL(img.src, Astro.site).href;
+} else if (og && !ogFile) {
   const files = import.meta.glob<ImageMetadata>('../assets/apps/**/*.{png,jpg,jpeg,webp}', {
     eager: true,
     import: 'default',
@@ -66,7 +73,7 @@ const shared = `
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -82,6 +89,7 @@ const shared = `
     {fonts && <link rel="preconnect" href="https://fonts.googleapis.com" />}
     {fonts && <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />}
     {fonts && <link rel="stylesheet" href={fonts} />}
+    <slot name="head" />
     <style is:inline set:html={css + shared}></style>
     <Analytics />
   </head>

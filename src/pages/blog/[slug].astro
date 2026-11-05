@@ -1,0 +1,87 @@
+---
+// One blog post, from src/content/blog/<slug>.md.
+import { render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import BlogNav from '../../components/BlogNav.astro';
+import { getPosts, postPath, tagPath, formatDate, readingMinutes, isDraft, type Post } from '../../data/blog';
+import tokens from '../../styles/tokens.css?raw';
+import system from '../../styles/system.css?raw';
+import blog from '../../styles/blog.css?raw';
+import { schibstedCss, schibstedPreload } from '../../styles/fonts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+interface Props {
+  post: Post;
+  newer?: Post;
+  older?: Post;
+}
+
+const { post, newer, older } = Astro.props;
+const { title, date, summary, cover, coverAlt, tags } = post.data;
+const draft = isDraft(post);
+const { Content } = await render(post);
+---
+
+<Base
+  title={`${title} — Spencer Holtaway`}
+  description={summary}
+  path={postPath(post)}
+  preloadFonts={schibstedPreload}
+  css={schibstedCss + tokens + system + blog}
+  ogSrc={cover}
+  ogFile={cover ? undefined : '/og/home.png?v=2'}
+  ogType="article"
+  themeColor="#FAFAF7"
+  noindex={draft}
+>
+  <link slot="head" rel="alternate" type="application/rss+xml" title="Spencer Holtaway — Blog" href="/blog/rss.xml" />
+  <meta slot="head" property="article:published_time" content={date.toISOString()} />
+  <div class="page page--blog">
+    <BlogNav section={{ id: 'post', label: 'Blog' }} />
+
+    <main id="top" class="container">
+      <article>
+        <header class="post-head">
+          <div class="t-meta">
+            <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
+            <span>{readingMinutes(post)} min read</span>
+            {draft && <span class="t-accent">Draft, not published</span>}
+            {tags.map((t) => <a href={tagPath(t)} class="post-tag">{t}</a>)}
+          </div>
+          <h1 class="t-display-3 post-head__title">{title}</h1>
+          <p class="t-lede post-head__summary">{summary}</p>
+        </header>
+
+        {
+          cover && (
+            <figure class="post-cover">
+              <Image src={cover} alt={coverAlt ?? ''} widths={[640, 960, 1280, 1920].filter((w) => w <= cover.width)} sizes="(max-width: 1360px) 92vw, 1248px" format="webp" quality={80} loading="eager" />
+            </figure>
+          )
+        }
+
+        <div id="post" class="post-body">
+          <div class="prose">
+            <Content />
+          </div>
+        </div>
+      </article>
+
+      <nav class="post-foot" aria-label="More posts">
+        <a href="/blog" class="link-u">All posts</a>
+        <span style="display:flex; gap:24px; flex-wrap:wrap">
+          {newer && <a href={postPath(newer)} class="link-u">Newer: {newer.data.title}</a>}
+          {older && <a href={postPath(older)} class="link-u">Older: {older.data.title}</a>}
+        </span>
+      </nav>
+    </main>
+  </div>
+</Base>

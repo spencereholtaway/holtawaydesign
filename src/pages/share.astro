@@ -1,0 +1,186 @@
+---
+// Private helper for sharing posts: edit the text once, then open each
+// platform's compose screen with it filled in. Come back and press again to
+// repost later. Not linked from the site and kept out of search engines.
+import Base from '../layouts/Base.astro';
+import BlogNav from '../components/BlogNav.astro';
+import { getPosts, postPath, formatDate, isDraft } from '../data/blog';
+import { SHARE_TARGETS, shareLength } from '../data/share';
+import tokens from '../styles/tokens.css?raw';
+import system from '../styles/system.css?raw';
+import blog from '../styles/blog.css?raw';
+import { schibstedCss, schibstedPreload } from '../styles/fonts';
+
+const posts = (await getPosts()).map((p) => ({
+  post: p,
+  input: { text: p.data.share ?? p.data.title, url: new URL(postPath(p), Astro.site).href, title: p.data.title },
+}));
+---
+
+<Base
+  title="Share — Spencer Holtaway"
+  description="Share blog posts."
+  path="/share"
+  preloadFonts={schibstedPreload}
+  css={schibstedCss + tokens + system + blog}
+  themeColor="#FAFAF7"
+  noindex
+>
+  <div class="page page--blog">
+    <BlogNav section={{ id: 'share', label: 'Share' }} />
+
+    <main id="top" class="container">
+      <header class="blog-head">
+        <h1 class="t-display-2">Share<span class="t-accent">.</span></h1>
+        <p class="share-note">
+          Each button opens that platform’s own post screen with the text and link filled in. Nothing is posted until you
+          press Post there, so press again any time to repost. The “last shared” dates are kept in this browser only.
+        </p>
+      </header>
+
+      <div id="share" class="share-list">
+        {posts.length === 0 && <p class="blog-empty">No published posts yet.</p>}
+        {
+          posts.map(({ post, input }) => (
+            <section class="share-post" data-share-post data-slug={post.id} data-url={input.url} data-title={input.title} data-default={input.text}>
+              <div>
+                <a href={postPath(post)} class="share-post__title">{post.data.title}</a>
+                <div class="t-meta" style="margin-top:6px">
+                  <span>{formatDate(post.data.date)}</span>
+                  {isDraft(post) && <span class="t-accent">Draft: not live yet</span>}
+                  <span class="share-post__url">{input.url}</span>
+                </div>
+              </div>
+              <textarea class="share-text" data-text aria-label={`Share text for ${post.data.title}`}>{input.text}</textarea>
+              <div class="share-counts">
+                {SHARE_TARGETS.filter((t) => t.limit).map((t) => (
+                  <span data-count={t.id}>{t.label} {shareLength(t, input)}/{t.limit}</span>
+                ))}
+                <button type="button" data-reset hidden>Reset text</button>
+              </div>
+              <div class="share-targets">
+                {SHARE_TARGETS.map((t) => (
+                  <a class="share-target" href={t.href(input)} target="_blank" rel="noopener" data-target={t.id}>
+                    <span>{t.label}</span>
+                    <span class="share-target__last" data-last>Not shared yet</span>
+                  </a>
+                ))}
+                <button type="button" class="share-target" data-target="copy">
+                  <span>Copy link</span>
+                  <span class="share-target__last" data-last>Not shared yet</span>
+                </button>
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </main>
+    <div class="share-toast" role="status" aria-live="polite" data-toast hidden></div>
+  </div>
+
+  <script>
+    import { SHARE_TARGETS, shareLength, type ShareInput } from '../data/share';
+
+    // localStorage can be missing or throw (private windows, blocked storage).
+    const store = {
+      get(k: string) {
+        try { return localStorage.getItem(k); } catch { return null; }
+      },
+      set(k: string, v: string | null) {
+        try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {}
+      },
+    };
+
+    const toastEl = document.querySelector<HTMLElement>('[data-toast]')!;
+    let toastTimer = 0;
+    function toast(msg: string) {
+      toastEl.textContent = msg;
+      toastEl.hidden = false;
+      clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => (toastEl.hidden = true), 4000);
+    }
+
+    async function copy(text: string) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    const fmt = (iso: string) =>
+      'Last: ' + new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+    document.querySelectorAll<HTMLElement>('[data-share-post]').forEach((el) => {
+      const { slug, url, title, default: original } = el.dataset as Record<string, string>;
+      const area = el.querySelector<HTMLTextAreaElement>('[data-text]')!;
+      const reset = el.querySelector<HTMLButtonElement>('[data-reset]')!;
+      const textKey = `share-text:${slug}`;
+      const lastKey = (id: string) => `share-last:${slug}:${id}`;
+
+      const saved = store.get(textKey);
+      if (saved !== null) area.value = saved;
+
+      const input = (): ShareInput => ({ text: area.value.trim(), url, title });
+
+      function update() {
+        const s = input();
+        for (const t of SHARE_TARGETS) {
+          const a = el.querySelector<HTMLAnchorElement>(`a[data-target="${t.id}"]`)!;
+          a.href = t.href(s);
+          const count = el.querySelector<HTMLElement>(`[data-count="${t.id}"]`);
+          if (count && t.limit) {
+            const n = shareLength(t, s);
+            count.textContent = `${t.label} ${n}/${t.limit}`;
+            count.toggleAttribute('data-over', n > t.limit);
+          }
+        }
+        reset.hidden = area.value === original;
+      }
+
+      function showLast(id: string) {
+        const iso = store.get(lastKey(id));
+        const label = el.querySelector<HTMLElement>(`[data-target="${id}"] [data-last]`);
+        if (label) label.textContent = iso ? fmt(iso) : 'Not shared yet';
+      }
+
+      function markShared(id: string) {
+        store.set(lastKey(id), new Date().toISOString());
+        showLast(id);
+      }
+
+      area.addEventListener('input', () => {
+        store.set(textKey, area.value === original ? null : area.value);
+        update();
+      });
+      reset.addEventListener('click', () => {
+        area.value = original;
+        store.set(textKey, null);
+        update();
+      });
+
+      for (const t of SHARE_TARGETS) {
+        el.querySelector(`a[data-target="${t.id}"]`)!.addEventListener('click', () => {
+          // The link opens in a new tab as normal; copying first is for the
+          // platforms that can't be pre-filled.
+          if (t.copy) {
+            const s = input();
+            copy(t.copy === 'text' ? `${s.text}\n\n${s.url}` : s.url).then((ok) => ok && t.hint && toast(t.hint));
+          }
+          markShared(t.id);
+        });
+        showLast(t.id);
+      }
+      el.querySelector('button[data-target="copy"]')!.addEventListener('click', async () => {
+        if (await copy(url)) {
+          toast('Link copied.');
+          markShared('copy');
+        } else toast('Couldn’t copy. The link is ' + url);
+      });
+      showLast('copy');
+
+      update();
+    });
+  </script>
+</Base>

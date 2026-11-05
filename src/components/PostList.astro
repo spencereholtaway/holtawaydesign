@@ -1,0 +1,36 @@
+---
+// The list of posts on /blog and the tag pages: date, then title, summary and tags.
+import { postPath, formatDate, isDraft, type Post } from '../data/blog';
+
+interface Props {
+  posts: Post[];
+  id?: string;
+}
+
+const { posts, id } = Astro.props;
+---
+
+{
+  posts.length ? (
+    <ul id={id} class="post-list">
+      {posts.map((p) => (
+        <li class="post-row">
+          <a href={postPath(p)}>
+            <span class="t-meta">
+              <time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDate(p.data.date)}</time>
+            </span>
+            <span>
+              <span class="post-row__title">{p.data.title}</span>
+              {isDraft(p) && <span class="post-row__draft">Draft</span>}
+              <p class="post-row__summary">{p.data.summary}</p>
+              {p.data.tags.length > 0 && <span class="post-row__tags">{p.data.tags.join(' · ')}</span>}
+            </span>
+            <span class="post-row__arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p id={id} class="blog-empty">Nothing here yet.</p>
+  )
+}

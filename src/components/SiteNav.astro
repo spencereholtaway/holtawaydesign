@@ -26,14 +26,17 @@ interface Props {
   /** Which section the crumb and underline follow: the one that has reached
    *  the header ("top"), or the one in the middle of the screen ("middle"). */
   activeBy?: 'top' | 'middle';
+  /** On pages other than the homepage: where the name links to before you've
+   *  scrolled. Once the name has rolled up to a section, it scrolls to the top. */
+  home?: string;
 }
 
-const { sections, nav, email, activeBy = 'top' } = Astro.props;
+const { sections, nav, email, activeBy = 'top', home } = Astro.props;
 ---
 
 <header class="site-header" data-site-nav data-active-by={activeBy} data-sections={JSON.stringify(sections)}>
   <div class="site-header__row">
-    <a href="#top" class="site-header__name" data-totop>
+    <a href={home ?? '#top'} class="site-header__name" data-totop data-home={home}>
       <span class="roll">
         <span class="roll__track" data-roll>
           <span>Spencer Holtaway</span>
@@ -133,7 +136,10 @@ const { sections, nav, email, activeBy = 'top' } = Astro.props;
       btn.focus();
     }
   });
-  header.querySelector('[data-totop]')!.addEventListener('click', (e) => {
+  const toTop = header.querySelector<HTMLElement>('[data-totop]')!;
+  toTop.addEventListener('click', (e) => {
+    // Showing the name, not a section: follow the link home.
+    if (toTop.dataset.home && !roll.hasAttribute('data-rolled')) return;
     e.preventDefault();
     setMenu(false);
     scrollTo({ top: 0, behavior: reduceMq.matches ? 'auto' : 'smooth' });
