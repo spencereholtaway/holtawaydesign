@@ -1,0 +1,60 @@
+---
+// The blog: every post, newest first.
+import Base from '../../layouts/Base.astro';
+import BlogNav from '../../components/BlogNav.astro';
+import { getPosts, postPath, formatDate } from '../../data/blog';
+import tokens from '../../styles/tokens.css?raw';
+import system from '../../styles/system.css?raw';
+import blog from '../../styles/blog.css?raw';
+import { schibstedCss, schibstedPreload } from '../../styles/fonts';
+
+const posts = await getPosts();
+---
+
+<Base
+  title="Blog — Spencer Holtaway"
+  description="Writing by Spencer Holtaway on product design, games and building apps with AI."
+  path="/blog"
+  preloadFonts={schibstedPreload}
+  css={schibstedCss + tokens + system + blog}
+  ogFile="/og/home.png?v=2"
+  themeColor="#FAFAF7"
+  noindex={posts.length === 0}
+>
+  <link slot="head" rel="alternate" type="application/rss+xml" title="Spencer Holtaway — Blog" href="/blog/rss.xml" />
+  <div class="page page--blog">
+    <BlogNav section={{ id: 'posts', label: 'Blog' }} />
+
+    <main id="top" class="container">
+      <header class="blog-head">
+        <h1 class="t-display-2">Blog<span class="t-accent">.</span></h1>
+        <p class="t-intro blog-head__lede">Notes on product design, games and building apps with AI.</p>
+        <a href="/blog/rss.xml" class="blog-head__rss link-u">RSS feed</a>
+      </header>
+
+      {
+        posts.length ? (
+          <ul id="posts" class="post-list">
+            {posts.map((p) => (
+              <li class="post-row">
+                <a href={postPath(p)}>
+                  <span class="t-meta">
+                    <time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDate(p.data.date)}</time>
+                  </span>
+                  <span>
+                    <span class="post-row__title">{p.data.title}</span>
+                    {p.data.draft && <span class="post-row__draft">Draft</span>}
+                    <p class="post-row__summary">{p.data.summary}</p>
+                  </span>
+                  <span class="post-row__arrow" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p id="posts" class="blog-empty">Nothing here yet.</p>
+        )
+      }
+    </main>
+  </div>
+</Base>

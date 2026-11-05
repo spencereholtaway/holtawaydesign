@@ -1,10 +1,14 @@
 import type { APIRoute } from 'astro';
+import { getPosts, postPath } from '../data/blog';
 
 const paths = ['/', '/breathebody', '/fishingforcompliments', '/mybussf', '/olivers-train', '/pingpongcowboy'];
 
-export const GET: APIRoute = ({ site }) => {
+export const GET: APIRoute = async ({ site }) => {
   const lastmod = new Date().toISOString().slice(0, 10); // build date
-  const urls = paths
+  const posts = await getPosts();
+  // The blog joins the sitemap once it has a post.
+  const all = posts.length ? [...paths, '/blog', ...posts.map(postPath)] : paths;
+  const urls = all
     .map((p) => `  <url><loc>${new URL(p, site).href}</loc><lastmod>${lastmod}</lastmod></url>`)
     .join('\n');
   return new Response(

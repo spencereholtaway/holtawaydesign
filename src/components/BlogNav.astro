@@ -1,0 +1,23 @@
+---
+// The site header for pages away from the homepage (the blog and /share):
+// the name goes home, and the nav links back to the homepage's sections.
+import SiteNav from './SiteNav.astro';
+
+interface Props {
+  /** The page's main section: its id, and the label shown in the crumb and the roll-up. */
+  section: { id: string; label: string };
+}
+
+const { section } = Astro.props;
+---
+
+<SiteNav
+  home="/"
+  email="spencer@holtawaydesign.com"
+  sections={[section]}
+  nav={[
+    { href: '/#work', label: 'Work' },
+    { href: '/blog', label: 'Blog', section: section.id },
+    { href: '/#hello', label: 'Say hello', menuLabel: 'Say hello.', cta: true },
+  ]}
+/>
