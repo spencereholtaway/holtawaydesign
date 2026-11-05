@@ -24,11 +24,8 @@ import system from '../styles/system.css?raw';
 import recent from '../styles/recent.css?raw';
 import portfolio from '../styles/portfolio.css?raw';
 import { schibstedCss, schibstedPreload } from '../styles/fonts';
-import { getPosts } from '../data/blog';
 
 const EMAIL = 'spencer@holtawaydesign.com';
-// The Blog link appears once there's a published post.
-const hasPosts = (await getPosts()).length > 0;
 const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
 ---
 
@@ -56,7 +53,7 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
         { href: '#work', label: 'Work', section: 'work' },
         { href: '#career', label: 'Career', section: 'career' },
         { href: '#me', label: 'Me', section: 'me' },
-        ...(hasPosts ? [{ href: '/blog', label: 'Blog' }] : []),
+        { href: '/blog', label: 'Blog' },
         { href: '#hello', label: 'Say hello', menuLabel: 'Say hello.', cta: true },
       ]}
     />
