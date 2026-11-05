@@ -12,6 +12,9 @@ export async function getPosts(): Promise<Post[]> {
 
 export const postPath = (p: Post) => `/blog/${p.id}`;
 
+/** The homepage's "Latest from the blog" row shows this many posts, and only once there are this many. */
+export const LATEST_COUNT = 5;
+
 /** A tag as it appears in a URL: "Product Design" -> "product-design". */
 export const tagSlug = (tag: string) =>
   tag.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

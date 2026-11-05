@@ -13,6 +13,8 @@ import Beats from '../components/portfolio/Beats.astro';
 import Features from '../components/portfolio/Features.astro';
 import MoreWork from '../components/portfolio/MoreWork.astro';
 import WorkSheet from '../components/portfolio/WorkSheet.astro';
+import LatestPosts from '../components/LatestPosts.astro';
+import { getPosts, LATEST_COUNT } from '../data/blog';
 import CareerRow from '../components/portfolio/CareerRow.astro';
 import { APPS, priceOf } from '../data/apps';
 import {
@@ -23,9 +25,13 @@ import tokens from '../styles/tokens.css?raw';
 import system from '../styles/system.css?raw';
 import recent from '../styles/recent.css?raw';
 import portfolio from '../styles/portfolio.css?raw';
+import latest from '../styles/latest.css?raw';
 import { schibstedCss, schibstedPreload } from '../styles/fonts';
 
 const EMAIL = 'spencer@holtawaydesign.com';
+// Once the "Latest from the blog" row is showing, the Blog link scrolls to it;
+// until then it goes to /blog.
+const hasLatest = (await getPosts()).length >= LATEST_COUNT;
 const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
 ---
 
@@ -34,7 +40,7 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
   description="Staff Product Designer and game designer in the San Francisco Bay Area. AI-native: I design and ship my own iOS apps by directing Claude Code."
   path="/"
   preloadFonts={schibstedPreload}
-  css={schibstedCss + tokens + system + recent + portfolio}
+  css={schibstedCss + tokens + system + recent + portfolio + latest}
   ogFile="/og/home.png?v=2"
   themeColor="#FAFAF7"
 >
@@ -47,13 +53,14 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
         { id: 'work', label: 'Work' },
         { id: 'career', label: 'Career' },
         { id: 'me', label: 'Me' },
+        ...(hasLatest ? [{ id: 'latest', label: 'Blog' }] : []),
         { id: 'hello', label: 'Hello' },
       ]}
       nav={[
         { href: '#work', label: 'Work', section: 'work' },
         { href: '#career', label: 'Career', section: 'career' },
         { href: '#me', label: 'Me', section: 'me' },
-        { href: '/blog', label: 'Blog' },
+        hasLatest ? { href: '#latest', label: 'Blog', section: 'latest' } : { href: '/blog', label: 'Blog' },
         { href: '#hello', label: 'Say hello', menuLabel: 'Say hello.', cta: true },
       ]}
     />
@@ -127,6 +134,7 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
         <div class="pillars">
           <Features items={PILLARS} variant="plain" min={280} steps={4} reveal />
         </div>
+        <LatestPosts />
         <div class="band bleed-l bleed-r">
           <div class="principles">
             {

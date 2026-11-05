@@ -1,0 +1,73 @@
+---
+// "Latest from the blog": the five newest posts in a row that scrolls sideways,
+// on the homepage between the pillars and the principles. It renders nothing
+// until there are five published posts. The site rebuilds on every save, so it
+// appears by itself once the fifth is published, and the homepage's Blog link
+// then scrolls here instead of going to /blog. Styles in latest.css.
+import { getImage } from 'astro:assets';
+import { getPosts, postPath, formatDate, LATEST_COUNT } from '../data/blog';
+import { TINTS } from '../lib/shots.mjs';
+
+const posts = (await getPosts()).slice(0, LATEST_COUNT);
+
+const cards = await Promise.all(
+  posts.map(async (post, i) => {
+    const cover = post.data.cover
+      ? await getImage({ src: post.data.cover, widths: [400, 640, 960], sizes: '(max-width: 719px) 80vw, 400px', format: 'webp', quality: 80 })
+      : undefined;
+    return { post, cover, tint: TINTS[i % TINTS.length] };
+  }),
+);
+---
+
+{
+  posts.length >= LATEST_COUNT && (
+    <section id="latest" class="latest" aria-labelledby="latest-title" data-latest>
+      <div class="latest__bar">
+        <h2 id="latest-title" class="t-title-m">Latest from the blog</h2>
+        <div class="latest__controls">
+          <a href="/blog" class="link-u">All posts</a>
+          <button type="button" class="icon-btn icon-btn--s is-wide-only" data-latest-prev aria-label="Previous posts" aria-disabled="true">←</button>
+          <button type="button" class="icon-btn icon-btn--s is-wide-only" data-latest-next aria-label="More posts">→</button>
+        </div>
+      </div>
+      <ul class="latest__track" data-latest-track>
+        {cards.map(({ post, cover, tint }) => (
+          <li class="latest__card">
+            <a href={postPath(post)} data-tilt>
+              <div class="latest__panel" data-tilt-panel style={`--tint:var(${tint})`}>
+                {cover ? (
+                  <img src={cover.src} srcset={cover.srcSet.attribute} sizes={cover.attributes.sizes} alt="" loading="lazy" decoding="async" />
+                ) : (
+                  <span class="latest__panel-title">{post.data.title}</span>
+                )}
+              </div>
+              <span class="t-meta">{formatDate(post.data.date)}</span>
+              {/* Without a cover, the title is already set large in the panel. */}
+              {cover && <span class="latest__title">{post.data.title}</span>}
+              <span class="latest__summary">{post.data.summary}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <script>
+        // Arrow buttons scroll by one card and dim at either end.
+        document.querySelectorAll<HTMLElement>('[data-latest]').forEach((el) => {
+          const track = el.querySelector<HTMLElement>('[data-latest-track]')!;
+          const prev = el.querySelector<HTMLElement>('[data-latest-prev]')!;
+          const next = el.querySelector<HTMLElement>('[data-latest-next]')!;
+          const step = () => (track.firstElementChild as HTMLElement).offsetWidth + parseFloat(getComputedStyle(track).columnGap || '0');
+          const update = () => {
+            prev.setAttribute('aria-disabled', String(track.scrollLeft <= 2));
+            next.setAttribute('aria-disabled', String(track.scrollLeft + track.clientWidth >= track.scrollWidth - 2));
+          };
+          prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+          next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+          track.addEventListener('scroll', update, { passive: true });
+          addEventListener('resize', update);
+          update();
+        });
+      </script>
+    </section>
+  )
+}
