@@ -4,7 +4,7 @@ import { render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import BlogNav from '../../components/BlogNav.astro';
-import { getPosts, postPath, formatDate, readingMinutes, type Post } from '../../data/blog';
+import { getPosts, postPath, tagPath, formatDate, readingMinutes, isDraft, type Post } from '../../data/blog';
 import tokens from '../../styles/tokens.css?raw';
 import system from '../../styles/system.css?raw';
 import blog from '../../styles/blog.css?raw';
@@ -25,7 +25,8 @@ interface Props {
 }
 
 const { post, newer, older } = Astro.props;
-const { title, date, summary, cover, coverAlt, draft } = post.data;
+const { title, date, summary, cover, coverAlt, tags } = post.data;
+const draft = isDraft(post);
 const { Content } = await render(post);
 ---
 
@@ -53,6 +54,7 @@ const { Content } = await render(post);
             <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
             <span>{readingMinutes(post)} min read</span>
             {draft && <span class="t-accent">Draft, not published</span>}
+            {tags.map((t) => <a href={tagPath(t)} class="post-tag">{t}</a>)}
           </div>
           <h1 class="t-display-3 post-head__title">{title}</h1>
           <p class="t-lede post-head__summary">{summary}</p>
@@ -67,7 +69,7 @@ const { Content } = await render(post);
         }
 
         <div id="post" class="post-body">
-          <div class="prose push" style="--push-lg:2">
+          <div class="prose">
             <Content />
           </div>
         </div>

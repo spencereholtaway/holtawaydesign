@@ -9,13 +9,16 @@
   .page--blog .site-header__row { padding-block: 5px }
 }
 
+/* Every blog page ends with the same space below its content. */
+.page--blog main { padding-bottom: var(--space-section) }
+
 /* Page heading */
 .blog-head { padding: clamp(48px, 10vw, 144px) 0 clamp(40px, 6vw, 80px); display: grid; gap: clamp(20px, 3vw, 32px) }
 .blog-head__lede { max-width: 32ch; color: var(--c-text) }
 .blog-head__rss { font-size: var(--fs-meta); color: var(--c-muted) }
 
 /* Post list: date, then title and summary, like the career rows. */
-.post-list { list-style: none; margin: 0 0 var(--space-section); padding: 0; border-top: 2px solid var(--c-ink); border-bottom: 1px solid var(--c-line) }
+.post-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--c-ink); border-bottom: 1px solid var(--c-line) }
 .post-row + .post-row { border-top: 1px solid var(--c-line) }
 .post-row > a { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: clamp(20px, 3vw, 32px) 0 }
 @media (min-width: 720px) { .post-row > a { grid-template-columns: 16.6667% minmax(0, 1fr) 28px; align-items: baseline } }
@@ -25,7 +28,11 @@
 .post-row > a:hover .post-row__arrow { transform: translateX(4px) }
 .post-row__draft { margin-left: 10px; vertical-align: middle; font-size: var(--fs-label); font-weight: 600; color: var(--c-accent) }
 @media (max-width: 719px) { .post-row__arrow { display: none } }
-.blog-empty { margin: 0 0 var(--space-section); padding-top: 24px; border-top: 2px solid var(--c-ink); color: var(--c-muted) }
+.post-row__tags { display: block; margin-top: 8px; font-size: var(--fs-meta); color: var(--c-muted) }
+.post-tag { color: var(--c-muted); text-decoration: underline; text-decoration-color: var(--c-line-dashed); text-underline-offset: 3px }
+.tag-cloud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; margin-top: 32px; font-size: var(--fs-ui) }
+.tag-cloud .t-label { color: var(--c-muted) }
+.blog-empty { margin: 0; padding-top: 24px; border-top: 2px solid var(--c-ink); color: var(--c-muted) }
 
 /* A post */
 .post-head { padding: clamp(48px, 9vw, 128px) 0 clamp(32px, 5vw, 56px); display: grid; gap: clamp(20px, 3vw, 32px) }
@@ -34,11 +41,13 @@
 .post-cover { margin: 0 0 clamp(40px, 6vw, 72px) }
 .post-cover img { display: block; width: 100%; height: auto }
 .post-body { border-top: 2px solid var(--c-ink); padding-top: clamp(32px, 5vw, 56px); scroll-margin-top: var(--header-h) }
-.post-foot { margin: clamp(56px, 8vw, 96px) 0 var(--space-section); padding-top: 20px; border-top: 1px solid var(--c-line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: var(--fs-ui) }
+.post-foot { margin: clamp(56px, 8vw, 96px) 0 0; padding-top: 20px; border-top: 1px solid var(--c-line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: var(--fs-ui) }
 
-/* Long-form text from Markdown */
-.prose { max-width: 680px; font-size: var(--fs-body-l); line-height: 1.6; color: var(--c-text) }
-.prose > * { margin: 0 }
+/* Long-form text from Markdown. Text sits in a 680px column (two twelfths in
+   on wide screens); figures run from the text's left edge out to the window. */
+.prose { display: grid; grid-template-columns: [text-start] minmax(0, 680px) [text-end] minmax(0, 1fr) [full-end]; font-size: var(--fs-body-l); line-height: 1.6; color: var(--c-text) }
+@media (min-width: 1100px) { .prose { grid-template-columns: calc(100% * 2 / 12) [text-start] minmax(0, 680px) [text-end] minmax(0, 1fr) [full-end] } }
+.prose > * { grid-column: text; margin: 0 }
 .prose > * + * { margin-top: 1.1em }
 .prose h2, .prose h3 { color: var(--c-ink); font-weight: 700; text-wrap: balance }
 .prose h2 { margin-top: 2em; font-size: var(--fs-title-s); line-height: 1.05; letter-spacing: -0.035em }
@@ -52,8 +61,8 @@
 .prose blockquote { margin-block: 1.6em; padding-left: clamp(16px, 2vw, 24px); border-left: 3px solid var(--c-accent); color: var(--c-ink); font-size: var(--fs-lede); line-height: 1.3; letter-spacing: -0.015em }
 .prose blockquote > * { margin: 0 }
 .prose blockquote > * + * { margin-top: 0.6em }
-.prose img { display: block; width: auto; max-width: 100%; height: auto; max-height: min(85vh, 960px) }
-.prose p:has(> img:only-child) { margin-block: 1.8em }
+/* An image in a line of text (the figures below handle images on their own). */
+.prose img { max-width: 100%; height: auto; vertical-align: middle }
 .prose hr { border: 0; border-top: 1px solid var(--c-line); margin-block: 2.4em }
 .prose code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.86em; background: rgba(17, 17, 17, 0.06); padding: 0.1em 0.35em; border-radius: 4px }
 .prose pre { overflow-x: auto; padding: 20px; font-size: 15px; line-height: 1.5; border-radius: 6px }
@@ -61,8 +70,48 @@
 .prose table { width: 100%; border-collapse: collapse; font-size: var(--fs-body-s) }
 .prose th, .prose td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--c-line) }
 
+/* Figures (src/lib/markdown-shots.mjs): phone screenshots in phone frames and
+   Mac screenshots on a tinted panel, like the homepage; photos plain. */
+.prose > .shots, .prose > .shots + * { margin-top: clamp(40px, 6vw, 72px) }
+.prose > .shots { grid-column: text-start / full-end; margin-right: calc(-1 * var(--bleed)) }
+@media (max-width: 719px) { .prose > .shots { margin-left: calc(-1 * var(--gutter)) } }
+.shots > figcaption { margin-top: 12px; max-width: 680px; font-size: var(--fs-meta); line-height: 1.4; color: var(--c-muted); text-wrap: pretty }
+@media (max-width: 719px) { .shots > figcaption { padding-inline: var(--gutter) } }
+.shots img { display: block; width: 100%; height: auto }
+
+.shots--phones .shots__panel, .shots--screens .shots__panel { background: var(--tint); padding: clamp(40px, 7vw, 112px) clamp(20px, 6vw, 96px) }
+@media (min-width: 720px) {
+  .shots--phones .shots__panel, .shots--screens .shots__panel { padding-right: calc(var(--bleed) + clamp(20px, 6vw, 96px)) }
+}
+@media (max-width: 719px) {
+  .shots--phones .shots__panel, .shots--screens .shots__panel { padding-inline: var(--gutter) }
+}
+
+/* Phones: one centred; two side by side with the second stepped down; three or more in rows of three. */
+.shots--phones .shots__panel { display: grid; justify-content: center; align-items: start; gap: clamp(32px, 5vw, 64px) clamp(12px, 2.5vw, 32px) }
+.shots--phones.shots--n1 .shots__panel { grid-template-columns: minmax(0, 300px); padding-inline: 20% }
+.shots--phones.shots--n2 .shots__panel { grid-template-columns: repeat(2, minmax(0, 300px)) }
+.shots--phones.shots--n2 .shot:nth-child(2) { margin-top: 24% }
+.shots--phones.shots--n3 .shots__panel { grid-template-columns: repeat(3, minmax(0, 280px)) }
+.shots--phones.shots--n3 .shot:nth-child(3n+2) { margin-top: 12% }
+.shots--phones.shots--n3 .shot:nth-child(3n) { margin-top: 24% }
+@media (min-width: 720px) { .shots--phones.shots--n1 .shots__panel { padding-inline: 0 } }
+.shot--phone img { border-radius: var(--phone-radius); box-shadow: var(--shadow-phone) }
+
+/* Mac screenshots, centred and never wider than they were on screen. */
+.shots--screens .shots__panel { display: grid; justify-items: center; gap: clamp(32px, 5vw, 64px) }
+.shot--screen, .shot--window { width: min(100%, var(--w, 100%)) }
+.shot--screen img { border-radius: clamp(4px, 0.8vw, 10px); box-shadow: var(--shadow-detail) }
+/* A window capture already has macOS's rounded corners and shadow. */
+
+/* Photos: as wide as the figure; side by side when there are two or three. */
+.shots--photos .shots__panel { display: grid; grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr)); gap: clamp(8px, 1.5vw, 16px); align-items: start }
+.shots--photos.shots--n2 { --cols: 2 }
+.shots--photos.shots--n3 { --cols: 3 }
+.shots--photos.shots--n1 .shot--portrait { max-width: 560px }
+
 /* Share page */
-.share-list { display: grid; gap: clamp(48px, 6vw, 72px); margin-bottom: var(--space-section) }
+.share-list { display: grid; gap: clamp(48px, 6vw, 72px) }
 .share-post { border-top: 2px solid var(--c-ink); padding-top: 20px; display: grid; gap: 16px; max-width: 760px }
 .share-post__title { font-weight: 600; font-size: var(--fs-row-title); line-height: 1.1; letter-spacing: -0.03em }
 .share-post__url { font-size: var(--fs-meta); color: var(--c-muted); word-break: break-all }

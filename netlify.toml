@@ -43,6 +43,11 @@
   to = "/blog.html"
   status = 200
 
+[[redirects]]
+  from = "/admin/"
+  to = "/admin.html"
+  status = 200
+
 # The portfolio was previewed at /portfolio before it became the homepage.
 [[redirects]]
   from = "/portfolio"

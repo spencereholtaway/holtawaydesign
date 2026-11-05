@@ -4,7 +4,7 @@
 // repost later. Not linked from the site and kept out of search engines.
 import Base from '../layouts/Base.astro';
 import BlogNav from '../components/BlogNav.astro';
-import { getPosts, postPath, formatDate } from '../data/blog';
+import { getPosts, postPath, formatDate, isDraft } from '../data/blog';
 import { SHARE_TARGETS, shareLength } from '../data/share';
 import tokens from '../styles/tokens.css?raw';
 import system from '../styles/system.css?raw';
@@ -47,7 +47,7 @@ const posts = (await getPosts()).map((p) => ({
                 <a href={postPath(post)} class="share-post__title">{post.data.title}</a>
                 <div class="t-meta" style="margin-top:6px">
                   <span>{formatDate(post.data.date)}</span>
-                  {post.data.draft && <span class="t-accent">Draft: not live yet</span>}
+                  {isDraft(post) && <span class="t-accent">Draft: not live yet</span>}
                   <span class="share-post__url">{input.url}</span>
                 </div>
               </div>

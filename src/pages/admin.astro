@@ -1,0 +1,318 @@
+---
+// The blog editor, at /admin: Sveltia CMS (https://sveltiacms.app), an open
+// source editor that saves posts and images straight to the GitHub repo. Each
+// save is a commit, which Netlify then builds and deploys.
+//
+// Sign in with a GitHub fine-grained personal access token that can only
+// read and write this repository's contents. The token stays in your browser.
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Posts — Spencer Holtaway</title>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <!-- The prebuilt editor, copied from the npm package by scripts/copy-cms.mjs.
+         It waits for CMS.init() below, which runs once it has loaded. -->
+    <script is:inline>window.CMS_MANUAL_INIT = true;</script>
+    <script is:inline src="/cms/sveltia-cms.js"></script>
+    <script>
+      import type { CmsConfig, CustomPreviewTemplateProps } from '@sveltia/cms';
+      import tokens from '../styles/tokens.css?raw';
+      import system from '../styles/system.css?raw';
+      import blog from '../styles/blog.css?raw';
+      import { schibstedCss } from '../styles/fonts';
+      import { classifyShot, groupOf, TINTS, displayWidth } from '../lib/shots.mjs';
+
+      const CMS = (window as unknown as { CMS: typeof import('@sveltia/cms').default }).CMS;
+
+      const config: CmsConfig = {
+        load_config_file: false,
+        backend: { name: 'github', repo: 'spencereholtaway/holtawaydesign', branch: 'main' },
+        // Leave out optional fields that are empty (no `cover: ''` in a post without a cover).
+        output: { omit_empty_optional_fields: true },
+        site_url: 'https://www.holtawaydesign.com',
+        display_url: 'https://www.holtawaydesign.com/blog',
+        media_folder: 'src/content/blog/images',
+        media_libraries: {
+          default: {
+            config: {
+              max_file_size: 30 * 1024 * 1024,
+              slugify_filename: true,
+              // Phone photos: HEIC (which browsers can't show) and JPEG are saved as WebP,
+              // at most 3200px wide. Screenshots (PNG) are kept as they are.
+              transformations: {
+                heic: { format: 'webp', quality: 85, width: 3200 },
+                jpeg: { format: 'webp', quality: 85, width: 3200 },
+              },
+            },
+          },
+        },
+        collections: [
+          {
+            name: 'blog',
+            label: 'Posts',
+            label_singular: 'Post',
+            folder: 'src/content/blog',
+            // Images go next to the posts, in src/content/blog/images.
+            media_folder: 'images',
+            create: true,
+            extension: 'md',
+            format: 'frontmatter',
+            slug: '{{slug}}',
+            preview_path: 'blog/{{slug}}',
+            // The post list: title, then status and date. Newest first; sort, filter or group with the buttons above it.
+            summary: "{{title}} · {{status | upper}} · {{date | date('MMM D, YYYY')}}",
+            thumbnail: 'cover',
+            sortable_fields: { fields: ['date', 'title', 'status'], default: { field: 'date', direction: 'descending' } },
+            view_filters: [
+              { label: 'Drafts', field: 'status', pattern: 'draft' },
+              { label: 'Published', field: 'status', pattern: 'published' },
+            ],
+            view_groups: [
+              { label: 'Status', field: 'status' },
+              { label: 'Year', field: 'date', pattern: '\\d{4}' },
+            ],
+            fields: [
+              { name: 'title', label: 'Title', widget: 'string' },
+              {
+                name: 'summary',
+                label: 'Summary',
+                widget: 'text',
+                hint: 'One or two sentences. Shown under the title, in the post list and in link previews.',
+              },
+              {
+                name: 'status',
+                label: 'Status',
+                widget: 'select',
+                options: [
+                  { label: 'Draft', value: 'draft' },
+                  { label: 'Published', value: 'published' },
+                ],
+                default: 'draft',
+                hint: 'Drafts are saved but not shown on the site. Choose Published and save to put the post live; choose Draft again to take it down.',
+              },
+              {
+                name: 'date',
+                label: 'Date',
+                widget: 'datetime',
+                time_format: false,
+                format: 'YYYY-MM-DD',
+                default: '{{now}}',
+                hint: 'The date shown on the post. Posts are listed newest first, so set an earlier date to backdate one.',
+              },
+              {
+                name: 'tags',
+                label: 'Tags',
+                label_singular: 'Tag',
+                widget: 'list',
+                required: false,
+                default: [],
+                hint: 'Topics, e.g. Design, AI, Games: one per row, or several separated by commas. Each tag gets its own page listing its posts.',
+              },
+              {
+                name: 'cover',
+                label: 'Cover image',
+                widget: 'image',
+                required: false,
+                hint: 'Optional. Shown under the summary and used as the picture when the post is shared.',
+              },
+              {
+                name: 'coverAlt',
+                label: 'Cover description',
+                widget: 'string',
+                required: false,
+                hint: 'What the cover shows, for people using screen readers.',
+              },
+              {
+                name: 'body',
+                label: 'Post',
+                widget: 'richtext',
+                buttons: ['bold', 'italic', 'link', 'heading-two', 'heading-three', 'quote', 'bulleted-list', 'numbered-list', 'code'],
+                editor_components: ['image', 'code-block', 'hr'],
+                hint:
+                  'Images on their own line are laid out for you: iPhone screenshots in phone frames, Mac screenshots on a coloured panel, photos full width. Images one after another, with no text between, sit side by side. An image’s title becomes its caption.',
+              },
+            ],
+          },
+        ],
+      };
+
+      // The preview uses the site's own styles, and lays images out the way the
+      // site does (src/lib/markdown-shots.mjs does the same when the site is built).
+      CMS.registerPreviewStyle(
+        schibstedCss + tokens + system + blog + 'body{margin:0;background:var(--c-bg)}',
+        { raw: true },
+      );
+
+      /** The <img> children of a paragraph that holds only images, or null. */
+      function imagesOnly(el: Element | null): HTMLImageElement[] | null {
+        if (!el || el.tagName !== 'P') return null;
+        const kids = [...el.childNodes].filter(
+          (n) => !(n.nodeType === 3 && !n.textContent?.trim()) && n.nodeType !== 8 && n.nodeName !== 'BR',
+        );
+        return kids.length && kids.every((n) => n.nodeName === 'IMG') ? (kids as HTMLImageElement[]) : null;
+      }
+
+      async function measure(img: HTMLImageElement) {
+        await img.decode().catch(() => {});
+        const width = img.naturalWidth || 1;
+        const height = img.naturalHeight || 1;
+        let format = '';
+        let transparentCorner = false;
+        try {
+          const blob = await (await fetch(img.src)).blob();
+          format = blob.type.replace('image/', '');
+          const c = document.createElement('canvas');
+          c.width = c.height = 1;
+          const g = c.getContext('2d')!;
+          g.drawImage(img, 0, 0, width, height, 0, 0, width, height);
+          transparentCorner = g.getImageData(0, 0, 1, 1).data[3] < 250;
+        } catch {}
+        return { width, height, format, transparentCorner };
+      }
+
+      async function layoutShots(root: HTMLElement) {
+        // The rendered post sits in a wrapper of Sveltia's.
+        const children = [...(root.querySelector('[data-rich-text-preview]') ?? root).children];
+        for (let i = 0; i < children.length; i++) {
+          const imgs = imagesOnly(children[i]);
+          if (!imgs) continue;
+          const run = [children[i]];
+          while (imagesOnly(children[i + 1] ?? null)) run.push(children[++i]);
+          const all = run.flatMap((p) => imagesOnly(p)!);
+          const items = await Promise.all(all.map(async (img) => {
+            const m = await measure(img);
+            return { img, kind: classifyShot(m), width: m.width };
+          }));
+          const groups: { g: string; items: typeof items }[] = [];
+          for (const it of items) {
+            const g = groupOf(it.kind);
+            if (groups.at(-1)?.g === g) groups.at(-1)!.items.push(it);
+            else groups.push({ g, items: [it] });
+          }
+          const doc = root.ownerDocument;
+          const figures = groups.map(({ g, items }, gi) => {
+            const fig = doc.createElement('figure');
+            fig.className = `shots shots--${g} shots--n${Math.min(items.length, 3)}`;
+            if (g !== 'photos') fig.style.setProperty('--tint', `var(${TINTS[(i + gi) % TINTS.length]})`);
+            const panel = fig.appendChild(doc.createElement('div'));
+            panel.className = 'shots__panel';
+            for (const { img, kind, width } of items) {
+              const shot = panel.appendChild(doc.createElement('div'));
+              shot.className = `shot shot--${kind}`;
+              const w = displayWidth(kind, width);
+              if (w) shot.style.setProperty('--w', `${w}px`);
+              shot.appendChild(img);
+            }
+            const caption = items.map((it) => it.img.title).filter(Boolean).join(' ');
+            if (caption) fig.appendChild(doc.createElement('figcaption')).textContent = caption;
+            items.forEach((it) => it.img.removeAttribute('title'));
+            return fig;
+          });
+          run[0].replaceWith(...figures);
+          run.slice(1).forEach((p) => p.remove());
+        }
+      }
+
+      /** A loadable URL for an asset: its blob URL once the editor has fetched the file. */
+      async function assetUrl(asset: ReturnType<CustomPreviewTemplateProps['getAsset']>, src: string) {
+        if (!asset) return undefined;
+        for (let i = 0; i < 30 && !/^(blob|data):/.test(asset.url); i++) await new Promise((r) => setTimeout(r, 100));
+        if (/^(blob|data):/.test(asset.url)) return asset.url;
+        try {
+          const b64 = await asset.toBase64();
+          if (b64.startsWith('data:')) return b64;
+          const ext = src.split('.').pop()?.toLowerCase() ?? '';
+          return `data:image/${ext === 'jpg' ? 'jpeg' : ext};base64,${b64}`;
+        } catch {
+          return undefined;
+        }
+      }
+
+      const { React } = CMS;
+      const h = React.createElement;
+
+      function PostPreview({ entry, getAsset }: CustomPreviewTemplateProps) {
+        const data = entry.get('data');
+        const title = data?.get('title') ?? '';
+        const summary = data?.get('summary') ?? '';
+        const date = data?.get('date') ?? '';
+        const draft = data?.get('status') !== 'published';
+        const tags: string[] = ((data?.get('tags')?.toJS?.() ?? []) as string[])
+          .flatMap((t) => t.split(','))
+          .map((t) => t.trim())
+          .filter(Boolean);
+        const cover = data?.get('cover');
+        const body = data?.get('body') ?? '';
+        const ref = React.useRef<HTMLDivElement>(null);
+
+        React.useEffect(() => {
+          const el = ref.current;
+          if (!el) return;
+          // The preview pane is an iframe, and renderRichText() only takes an element
+          // from this page, so render off-screen here and copy the result across.
+          const host = document.createElement('div');
+          let timer = 0;
+          let cancelled = false;
+          const observer = new MutationObserver(() => {
+            clearTimeout(timer);
+            timer = window.setTimeout(async () => {
+              const copy = el.ownerDocument.createElement('div');
+              copy.innerHTML = host.innerHTML;
+              // Point images saved next to the post (images/…) at the editor's copies.
+              await Promise.all([...copy.querySelectorAll('img')].map(async (img) => {
+                const src = img.getAttribute('src') ?? '';
+                if (/^([a-z][a-z0-9+.-]*:|\/)/i.test(src)) return;
+                const url = await assetUrl(getAsset(decodeURI(src)), src);
+                if (url) img.src = url;
+              }));
+              await layoutShots(copy);
+              if (!cancelled) el.replaceChildren(...copy.childNodes);
+            }, 80);
+          });
+          observer.observe(host, { childList: true, subtree: true, attributes: true, characterData: true });
+          const destroy = CMS.renderRichText(host, body);
+          return () => {
+            cancelled = true;
+            observer.disconnect();
+            clearTimeout(timer);
+            destroy();
+          };
+        }, [body]);
+
+        const when = date
+          ? new Date(date + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })
+          : '';
+        const coverUrl = cover ? getAsset(cover)?.toString() : undefined;
+
+        return h('div', { className: 'page page--blog' },
+          h('main', { className: 'container' },
+            h('article', null,
+              h('header', { className: 'post-head' },
+                h('div', { className: 't-meta' },
+                  h('span', null, when),
+                  draft ? h('span', { className: 't-accent' }, 'Draft') : null,
+                  ...tags.map((t) => h('span', { key: t, className: 'post-tag' }, t)),
+                ),
+                h('h1', { className: 't-display-3 post-head__title' }, title),
+                summary ? h('p', { className: 't-lede post-head__summary' }, summary) : null,
+              ),
+              coverUrl ? h('figure', { className: 'post-cover' }, h('img', { src: coverUrl, alt: '' })) : null,
+              h('div', { className: 'post-body' }, h('div', { className: 'prose', ref })),
+            ),
+          ),
+        );
+      }
+
+      CMS.registerPreviewTemplate('blog', PostPreview);
+      CMS.init({ config });
+    </script>
+  </body>
+</html>
