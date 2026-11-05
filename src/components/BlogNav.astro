@@ -1,6 +1,7 @@
 ---
 // The site header for pages away from the homepage (the blog and /share):
-// the name goes home, and the nav links back to the homepage's sections.
+// the name goes home, and the nav matches the homepage's, each link going to
+// that section of the homepage.
 import SiteNav from './SiteNav.astro';
 
 interface Props {
@@ -17,6 +18,8 @@ const { section } = Astro.props;
   sections={[section]}
   nav={[
     { href: '/#work', label: 'Work' },
+    { href: '/#career', label: 'Career' },
+    { href: '/#me', label: 'Me' },
     { href: '/blog', label: 'Blog', section: section.id },
     { href: '/#hello', label: 'Say hello', menuLabel: 'Say hello.', cta: true },
   ]}

@@ -144,6 +144,20 @@ const { sections, nav, email, activeBy = 'top', home } = Astro.props;
     setMenu(false);
     scrollTo({ top: 0, behavior: reduceMq.matches ? 'auto' : 'smooth' });
   });
+  // Arriving from another page with a #section link: the browser jumps there
+  // before the fonts and fitted headings above have settled, which leaves the
+  // section lower than it should be. Line it up again once they have.
+  if (location.hash.length > 1) {
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target) {
+      const realign = () => {
+        if (Math.abs(target.getBoundingClientRect().top - parseFloat(getComputedStyle(target).scrollMarginTop || '0')) > 2) {
+          target.scrollIntoView({ behavior: 'auto' });
+        }
+      };
+      Promise.all([document.fonts.ready, new Promise((r) => (document.readyState === 'complete' ? r(0) : addEventListener('load', r, { once: true })))]).then(() => requestAnimationFrame(realign));
+    }
+  }
   narrowMq.addEventListener('change', render);
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll, { passive: true });
