@@ -6,6 +6,8 @@ date: 2026-10-29
 tags:
   - Navigation & Transit
   - Do one thing well
+cover: images/pasted-image-1793926786282.png
+coverAlt: Image of Google Maps transit view
 ---
 
 It's one of the most common pieces of feedback I get on anything I build that has a map, transit or navigation component. 
