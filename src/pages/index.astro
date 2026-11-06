@@ -57,7 +57,8 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
         { id: 'hello', label: 'Hello' },
       ]}
       nav={[
-        { href: '#work', label: 'Work', section: 'work' },
+        // Work starts at "What I've been working on recently", just above the Work section.
+        { href: '#recent', label: 'Work', section: ['recent', 'work'] },
         { href: '#career', label: 'Career', section: 'career' },
         { href: '#me', label: 'Me', section: 'me' },
         hasLatest ? { href: '#latest', label: 'Blog', section: 'latest' } : { href: '/blog', label: 'Blog' },
