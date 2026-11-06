@@ -25,7 +25,7 @@ export const GET: APIRoute = async ({ site }) => {
   <channel>
     <title>Spencer Holtaway — Blog</title>
     <link>${home}</link>
-    <description>Notes on product design, games and building apps with AI.</description>
+    <description>Notes on product design, games and building apps with AI. Things I see, think and make.</description>
     <language>en-us</language>
     <atom:link href="${new URL('/blog/rss.xml', site).href}" rel="self" type="application/rss+xml" />
 ${items}
