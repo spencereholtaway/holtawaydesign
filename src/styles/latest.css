@@ -1,5 +1,6 @@
 /* "Latest from the blog" (LatestPosts.astro): the five newest posts in a row
-   that scrolls sideways and runs off the right edge of the window. */
+   that scrolls sideways and runs off the right edge of the window. The cards
+   themselves are in post-card.css. */
 .latest { margin-bottom: clamp(72px, 10vw, 140px); scroll-margin-top: var(--header-h) }
 .latest__bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; padding-top: 20px; border-top: 2px solid var(--c-ink); margin-bottom: clamp(24px, 3vw, 40px) }
 .latest__controls { display: flex; align-items: center; gap: 12px; font-size: var(--fs-ui) }
@@ -14,10 +15,3 @@
   .latest__track { grid-auto-columns: 80%; margin-left: calc(-1 * var(--gutter)); padding-left: var(--gutter); scroll-padding-left: var(--gutter) }
 }
 .latest__card { scroll-snap-align: start; min-width: 0 }
-.latest__card > a { display: grid; gap: 8px; align-content: start; color: var(--c-ink) }
-.latest__panel { --tilt-radius: 14px; position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 14px; background: var(--tint); margin-bottom: 8px }
-.latest__panel > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block }
-.latest__panel-title { position: absolute; inset: auto 0 0 0; padding: clamp(16px, 2vw, 24px); font-weight: 800; font-size: var(--fs-title-s); line-height: 1; letter-spacing: -0.04em; text-wrap: balance }
-.latest__title { font-weight: 600; font-size: var(--fs-row-title); line-height: 1.1; letter-spacing: -0.03em; text-wrap: balance }
-.latest__summary { color: var(--c-text); font-size: var(--fs-body-s); line-height: 1.45; text-wrap: pretty; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden }
-.latest__card > a:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 6px; border-radius: 16px }

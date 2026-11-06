@@ -1,0 +1,59 @@
+---
+// One post as a card: its cover (or, without one, the title set large on a
+// tinted panel), then the date, tags, title and summary. Used by the blog's
+// bento (PostList) and the homepage's "Latest from the blog" row. Styles in
+// post-card.css; it leans toward the cursor like the homepage tiles.
+import { getImage } from 'astro:assets';
+import { postPath, formatDate, isDraft, type Post } from '../data/blog';
+
+interface Props {
+  post: Post;
+  /** Panel colour behind a post without a cover, e.g. "--p-bus". */
+  tint: string;
+  /** normal: a third of the row. wide: two thirds. full: the whole row, image beside the text. */
+  size?: 'normal' | 'wide' | 'full';
+  /** Sizes hint for the cover image. */
+  sizes: string;
+  class?: string;
+}
+
+const { post, tint, size = 'normal', sizes, class: className } = Astro.props;
+const { title, summary, date, tags, cover } = post.data;
+const img = cover
+  ? await getImage({
+      src: cover,
+      widths: [400, 640, 960, 1280, 1680].filter((w) => w <= cover.width),
+      sizes,
+      format: 'webp',
+      quality: 80,
+    })
+  : undefined;
+---
+
+<article class:list={['pcard', `pcard--${size}`, className]} data-tilt>
+  <a href={postPath(post)} class="pcard__link">
+    <div class="pcard__panel" data-tilt-panel style={`--tint:var(${tint})`}>
+      {
+        img ? (
+          <img src={img.src} srcset={img.srcSet.attribute} sizes={sizes} alt="" loading="lazy" decoding="async" />
+        ) : (
+          <span class="pcard__panel-title">{title}</span>
+        )
+      }
+    </div>
+    <div class="pcard__text">
+      <span class="t-meta pcard__meta">
+        <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
+        {isDraft(post) && <span class="t-accent">Draft</span>}
+        {tags.length > 0 && <span>{tags.join(' · ')}</span>}
+      </span>
+      {/* Without a cover, the title is already set large in the panel. */}
+      {img && <span class="pcard__title">{title}</span>}
+      <span class="pcard__summary">{summary}</span>
+    </div>
+  </a>
+</article>
+
+<script>
+  import '../scripts/tilt';
+</script>

@@ -7,6 +7,7 @@ import { getPosts, getTags, tagPath } from '../../data/blog';
 import tokens from '../../styles/tokens.css?raw';
 import system from '../../styles/system.css?raw';
 import blog from '../../styles/blog.css?raw';
+import postCard from '../../styles/post-card.css?raw';
 import { schibstedCss, schibstedPreload } from '../../styles/fonts';
 
 const posts = await getPosts();
@@ -18,7 +19,7 @@ const tags = await getTags();
   description="Writing by Spencer Holtaway on product design, games and building apps with AI."
   path="/blog"
   preloadFonts={schibstedPreload}
-  css={schibstedCss + tokens + system + blog}
+  css={schibstedCss + tokens + system + blog + postCard}
   ogFile="/og/home.png?v=2"
   themeColor="#FAFAF7"
   noindex={posts.length === 0}

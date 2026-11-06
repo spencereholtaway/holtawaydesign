@@ -1,6 +1,12 @@
 ---
-// The list of posts on /blog and the tag pages: date, then title, summary and tags.
-import { postPath, formatDate, isDraft, type Post } from '../data/blog';
+// The posts on /blog and the tag pages, as a bento, newest first. Rows follow
+// a repeating rhythm in a 12-column grid: big + small, three across, small +
+// big, three across. A post left alone at the end takes the whole row (two
+// share it). Tablets: two columns, with the newest post across both, then
+// pairs, and a lone last post across both. Phones: one column.
+import PostCard from './PostCard.astro';
+import { type Post } from '../data/blog';
+import { TINTS } from '../lib/shots.mjs';
 
 interface Props {
   posts: Post[];
@@ -8,28 +14,40 @@ interface Props {
 }
 
 const { posts, id } = Astro.props;
+
+const RHYTHM = [[8, 4], [4, 4, 4], [4, 8], [4, 4, 4]];
+const cards: { post: Post; span: number }[] = [];
+for (let i = 0, row = 0; i < posts.length; row++) {
+  let spans = RHYTHM[row % RHYTHM.length];
+  const left = posts.length - i;
+  if (left < spans.length) spans = Array(left).fill(12 / left);
+  for (const span of spans) cards.push({ post: posts[i++], span });
+}
+
+// Tablets: which cards run across both columns.
+const tabletWide = (i: number) => i === 0 || (i === posts.length - 1 && (posts.length - 1) % 2 === 1);
+
+const SIZES: Record<number, string> = {
+  4: '(max-width: 719px) 100vw, (max-width: 1099px) 46vw, 420px',
+  6: '(max-width: 719px) 100vw, (max-width: 1099px) 46vw, 640px',
+  8: '(max-width: 719px) 100vw, (max-width: 1099px) 92vw, 840px',
+  12: '(max-width: 719px) 100vw, (max-width: 1099px) 92vw, 840px',
+};
 ---
 
 {
   posts.length ? (
-    <ul id={id} class="post-list">
-      {posts.map((p) => (
-        <li class="post-row">
-          <a href={postPath(p)}>
-            <span class="t-meta">
-              <time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDate(p.data.date)}</time>
-            </span>
-            <span>
-              <span class="post-row__title">{p.data.title}</span>
-              {isDraft(p) && <span class="post-row__draft">Draft</span>}
-              <p class="post-row__summary">{p.data.summary}</p>
-              {p.data.tags.length > 0 && <span class="post-row__tags">{p.data.tags.join(' · ')}</span>}
-            </span>
-            <span class="post-row__arrow" aria-hidden="true">→</span>
-          </a>
-        </li>
+    <div id={id} class="bento">
+      {cards.map(({ post, span }, i) => (
+        <PostCard
+          post={post}
+          tint={TINTS[i % TINTS.length]}
+          size={span === 12 ? 'full' : span === 8 ? 'wide' : 'normal'}
+          sizes={SIZES[span]}
+          class={`bento__item bento__item--${span}${tabletWide(i) ? ' bento__item--t2' : ''}`}
+        />
       ))}
-    </ul>
+    </div>
   ) : (
     <p id={id} class="blog-empty">Nothing here yet.</p>
   )

@@ -17,20 +17,32 @@
 .blog-head__lede { max-width: 32ch; color: var(--c-text) }
 .blog-head__rss { font-size: var(--fs-meta); color: var(--c-muted) }
 
-/* Post list: date, then title and summary, like the career rows. */
-.post-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--c-ink); border-bottom: 1px solid var(--c-line) }
-.post-row + .post-row { border-top: 1px solid var(--c-line) }
-.post-row > a { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: clamp(20px, 3vw, 32px) 0 }
-@media (min-width: 720px) { .post-row > a { grid-template-columns: 16.6667% minmax(0, 1fr) 28px; align-items: baseline } }
-.post-row__title { font-weight: 600; font-size: var(--fs-row-title); line-height: 1.1; letter-spacing: -0.03em; text-wrap: balance }
-.post-row__summary { margin: 6px 0 0; color: var(--c-text); font-size: var(--fs-body-s); max-width: 60ch; text-wrap: pretty }
-.post-row__arrow { font-size: 24px; text-align: right; color: var(--c-accent); transition: transform .2s var(--ease-out) }
-.post-row > a:hover .post-row__arrow { transform: translateX(4px) }
-.post-row__draft { margin-left: 10px; vertical-align: middle; font-size: var(--fs-label); font-weight: 600; color: var(--c-accent) }
-@media (max-width: 719px) { .post-row__arrow { display: none } }
-.post-row__tags { display: block; margin-top: 8px; font-size: var(--fs-meta); color: var(--c-muted) }
+/* Bento of posts (PostList.astro, cards in post-card.css). */
+.bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(40px, 5vw, 72px) clamp(16px, 2vw, 28px); padding-top: clamp(24px, 3vw, 40px); border-top: 2px solid var(--c-ink); align-items: start }
+.bento__item--4 { grid-column: span 4 }
+.bento__item--6 { grid-column: span 6 }
+.bento__item--8 { grid-column: span 8 }
+.bento__item--12 { grid-column: span 12 }
+/* Cards in a row line their images up: the same height, whatever their width. */
+@media (min-width: 1100px) {
+  .bento .pcard__panel { aspect-ratio: auto; height: clamp(240px, 24vw, 360px) }
+  .bento .pcard--full .pcard__panel { height: clamp(300px, 34vw, 480px) }
+  /* A post with the whole row to itself: image on the left, text beside it. */
+  .bento .pcard--full .pcard__link { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: end }
+}
+@media (min-width: 720px) and (max-width: 1099px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .bento > .bento__item { grid-column: span 1 }
+  .bento > .bento__item--t2 { grid-column: span 2 }
+  .bento .pcard__panel { aspect-ratio: auto; height: clamp(220px, 30vw, 320px) }
+  .bento .bento__item--t2 .pcard__panel { height: clamp(300px, 46vw, 460px) }
+}
+@media (max-width: 719px) {
+  .bento { grid-template-columns: minmax(0, 1fr) }
+  .bento > * { grid-column: auto }
+}
 .post-tag { color: var(--c-muted); text-decoration: underline; text-decoration-color: var(--c-line-dashed); text-underline-offset: 3px }
-.tag-cloud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; margin-top: 32px; font-size: var(--fs-ui) }
+.tag-cloud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; margin-top: clamp(56px, 7vw, 96px); padding-top: 20px; border-top: 1px solid var(--c-line); font-size: var(--fs-ui) }
 .tag-cloud .t-label { color: var(--c-muted) }
 .blog-empty { margin: 0; padding-top: 24px; border-top: 2px solid var(--c-ink); color: var(--c-muted) }
 
