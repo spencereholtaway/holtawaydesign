@@ -16,8 +16,8 @@ interface NavItem {
   menuLabel?: string;
   /** Accent call to action (no underline). */
   cta?: boolean;
-  /** Section id this link underlines. */
-  section?: string;
+  /** Section id (or ids) this link underlines. */
+  section?: string | string[];
 }
 interface Props {
   sections: Section[];
@@ -47,7 +47,7 @@ const { sections, nav, email, activeBy = 'top', home } = Astro.props;
     </a>
     <nav class="site-nav is-wide-only" aria-label="Sections">
       {nav.map((n) => (
-        <a href={n.href} class={n.cta ? 'site-nav__cta' : undefined} data-nav={n.section}>
+        <a href={n.href} class={n.cta ? 'site-nav__cta' : undefined} data-nav={[n.section ?? []].flat().join(' ') || undefined}>
           <span>{n.label}</span>
         </a>
       ))}
@@ -92,8 +92,9 @@ const { sections, nav, email, activeBy = 'top', home } = Astro.props;
     rollLabel.textContent = past || lastPast || sections[0].label;
     crumb.textContent = active ? '/ ' + active : '';
     navLinks.forEach((a) => {
-      const s = sections.find((x) => x.id === a.dataset.nav);
-      if (s && s.label === active) a.setAttribute('aria-current', 'true');
+      const ids = (a.dataset.nav ?? '').split(' ');
+      const on = sections.some((x) => ids.includes(x.id) && x.label === active);
+      if (on) a.setAttribute('aria-current', 'true');
       else a.removeAttribute('aria-current');
     });
   }
