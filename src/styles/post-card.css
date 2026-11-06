@@ -1,0 +1,16 @@
+/* Post cards (PostCard.astro), on /blog, the tag pages and the homepage. */
+.pcard { min-width: 0 }
+.pcard__link { display: grid; gap: 14px; align-content: start; color: var(--c-ink); height: 100% }
+.pcard__panel { --tilt-radius: 14px; position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 14px; background: var(--tint) }
+.pcard__panel > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block }
+.pcard__panel-title { position: absolute; inset: auto 0 0 0; padding: clamp(16px, 2vw, 28px); font-weight: 800; font-size: var(--fs-title-s); line-height: 1; letter-spacing: -0.04em; text-wrap: balance }
+.pcard__text { display: grid; gap: 6px; align-content: start }
+.pcard__meta { gap: 6px 14px }
+.pcard__title { font-weight: 600; font-size: var(--fs-row-title); line-height: 1.1; letter-spacing: -0.03em; text-wrap: balance }
+.pcard__summary { color: var(--c-text); font-size: var(--fs-body-s); line-height: 1.45; max-width: 60ch; text-wrap: pretty; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden }
+.pcard__link:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 6px; border-radius: 16px }
+
+/* Bigger cards get bigger type. */
+.pcard--wide .pcard__title, .pcard--full .pcard__title { font-size: var(--fs-title-m); line-height: 1; letter-spacing: -0.04em }
+.pcard--wide .pcard__panel-title, .pcard--full .pcard__panel-title { font-size: var(--fs-title-l); letter-spacing: -0.045em }
+.pcard--wide .pcard__summary, .pcard--full .pcard__summary { font-size: var(--fs-body-l) }

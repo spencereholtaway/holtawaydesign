@@ -7,6 +7,7 @@ import { getTags, tagPath } from '../../../data/blog';
 import tokens from '../../../styles/tokens.css?raw';
 import system from '../../../styles/system.css?raw';
 import blog from '../../../styles/blog.css?raw';
+import postCard from '../../../styles/post-card.css?raw';
 import { schibstedCss, schibstedPreload } from '../../../styles/fonts';
 
 export async function getStaticPaths() {
@@ -21,7 +22,7 @@ const { tag } = Astro.props as { tag: Awaited<ReturnType<typeof getTags>>[number
   description={`Posts by Spencer Holtaway tagged ${tag.name}.`}
   path={tagPath(tag.name)}
   preloadFonts={schibstedPreload}
-  css={schibstedCss + tokens + system + blog}
+  css={schibstedCss + tokens + system + blog + postCard}
   ogFile="/og/home.png?v=2"
   themeColor="#FAFAF7"
 >
