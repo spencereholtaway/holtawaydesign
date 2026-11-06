@@ -4,7 +4,7 @@ summary: Yes, I know.
 status: published
 date: 2026-10-29
 tags:
-  - Maps, Navigation & Transit
+  - Navigation & Transit
   - Do one thing well
 ---
 
