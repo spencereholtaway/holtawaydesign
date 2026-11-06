@@ -35,7 +35,8 @@
 .blog-empty { margin: 0; padding-top: 24px; border-top: 2px solid var(--c-ink); color: var(--c-muted) }
 
 /* A post */
-.post-head { padding: clamp(48px, 9vw, 128px) 0 clamp(32px, 5vw, 56px); display: grid; gap: clamp(20px, 3vw, 32px) }
+.post-head { padding: clamp(32px, 6vw, 88px) 0 clamp(32px, 5vw, 56px); display: grid; gap: clamp(20px, 3vw, 32px) }
+.post-back { justify-self: start; font-size: var(--fs-ui); margin-bottom: clamp(0px, 0.8vw, 12px) }
 .post-head__title { max-width: 18ch }
 .post-head__summary { max-width: 34ch; color: var(--c-text) }
 .post-cover { margin: 0 0 clamp(40px, 6vw, 72px) }

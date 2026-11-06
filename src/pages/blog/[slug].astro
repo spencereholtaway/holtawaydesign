@@ -50,6 +50,7 @@ const { Content } = await render(post);
     <main id="top" class="container">
       <article>
         <header class="post-head">
+          <a href="/blog" class="post-back link-u"><span aria-hidden="true">← </span>Back to blog</a>
           <div class="t-meta">
             <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
             <span>{readingMinutes(post)} min read</span>
@@ -76,7 +77,7 @@ const { Content } = await render(post);
       </article>
 
       <nav class="post-foot" aria-label="More posts">
-        <a href="/blog" class="link-u">All posts</a>
+        <a href="/blog" class="link-u"><span aria-hidden="true">← </span>Back to blog</a>
         <span style="display:flex; gap:24px; flex-wrap:wrap">
           {newer && <a href={postPath(newer)} class="link-u">Newer: {newer.data.title}</a>}
           {older && <a href={postPath(older)} class="link-u">Older: {older.data.title}</a>}
