@@ -1,6 +1,6 @@
 ---
 title: 'Fishing for Compliments: Photo Mode'
-summary: And app that can just sit there until you want to dive in.
+summary: An app that waits peacefully until you want to dive in.
 status: published
 date: 2026-11-01
 tags:
