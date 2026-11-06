@@ -1,7 +1,7 @@
 ---
 title: Why I made Breath Body
 summary: Weird name, the good ones were taken.
-status: draft
+status: published
 date: 2026-10-16
 tags:
   - Do One Thing Well
