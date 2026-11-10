@@ -6,7 +6,7 @@ export const APPS: Record<AppSlug, { name: string; price: string | null }> = {
   breathebody: { name: 'Breath Body', price: '$0.99' },
   fishingforcompliments: { name: 'Fishing for Compliments', price: null },
   mybussf: { name: 'My Bus SF', price: '$0.99' },
-  'olivers-train': { name: 'Oliver’s Train', price: null },
+  'olivers-train': { name: 'Oliver’s Train', price: '$0.99' },
   pingpongcowboy: { name: 'Ping Pong Cowboy', price: '$0.99' },
 };
 
