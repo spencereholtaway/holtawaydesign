@@ -7,8 +7,8 @@ import css from '../styles/simplelatlon.css?raw';
 ---
 
 <Base
-  title="Simple LatLon — latitude and longitude for any spot on the map"
-  description="A small Mac app that shows the latitude and longitude of any spot on the map, ready to copy."
+  title="Simple LatLon — decimal coordinates for the Xcode Simulator, one click to copy"
+  description="A small Mac app that shows the latitude and longitude of any place as decimals, with a copy button for each. Made for pasting custom locations into the Xcode Simulator."
   path="/simplelatlon"
   css={css}
   themeColor="#F6F5F1"
@@ -17,12 +17,27 @@ import css from '../styles/simplelatlon.css?raw';
     <SiteHeader maxWidth={1080} background="rgba(246,245,241,0.92)" border="#DDDAD0" color="#1D2A22" accent="#1F6B3A" link="#1D2A22" weight={700} />
 
     <section data-screen-label="Hero" style="max-width:1080px; margin:0 auto; padding:clamp(40px,6vw,80px) clamp(20px,4vw,48px) 0; display:grid; gap:16px; text-align:center; justify-items:center">
-      <h1 style="margin:0; font-weight:700; font-size:clamp(40px,6vw,72px); line-height:1.05; letter-spacing:-0.025em">Simple LatLon</h1>
-      <p style="margin:0; max-width:36ch; font-size:clamp(18px,1.7vw,22px); color:#4A574E; text-wrap:pretty">Latitude and longitude for any spot on the map, ready to copy. For Mac.</p>
+      <span style="font-weight:600; font-size:14px; letter-spacing:0.08em; text-transform:uppercase; color:#1F6B3A">Simple LatLon · for Mac</span>
+      <h1 style="margin:0; max-width:16ch; font-weight:700; font-size:clamp(40px,6vw,72px); line-height:1.05; letter-spacing:-0.025em; text-wrap:balance">Decimal coordinates, one click to copy.</h1>
+      <p style="margin:0; max-width:40ch; font-size:clamp(18px,1.7vw,22px); color:#4A574E; text-wrap:pretty">A small Mac app for anyone tired of typing custom locations into the Xcode Simulator.</p>
       <Shot name="simplelatlon/01" alt="Simple LatLon showing a map of Apple Park, with its latitude and longitude at the bottom of the window" widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1079px) calc(100vw - 40px), 984px" eager style="display:block; width:100%; height:auto" />
     </section>
 
-    <section id="support" data-section="Support" data-screen-label="Support" style="max-width:1080px; margin:0 auto; padding:clamp(24px,4vw,48px) clamp(20px,4vw,48px) 0">
+    <section data-section="Why" data-screen-label="Why" style="max-width:1080px; margin:0 auto; padding:clamp(16px,3vw,40px) clamp(20px,4vw,48px) clamp(40px,6vw,72px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:32px clamp(32px,6vw,80px)">
+      <div style="display:grid; gap:14px; align-content:start">
+        <h2 style="margin:0; font-weight:700; font-size:clamp(28px,3.4vw,40px); line-height:1.1; letter-spacing:-0.02em; text-wrap:balance">The Simulator asks for two numbers. They're hard to get.</h2>
+        <p style="margin:0; color:#33413A">Xcode's Custom Coordinates dialog wants a latitude and a longitude as decimals. It asks again every session, and it can't save presets.</p>
+        <p style="margin:0; color:#33413A">Apple Maps and Google Maps don't make those numbers easy to find. The websites that do are covered in ads, and many copy the wrong format or have no copy button at all.</p>
+      </div>
+      <ul style="margin:0; padding:0; list-style:none; display:grid; gap:20px; align-content:start">
+        <li style="display:grid; gap:4px; border-top:1px solid #1D2A22; padding-top:16px"><strong>Find the place</strong><span style="color:#33413A">Search for it or move the map. The latitude and longitude are always on screen, as decimals.</span></li>
+        <li style="display:grid; gap:4px; border-top:1px solid #1D2A22; padding-top:16px"><strong>Copy each number</strong><span style="color:#33413A">Latitude and longitude each have a copy button, so each one pastes straight into its field.</span></li>
+        <li style="display:grid; gap:4px; border-top:1px solid #1D2A22; padding-top:16px"><strong>Save the places you test with</strong><span style="color:#33413A">Saved locations stay in the sidebar and sync through your iCloud account.</span></li>
+        <li style="display:grid; gap:4px; border-top:1px solid #1D2A22; padding-top:16px"><strong>Nothing else</strong><span style="color:#33413A">No ads, no accounts and no tracking.</span></li>
+      </ul>
+    </section>
+
+    <section id="support" data-section="Support" data-screen-label="Support" style="max-width:1080px; margin:0 auto; padding:0 clamp(20px,4vw,48px) 0">
       <div style="border-top:1px solid #1D2A22; padding-top:clamp(32px,5vw,56px); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:16px 24px">
         <h2 style="margin:0; font-weight:700; font-size:clamp(30px,4vw,48px); line-height:1.08; letter-spacing:-0.02em">need help? e-mail me!</h2>
         <a href="mailto:spencer@holtawaydesign.com" style="font-size:clamp(18px,2vw,24px); font-weight:600">spencer@holtawaydesign.com</a>
