@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import PrivacyScript from '../components/PrivacyScript.astro';
+import Shot from '../components/Shot.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import css from '../styles/simplelatlon.css?raw';
+---
+
+<Base
+  title="Simple LatLon — latitude and longitude for any spot on the map"
+  description="A small Mac app that shows the latitude and longitude of any spot on the map, ready to copy."
+  path="/simplelatlon"
+  css={css}
+  themeColor="#F6F5F1"
+>
+  <div style="font-family:system-ui,-apple-system,'Helvetica Neue',sans-serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip">
+    <SiteHeader maxWidth={1080} background="rgba(246,245,241,0.92)" border="#DDDAD0" color="#1D2A22" accent="#1F6B3A" link="#1D2A22" weight={700} />
+
+    <section data-screen-label="Hero" style="max-width:1080px; margin:0 auto; padding:clamp(40px,6vw,80px) clamp(20px,4vw,48px) 0; display:grid; gap:16px; text-align:center; justify-items:center">
+      <h1 style="margin:0; font-weight:700; font-size:clamp(40px,6vw,72px); line-height:1.05; letter-spacing:-0.025em">Simple LatLon</h1>
+      <p style="margin:0; max-width:36ch; font-size:clamp(18px,1.7vw,22px); color:#4A574E; text-wrap:pretty">Latitude and longitude for any spot on the map, ready to copy. For Mac.</p>
+      <Shot name="simplelatlon/01" alt="Simple LatLon showing a map of Apple Park, with its latitude and longitude at the bottom of the window" widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1079px) calc(100vw - 40px), 984px" eager style="display:block; width:100%; height:auto" />
+    </section>
+
+    <section id="support" data-section="Support" data-screen-label="Support" style="max-width:1080px; margin:0 auto; padding:clamp(24px,4vw,48px) clamp(20px,4vw,48px) 0">
+      <div style="border-top:1px solid #1D2A22; padding-top:clamp(32px,5vw,56px); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:16px 24px">
+        <h2 style="margin:0; font-weight:700; font-size:clamp(30px,4vw,48px); line-height:1.08; letter-spacing:-0.02em">need help? e-mail me!</h2>
+        <a href="mailto:spencer@holtawaydesign.com" style="font-size:clamp(18px,2vw,24px); font-weight:600">spencer@holtawaydesign.com</a>
+      </div>
+    </section>
+
+    <section id="privacy" data-section="Privacy" data-screen-label="Privacy Policy" style="max-width:1080px; margin:0 auto; padding:clamp(32px,5vw,56px) clamp(20px,4vw,48px) clamp(64px,8vw,112px); display:block">
+      <details style="border-top:1px solid #1D2A22; border-bottom:1px solid #1D2A22">
+        <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:64px; font-weight:600; font-size:17px">View privacy policy<span aria-hidden="true" style="font-size:24px; font-weight:400">+</span></summary>
+        <div style="padding:8px 0 48px; max-width:70ch; display:grid; gap:14px; font-size:17px; color:#33413A">
+          <h2 style="margin:0; font-weight:700; font-size:clamp(28px,3.4vw,40px); line-height:1.08; letter-spacing:-0.02em; color:#1D2A22">Simple LatLon Privacy Policy</h2>
+          <p style="margin:0"><strong>Last updated: November 12, 2026</strong></p>
+          <p style="margin:0">Simple LatLon doesn't collect any personal information. There are no accounts, no analytics, no ads and no tracking.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#1D2A22">Your location</h3>
+          <p style="margin:0">If you allow it, Simple LatLon uses your location only to show where you are on the map, so you can copy your current coordinates. Your location isn't stored or sent to us. You can turn off location access at any time in System Settings &gt; Privacy &amp; Security &gt; Location Services.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#1D2A22">Maps and search</h3>
+          <p style="margin:0">The map, place search and place names come from Apple Maps. When you search, or save a location, the search text or the map area is sent to Apple so it can return results. Apple handles this under its own privacy policy: <a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a></p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#1D2A22">Saved locations and recent searches</h3>
+          <p style="margin:0">Recent searches are stored only on your Mac. Saved locations are stored on your Mac and in your own iCloud account, so they come back if you reinstall the app or use a new Mac. We can't see this data. You can delete it at any time from inside the app.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#1D2A22">Children</h3>
+          <p style="margin:0">Simple LatLon doesn't knowingly collect information from anyone, including children.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#1D2A22">Changes</h3>
+          <p style="margin:0">If this policy changes, the new version will be posted here with a new date.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#1D2A22">Contact</h3>
+          <p style="margin:0">Questions? Email <strong><a href="mailto:spencer@holtawaydesign.com">spencer@holtawaydesign.com</a></strong>.</p>
+        </div>
+      </details>
+    </section>
+
+    <footer style="max-width:1080px; margin:0 auto; padding:24px clamp(20px,4vw,48px) 40px; border-top:1px solid #DDDAD0; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:14px; color:#4A574E">
+      <span>Simple LatLon</span>
+      <span>Made by <a href="/">Spencer Holtaway</a></span>
+    </footer>
+  </div>
+  <PrivacyScript />
+</Base>
