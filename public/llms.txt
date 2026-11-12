@@ -18,7 +18,7 @@ Each app page has a description, screenshots, a support email and the app's full
 - [Fishing for Compliments: Isles](https://www.holtawaydesign.com/fishingforcompliments): a relaxing boating game with no finish line for iPhone, iPad, Mac and Apple TV. Support: fishing@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/fishingforcompliments#privacy)
 - [My Bus SF](https://www.holtawaydesign.com/mybussf): real-time Muni bus arrivals for San Franciscans, for iPhone, $0.99. [App Store](https://apps.apple.com/us/app/mybussf-2026/id6814334469). Support: mybussf@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/mybussf#privacy)
 - [Oliver's Train](https://www.holtawaydesign.com/olivers-train): an ambient train ride for iPhone, a game you can't win, lose or cheat, $0.99. [App Store](https://apps.apple.com/us/app/olivers-train/id6818586303). Support: trainride@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/olivers-train#privacy)
-- [Ping Pong Cowboy](https://www.holtawaydesign.com/pingpongcowboy): an arcade game for iPhone about throwing ping pong balls at things. Support: cowboy@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/pingpongcowboy#privacy)
+- [Ping Pong Cowboy](https://www.holtawaydesign.com/pingpongcowboy): an arcade game for iPhone about throwing ping pong balls at things, $0.99. [App Store](https://apps.apple.com/us/app/ping-pong-cowboy/id6816285942). Support: cowboy@holtawaydesign.com. [Privacy policy](https://www.holtawaydesign.com/pingpongcowboy#privacy)
 
 ## Optional
 
