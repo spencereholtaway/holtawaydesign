@@ -11,19 +11,23 @@ import css from '../styles/simplelatlon.css?raw';
   description="A small Mac app that shows the latitude and longitude of any place as decimals, with a copy button for each. Made for pasting custom locations into the Xcode Simulator."
   path="/simplelatlon"
   css={css}
+  og="simplelatlon/01"
   themeColor="#F6F5F1"
 >
   <div style="font-family:system-ui,-apple-system,'Helvetica Neue',sans-serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip">
     <SiteHeader maxWidth={1080} background="rgba(246,245,241,0.92)" border="#DDDAD0" color="#1D2A22" accent="#1F6B3A" link="#1D2A22" weight={700} />
 
-    <section data-screen-label="Hero" style="max-width:1080px; margin:0 auto; padding:clamp(40px,6vw,80px) clamp(20px,4vw,48px) 0; display:grid; gap:16px; text-align:center; justify-items:center">
-      <span style="font-weight:600; font-size:14px; letter-spacing:0.08em; text-transform:uppercase; color:#1F6B3A">Simple LatLon · for Mac</span>
-      <h1 style="margin:0; max-width:20ch; font-weight:700; font-size:clamp(36px,5.4vw,64px); line-height:1.05; letter-spacing:-0.025em; text-wrap:balance">The easiest way to copy coordinates into Xcode simulators.</h1>
-      <p style="margin:0; max-width:40ch; font-size:clamp(18px,1.7vw,22px); color:#4A574E; text-wrap:pretty">A small Mac app that shows the latitude and longitude of any place as decimals, each with its own copy button.</p>
-      <Shot name="simplelatlon/01" alt="Simple LatLon showing a map of Apple Park, with its latitude and longitude at the bottom of the window" widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1079px) calc(100vw - 40px), 984px" eager style="display:block; width:100%; height:auto" />
+    <section data-screen-label="Hero" style="max-width:1080px; margin:0 auto; padding:clamp(32px,5vw,64px) clamp(20px,4vw,48px) 0; display:grid; gap:12px; text-align:center; justify-items:center">
+      <h1 style="margin:0; font-weight:700; font-size:clamp(32px,4.4vw,52px); line-height:1.05; letter-spacing:-0.025em">Simple LatLon</h1>
+      <p style="margin:0; max-width:40ch; font-size:clamp(17px,1.6vw,20px); color:#4A574E; text-wrap:pretty">The easiest way to copy coordinates into Xcode simulators. For Mac.</p>
+      <div style="display:grid; gap:clamp(16px,2.4vw,28px); width:100%; margin-top:clamp(8px,2vw,24px)">
+        <Shot name="simplelatlon/01" alt="The simplest way to copy decimal coordinates to Xcode. The Simple LatLon window shows a map of San Francisco, a sidebar of saved locations, and the latitude and longitude at the bottom." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1079px) calc(100vw - 40px), 984px" eager style="display:block; width:100%; height:auto; border-radius:clamp(10px,1.6vw,20px)" />
+        <Shot name="simplelatlon/02" alt="Copy individual latitude and longitude decimal coordinates to paste into the simulator custom location dialog. The latitude shows as copied, next to the Custom Coordinates dialog with its Latitude and Longitude fields." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1079px) calc(100vw - 40px), 984px" style="display:block; width:100%; height:auto; border-radius:clamp(10px,1.6vw,20px)" />
+        <Shot name="simplelatlon/03" alt="The right format. The right number of clicks. Lightweight and easy to use. No ads. No subscriptions. No bells and whistles. Just the coordinates you need for your project. Simple LatLon in satellite view." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1079px) calc(100vw - 40px), 984px" style="display:block; width:100%; height:auto; border-radius:clamp(10px,1.6vw,20px)" />
+      </div>
     </section>
 
-    <section data-section="Why" data-screen-label="Why" style="max-width:1080px; margin:0 auto; padding:clamp(16px,3vw,40px) clamp(20px,4vw,48px) clamp(40px,6vw,72px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:32px clamp(32px,6vw,80px)">
+    <section data-section="Why" data-screen-label="Why" style="max-width:1080px; margin:0 auto; padding:clamp(40px,6vw,72px) clamp(20px,4vw,48px) clamp(40px,6vw,72px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:32px clamp(32px,6vw,80px)">
       <div style="display:grid; gap:14px; align-content:start">
         <h2 style="margin:0; font-weight:700; font-size:clamp(28px,3.4vw,40px); line-height:1.1; letter-spacing:-0.02em; text-wrap:balance">The Simulator asks for two numbers. They're hard to get.</h2>
         <p style="margin:0; color:#33413A">Xcode's Custom Coordinates dialog wants a latitude and a longitude as decimals. It asks again every session, and it can't save presets.</p>
