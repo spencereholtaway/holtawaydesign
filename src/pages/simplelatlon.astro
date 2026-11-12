@@ -17,17 +17,26 @@ import css from '../styles/simplelatlon.css?raw';
   <div style="font-family:system-ui,-apple-system,'Helvetica Neue',sans-serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip">
     <SiteHeader maxWidth={1080} background="rgba(246,245,241,0.92)" border="#DDDAD0" color="#1D2A22" accent="#1F6B3A" link="#1D2A22" weight={700} />
 
-    <section data-screen-label="Hero" style="max-width:1080px; margin:0 auto; padding:clamp(32px,5vw,64px) clamp(20px,4vw,48px) 0; display:grid; gap:12px; text-align:center; justify-items:center">
+    <section data-screen-label="Hero" style="max-width:1080px; margin:0 auto; padding:clamp(24px,3vw,40px) clamp(20px,4vw,48px) 0; display:grid; gap:10px; text-align:center; justify-items:center">
       <h1 style="margin:0; font-weight:700; font-size:clamp(32px,4.4vw,52px); line-height:1.05; letter-spacing:-0.025em">Simple LatLon</h1>
-      <p style="margin:0; max-width:40ch; font-size:clamp(17px,1.6vw,20px); color:#4A574E; text-wrap:pretty">A super simple Mac app that shows the latitude and longitude of any place as decimals, each with its own copy button.</p>
-      <div style="display:grid; gap:clamp(16px,2.4vw,28px); width:100%; margin-top:clamp(8px,2vw,24px)">
-        <Shot name="simplelatlon/01" alt="The simplest way to copy decimal coordinates to Xcode. The Simple LatLon window shows a map of San Francisco, a sidebar of saved locations, and the latitude and longitude at the bottom." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1079px) calc(100vw - 40px), 984px" eager style="display:block; width:100%; height:auto; border-radius:clamp(10px,1.6vw,20px)" />
-        <Shot name="simplelatlon/02" alt="Copy individual latitude and longitude decimal coordinates to paste into the simulator custom location dialog. The latitude shows as copied, next to the Custom Coordinates dialog with its Latitude and Longitude fields." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1079px) calc(100vw - 40px), 984px" style="display:block; width:100%; height:auto; border-radius:clamp(10px,1.6vw,20px)" />
-        <Shot name="simplelatlon/03" alt="The right format. The right number of clicks. Lightweight and easy to use. No ads. No subscriptions. No bells and whistles. Just the coordinates you need for your project. Simple LatLon in satellite view." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1079px) calc(100vw - 40px), 984px" style="display:block; width:100%; height:auto; border-radius:clamp(10px,1.6vw,20px)" />
+      <p style="margin:0; max-width:60ch; font-size:clamp(17px,1.6vw,20px); color:#4A574E; text-wrap:pretty">A super simple Mac app that shows the latitude and longitude of any place as decimals, each with its own copy button.</p>
+      <div class="sl-carousel" data-carousel>
+        <div class="sl-track" data-track tabindex="0" role="region" aria-label="Screenshots">
+          <div class="sl-slide" role="group" aria-label="1 of 3"><Shot name="simplelatlon/01" alt="The simplest way to copy decimal coordinates to Xcode. The Simple LatLon window shows a map of San Francisco, a sidebar of saved locations, and the latitude and longitude at the bottom." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 840px) calc(100vw - 40px), 800px" eager /></div>
+          <div class="sl-slide" role="group" aria-label="2 of 3"><Shot name="simplelatlon/02" alt="Copy individual latitude and longitude decimal coordinates to paste into the simulator custom location dialog. The latitude shows as copied, next to the Custom Coordinates dialog with its Latitude and Longitude fields." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 840px) calc(100vw - 40px), 800px" /></div>
+          <div class="sl-slide" role="group" aria-label="3 of 3"><Shot name="simplelatlon/03" alt="The right format. The right number of clicks. Lightweight and easy to use. No ads. No subscriptions. No bells and whistles. Just the coordinates you need for your project. Simple LatLon in satellite view." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 840px) calc(100vw - 40px), 800px" /></div>
+        </div>
+        <div class="sl-nav">
+          <button type="button" class="sl-arrow" data-prev aria-label="Previous screenshot" disabled>&larr;</button>
+          <button type="button" class="sl-dot" data-dot aria-label="Screenshot 1: The simplest way to copy coordinates" aria-current="true"></button>
+          <button type="button" class="sl-dot" data-dot aria-label="Screenshot 2: Paste into the Custom Coordinates dialog"></button>
+          <button type="button" class="sl-dot" data-dot aria-label="Screenshot 3: Just the coordinates you need"></button>
+          <button type="button" class="sl-arrow" data-next aria-label="Next screenshot">&rarr;</button>
+        </div>
       </div>
     </section>
 
-    <section data-section="Why" data-screen-label="Why" style="max-width:1080px; margin:0 auto; padding:clamp(40px,6vw,72px) clamp(20px,4vw,48px) clamp(40px,6vw,72px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:32px clamp(32px,6vw,80px)">
+    <section data-section="Why" data-screen-label="Why" style="max-width:1080px; margin:0 auto; padding:clamp(24px,3vw,40px) clamp(20px,4vw,48px) clamp(40px,6vw,72px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:32px clamp(32px,6vw,80px)">
       <div style="display:grid; gap:14px; align-content:start">
         <h2 style="margin:0; font-weight:700; font-size:clamp(28px,3.4vw,40px); line-height:1.1; letter-spacing:-0.02em; text-wrap:balance">The Simulator asks for two numbers. They're hard to get.</h2>
         <p style="margin:0; color:#33413A">Xcode's Custom Coordinates dialog wants a latitude and a longitude as decimals. It asks again every session, and it can't save presets.</p>
@@ -76,5 +85,41 @@ import css from '../styles/simplelatlon.css?raw';
       <span>Made by <a href="/">Spencer Holtaway</a></span>
     </footer>
   </div>
+  <script is:inline>
+    (function () {
+      var root = document.querySelector('[data-carousel]');
+      if (!root) return;
+      var track = root.querySelector('[data-track]');
+      var slides = track.children;
+      var dots = root.querySelectorAll('[data-dot]');
+      var prev = root.querySelector('[data-prev]');
+      var next = root.querySelector('[data-next]');
+      function index() {
+        return Math.round(track.scrollLeft / (slides[0].offsetWidth + 16));
+      }
+      function go(i) {
+        i = Math.max(0, Math.min(slides.length - 1, i));
+        track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft });
+      }
+      function update() {
+        var i = index();
+        dots.forEach(function (d, n) {
+          if (n === i) d.setAttribute('aria-current', 'true');
+          else d.removeAttribute('aria-current');
+        });
+        prev.disabled = i === 0;
+        next.disabled = i === slides.length - 1;
+      }
+      prev.addEventListener('click', function () { go(index() - 1); });
+      next.addEventListener('click', function () { go(index() + 1); });
+      dots.forEach(function (d, n) { d.addEventListener('click', function () { go(n); }); });
+      track.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(index() + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(index() - 1); }
+      });
+      track.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+  </script>
   <PrivacyScript />
 </Base>
