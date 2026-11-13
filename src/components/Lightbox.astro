@@ -1,0 +1,167 @@
+---
+// Full-screen screenshot viewer for the app pages. Any button on the page marked
+// data-thumb opens it at that button's position in the list (first button, first shot).
+// Close button, previous/next, arrow keys, Esc, swipe, and a click on the dark area.
+import Shot from './Shot.astro';
+
+interface Props {
+  /** Screenshots in order; `name` as Shot takes it. */
+  shots: { name: string; alt: string }[];
+  /** `sizes` for the large images. */
+  sizes: string;
+  /** CSS max-width / max-height of the large image, for shapes other than a wide window. */
+  maxWidth?: string;
+  maxHeight?: string;
+}
+
+const { shots, sizes, maxWidth, maxHeight } = Astro.props;
+const vars = [maxWidth && `--sl-max-w:${maxWidth}`, maxHeight && `--sl-max-h:${maxHeight}`].filter(Boolean).join(';');
+const css = `.sl-lightbox{width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;overflow:hidden;background:transparent;color:#fff;font-family:system-ui,-apple-system,'Helvetica Neue',sans-serif}
+.sl-lightbox::backdrop{background:rgba(12,16,14,.9);animation:slFade .22s ease-out}
+.sl-lightbox[data-closing]::backdrop{opacity:0;transition:opacity .16s ease-out}
+@keyframes slFade{from{opacity:0}}
+@media (prefers-reduced-motion: reduce){.sl-lightbox::backdrop{animation:none;transition:none}}
+.sl-lightbox[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;justify-items:center}
+.sl-bar{display:flex;align-items:center;gap:12px;padding:12px 16px;font-size:15px;font-variant-numeric:tabular-nums}
+.sl-bar--top{justify-self:end}
+.sl-stage{display:grid;place-items:center;width:100%;min-height:0;padding:0 16px;touch-action:pan-y}
+.sl-stage img{grid-area:1/1;display:block;user-select:none;-webkit-user-drag:none;max-width:var(--sl-max-w,min(80vw,1120px));max-height:var(--sl-max-h,calc((100dvh - 136px) * .8));width:auto;height:auto;border-radius:clamp(6px,1vw,14px)}
+.sl-stage img[hidden]{display:none}
+.sl-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;font:inherit;font-size:20px;line-height:1;cursor:pointer}
+.sl-btn:hover{background:rgba(255,255,255,.2)}
+.sl-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}`;
+---
+
+<style is:inline set:html={css}></style>
+<dialog class="sl-lightbox" data-lightbox aria-label="Screenshots" style={vars || undefined}>
+  <div class="sl-bar sl-bar--top">
+    <button type="button" class="sl-btn" data-close aria-label="Close">&times;</button>
+  </div>
+  <div class="sl-stage" data-stage>
+    {shots.map((s) => <Shot name={s.name} alt={s.alt} widths={[640, 960, 1280, 1600, 2000]} sizes={sizes} />)}
+  </div>
+  <div class="sl-bar">
+    <button type="button" class="sl-btn" data-prev aria-label="Previous screenshot">&larr;</button>
+    <span data-count aria-live="polite">1 / {shots.length}</span>
+    <button type="button" class="sl-btn" data-next aria-label="Next screenshot">&rarr;</button>
+  </div>
+</dialog>
+<script is:inline>
+  (function () {
+    var box = document.querySelector('[data-lightbox]');
+    if (!box || !box.showModal) return;
+    var stage = box.querySelector('[data-stage]');
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('img'));
+    var count = box.querySelector('[data-count]');
+    var EASE = 'cubic-bezier(.2,.7,.2,1)';
+    var still = matchMedia('(prefers-reduced-motion: reduce)');
+    var current = 0;
+    var running = [];
+    var closing = false;
+
+    function settle() {
+      running.forEach(function (a) { a.finish(); });
+      running = [];
+    }
+
+    // dir: 1 moves forward (new slide comes in from the right), -1 back, 0 no motion.
+    // fromX: where a swipe left the current slide, so the motion carries on from there.
+    function show(i, dir, fromX) {
+      var next = (i + slides.length) % slides.length;
+      var out = slides[current];
+      var inn = slides[next];
+      settle();
+      current = next;
+      count.textContent = current + 1 + ' / ' + slides.length;
+      out.style.transform = '';
+      if (!dir || out === inn || still.matches || !inn.animate) {
+        slides.forEach(function (img, n) { img.hidden = n !== current; });
+        return;
+      }
+      var x = fromX || 0;
+      var w = stage.clientWidth;
+      var opts = { duration: 420, easing: EASE };
+      inn.hidden = false;
+      var a = out.animate(
+        [{ transform: 'translateX(' + x + 'px)', opacity: 1 }, { transform: 'translateX(' + -dir * w + 'px)', opacity: 0 }],
+        opts
+      );
+      var b = inn.animate(
+        [{ transform: 'translateX(' + (dir * w + x) + 'px)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+        opts
+      );
+      a.onfinish = function () { if (slides[current] !== out) out.hidden = true; };
+      running = [a, b];
+    }
+
+    function open(i) {
+      slides.forEach(function (img) { img.loading = 'eager'; }); // so the next slide is ready to move in
+      show(i, 0);
+      box.showModal();
+      if (still.matches || !box.animate) return;
+      box.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, easing: 'ease-out' });
+      running = [slides[current].animate([{ transform: 'scale(.94)' }, { transform: 'none' }], { duration: 360, easing: EASE })];
+    }
+
+    function close() {
+      if (closing) return;
+      if (still.matches || !box.animate) { box.close(); return; }
+      closing = true;
+      box.setAttribute('data-closing', '');
+      slides[current].animate([{ transform: 'none' }, { transform: 'scale(.96)' }], { duration: 160, easing: 'ease-in' });
+      box.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease-in' }).onfinish = function () {
+        box.close();
+        box.removeAttribute('data-closing');
+        closing = false;
+      };
+    }
+
+    document.querySelectorAll('[data-thumb]').forEach(function (t, n) {
+      t.addEventListener('click', function () { open(n); });
+    });
+    box.querySelector('[data-close]').addEventListener('click', close);
+    box.querySelector('[data-prev]').addEventListener('click', function () { show(current - 1, -1); });
+    box.querySelector('[data-next]').addEventListener('click', function () { show(current + 1, 1); });
+    box.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1, 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1, -1); }
+    });
+    // Esc: fade out instead of vanishing.
+    box.addEventListener('cancel', function (e) { e.preventDefault(); close(); });
+    // A click on the dark area around the screenshot closes it.
+    box.addEventListener('click', function (e) {
+      if (e.target === box || e.target === stage) close();
+    });
+
+    // Swipe: the screenshot follows the finger, then carries on or springs back.
+    var startX = 0, startY = 0, dx = 0, dragging = false;
+    stage.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) return;
+      settle();
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      dx = 0;
+      dragging = false;
+    }, { passive: true });
+    stage.addEventListener('touchmove', function (e) {
+      var mx = e.touches[0].clientX - startX;
+      var my = e.touches[0].clientY - startY;
+      if (!dragging && Math.abs(mx) > 8 && Math.abs(mx) > Math.abs(my)) dragging = true;
+      if (!dragging) return;
+      dx = mx;
+      slides[current].style.transform = 'translateX(' + dx + 'px)';
+    }, { passive: true });
+    stage.addEventListener('touchend', function () {
+      if (!dragging) return;
+      dragging = false;
+      var img = slides[current];
+      if (Math.abs(dx) > 56) { show(current + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1, dx); return; }
+      img.style.transform = '';
+      if (!still.matches && img.animate) {
+        running = [img.animate([{ transform: 'translateX(' + dx + 'px)' }, { transform: 'none' }], { duration: 260, easing: EASE })];
+      }
+    });
+
+    show(0, 0);
+  })();
+</script>

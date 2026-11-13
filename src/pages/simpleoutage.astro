@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import Lightbox from '../components/Lightbox.astro';
+import Shot from '../components/Shot.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import css from '../styles/simpleoutage.css?raw';
+
+const shots = [
+  {
+    name: 'simpleoutage/01',
+    label: 'Lightweight, at-a-glance outage information',
+    alt: 'Lightweight, at-a-glance outage information. SimpleOutage shows an unplanned outage at an address in Redwood City, with an estimated fix in 2 hours 32 minutes, when it started and how many customers are affected.',
+  },
+  {
+    name: 'simpleoutage/02',
+    label: 'Dark mode for when your power goes dark',
+    alt: 'Dark mode for when your power goes dark. The same outage screen in dark colours.',
+  },
+  {
+    name: 'simpleoutage/03',
+    label: "Nearby outages to see what's happening around you",
+    alt: "Nearby outages to see what's happening around you. A list of three unplanned outages 1.5, 4.0 and 5.2 miles away, with a Report an Outage button.",
+  },
+  {
+    name: 'simpleoutage/04',
+    label: 'Designed for battery saving during a power outage',
+    alt: 'Designed for battery saving during a power outage. Asks PG&E for updates every 15 minutes. No maps, they like power too much. Dark mode saves battery on OLED screens. Not an official PG&E app.',
+  },
+];
+---
+
+<Base
+  title="SimpleOutage — PG&E outage information that's easy on your battery"
+  description="A super simple iPhone app for checking PG&E power outages at your address and nearby, designed to save battery while the power is out. Not an official PG&E app."
+  path="/simpleoutage"
+  css={css}
+  themeColor="#003953"
+  noindex
+>
+  <div style="font-family:system-ui,-apple-system,'Helvetica Neue',sans-serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip">
+    <SiteHeader maxWidth={1080} background="rgba(0,57,83,0.92)" border="#0E4C69" color="#F2F7FA" accent="#FF9230" link="#F2F7FA" weight={700} />
+
+    <section data-screen-label="Hero" style="max-width:1080px; margin:0 auto; padding:clamp(24px,3vw,40px) clamp(20px,4vw,48px) 0; display:grid; gap:10px; text-align:center; justify-items:center">
+      <h1 style="margin:0; font-weight:700; font-size:clamp(32px,4.4vw,52px); line-height:1.05; letter-spacing:-0.025em">SimpleOutage</h1>
+      <p style="margin:0; max-width:52ch; font-size:clamp(17px,1.6vw,20px); color:#B9D0DC; text-wrap:pretty">A super simple iPhone app for checking PG&amp;E power outages, designed to save your battery while the power is out.</p>
+      <div class="so-shots">
+        {shots.map((s, i) => (
+          <button type="button" class="so-shot" data-thumb aria-label={`View screenshot ${i + 1} of ${shots.length}: ${s.label}`}>
+            <Shot name={s.name} alt="" widths={[200, 320, 480, 640]} sizes="(max-width: 900px) 23vw, 200px" eager />
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <section data-section="Why" data-screen-label="Why" style="max-width:1080px; margin:0 auto; padding:clamp(32px,4vw,56px) clamp(20px,4vw,48px) clamp(40px,6vw,72px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:32px clamp(32px,6vw,80px)">
+      <div style="display:grid; gap:14px; align-content:start">
+        <h2 style="margin:0; font-weight:700; font-size:clamp(28px,3.4vw,40px); line-height:1.1; letter-spacing:-0.02em; text-wrap:balance">When the power is out, your battery is all you have</h2>
+        <p style="margin:0; color:#CFE0E9">SimpleOutage answers the two questions that matter: is the power out at my address, and when is it expected back?</p>
+        <p style="margin:0; color:#CFE0E9">It leaves out everything that drains a phone. There are no maps, and it asks PG&amp;E for updates only every 15 minutes.</p>
+        <p style="margin:0; font-size:15px; color:#9FBCCB">SimpleOutage is not an official PG&amp;E app. If safety is a concern, use PG&amp;E's official outages service.</p>
+      </div>
+      <ul style="margin:0; padding:0; list-style:none; display:grid; gap:20px; align-content:start">
+        <li style="display:grid; gap:4px; border-top:1px solid #3A6E88; padding-top:16px"><strong>Your outage at a glance</strong><span style="color:#CFE0E9">The estimated fix time, the cause, when it started and how many customers are affected.</span></li>
+        <li style="display:grid; gap:4px; border-top:1px solid #3A6E88; padding-top:16px"><strong>Nearby outages</strong><span style="color:#CFE0E9">See what's happening around you, with the distance to each outage.</span></li>
+        <li style="display:grid; gap:4px; border-top:1px solid #3A6E88; padding-top:16px"><strong>Any address</strong><span style="color:#CFE0E9">Search for an address or use your current location.</span></li>
+        <li style="display:grid; gap:4px; border-top:1px solid #3A6E88; padding-top:16px"><strong>Dark mode</strong><span style="color:#CFE0E9">For when your power goes dark. It also saves battery on OLED screens.</span></li>
+      </ul>
+    </section>
+
+    <section id="support" data-section="Support" data-screen-label="Support" style="max-width:1080px; margin:0 auto; padding:0 clamp(20px,4vw,48px) clamp(64px,8vw,112px)">
+      <div style="border-top:1px solid #F2F7FA; padding-top:clamp(32px,5vw,56px); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:16px 24px">
+        <h2 style="margin:0; font-weight:700; font-size:clamp(30px,4vw,48px); line-height:1.08; letter-spacing:-0.02em">need help? e-mail me!</h2>
+        <a href="mailto:spencer@holtawaydesign.com" style="font-size:clamp(18px,2vw,24px); font-weight:600">spencer@holtawaydesign.com</a>
+      </div>
+    </section>
+
+    <footer style="max-width:1080px; margin:0 auto; padding:24px clamp(20px,4vw,48px) 40px; border-top:1px solid #0E4C69; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:14px; color:#9FBCCB">
+      <span>SimpleOutage</span>
+      <span>Made by <a href="/">Spencer Holtaway</a></span>
+    </footer>
+  </div>
+  <Lightbox shots={shots} sizes="(max-height: 900px) 40vh, 420px" maxWidth="92vw" maxHeight="calc(100dvh - 136px)" />
+</Base>

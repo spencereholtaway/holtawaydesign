@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Lightbox from '../components/Lightbox.astro';
 import PrivacyScript from '../components/PrivacyScript.astro';
 import Shot from '../components/Shot.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -77,139 +78,13 @@ import css from '../styles/simplelatlon.css?raw';
       <span>Made by <a href="/">Spencer Holtaway</a></span>
     </footer>
   </div>
-  <dialog class="sl-lightbox" data-lightbox aria-label="Screenshots">
-    <div class="sl-bar sl-bar--top">
-      <button type="button" class="sl-btn" data-close aria-label="Close">&times;</button>
-    </div>
-    <div class="sl-stage" data-stage>
-      <Shot name="simplelatlon/01" alt="The simplest way to copy decimal coordinates to Xcode. The Simple LatLon window shows a map of San Francisco, a sidebar of saved locations, and the latitude and longitude at the bottom, next to the app icon." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1400px) 80vw, 1120px" />
-      <Shot name="simplelatlon/02" alt="Copy individual latitude and longitude decimal coordinates to paste into the simulator custom location dialog. From Simple LatLon to Device Hub: the latitude shows as copied, above the Custom Coordinates dialog with its Latitude and Longitude fields." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1400px) 80vw, 1120px" />
-      <Shot name="simplelatlon/03" alt="The right format. The right number of clicks. Lightweight and easy to use. No ads. No subscriptions. No bells and whistles. Just the coordinates you need for your project. Simple LatLon in satellite view." widths={[640, 960, 1280, 1600, 2000]} sizes="(max-width: 1400px) 80vw, 1120px" />
-    </div>
-    <div class="sl-bar">
-      <button type="button" class="sl-btn" data-prev aria-label="Previous screenshot">&larr;</button>
-      <span data-count aria-live="polite">1 / 3</span>
-      <button type="button" class="sl-btn" data-next aria-label="Next screenshot">&rarr;</button>
-    </div>
-  </dialog>
-  <script is:inline>
-    (function () {
-      var box = document.querySelector('[data-lightbox]');
-      if (!box || !box.showModal) return;
-      var stage = box.querySelector('[data-stage]');
-      var slides = Array.prototype.slice.call(stage.querySelectorAll('img'));
-      var count = box.querySelector('[data-count]');
-      var EASE = 'cubic-bezier(.2,.7,.2,1)';
-      var still = matchMedia('(prefers-reduced-motion: reduce)');
-      var current = 0;
-      var running = [];
-      var closing = false;
-
-      function settle() {
-        running.forEach(function (a) { a.finish(); });
-        running = [];
-      }
-
-      // dir: 1 moves forward (new slide comes in from the right), -1 back, 0 no motion.
-      // fromX: where a swipe left the current slide, so the motion carries on from there.
-      function show(i, dir, fromX) {
-        var next = (i + slides.length) % slides.length;
-        var out = slides[current];
-        var inn = slides[next];
-        settle();
-        current = next;
-        count.textContent = current + 1 + ' / ' + slides.length;
-        out.style.transform = '';
-        if (!dir || out === inn || still.matches || !inn.animate) {
-          slides.forEach(function (img, n) { img.hidden = n !== current; });
-          return;
-        }
-        var x = fromX || 0;
-        var w = stage.clientWidth;
-        var opts = { duration: 420, easing: EASE };
-        inn.hidden = false;
-        var a = out.animate(
-          [{ transform: 'translateX(' + x + 'px)', opacity: 1 }, { transform: 'translateX(' + -dir * w + 'px)', opacity: 0 }],
-          opts
-        );
-        var b = inn.animate(
-          [{ transform: 'translateX(' + (dir * w + x) + 'px)', opacity: 0 }, { transform: 'none', opacity: 1 }],
-          opts
-        );
-        a.onfinish = function () { if (slides[current] !== out) out.hidden = true; };
-        running = [a, b];
-      }
-
-      function open(i) {
-        slides.forEach(function (img) { img.loading = 'eager'; }); // so the next slide is ready to move in
-        show(i, 0);
-        box.showModal();
-        if (still.matches || !box.animate) return;
-        box.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, easing: 'ease-out' });
-        running = [slides[current].animate([{ transform: 'scale(.94)' }, { transform: 'none' }], { duration: 360, easing: EASE })];
-      }
-
-      function close() {
-        if (closing) return;
-        if (still.matches || !box.animate) { box.close(); return; }
-        closing = true;
-        box.setAttribute('data-closing', '');
-        slides[current].animate([{ transform: 'none' }, { transform: 'scale(.96)' }], { duration: 160, easing: 'ease-in' });
-        box.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease-in' }).onfinish = function () {
-          box.close();
-          box.removeAttribute('data-closing');
-          closing = false;
-        };
-      }
-
-      document.querySelectorAll('[data-thumb]').forEach(function (t, n) {
-        t.addEventListener('click', function () { open(n); });
-      });
-      box.querySelector('[data-close]').addEventListener('click', close);
-      box.querySelector('[data-prev]').addEventListener('click', function () { show(current - 1, -1); });
-      box.querySelector('[data-next]').addEventListener('click', function () { show(current + 1, 1); });
-      box.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1, 1); }
-        if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1, -1); }
-      });
-      // Esc: fade out instead of vanishing.
-      box.addEventListener('cancel', function (e) { e.preventDefault(); close(); });
-      // A click on the dark area around the screenshot closes it.
-      box.addEventListener('click', function (e) {
-        if (e.target === box || e.target === stage) close();
-      });
-
-      // Swipe: the screenshot follows the finger, then carries on or springs back.
-      var startX = 0, startY = 0, dx = 0, dragging = false;
-      stage.addEventListener('touchstart', function (e) {
-        if (e.touches.length !== 1) return;
-        settle();
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-        dx = 0;
-        dragging = false;
-      }, { passive: true });
-      stage.addEventListener('touchmove', function (e) {
-        var mx = e.touches[0].clientX - startX;
-        var my = e.touches[0].clientY - startY;
-        if (!dragging && Math.abs(mx) > 8 && Math.abs(mx) > Math.abs(my)) dragging = true;
-        if (!dragging) return;
-        dx = mx;
-        slides[current].style.transform = 'translateX(' + dx + 'px)';
-      }, { passive: true });
-      stage.addEventListener('touchend', function () {
-        if (!dragging) return;
-        dragging = false;
-        var img = slides[current];
-        if (Math.abs(dx) > 56) { show(current + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1, dx); return; }
-        img.style.transform = '';
-        if (!still.matches && img.animate) {
-          running = [img.animate([{ transform: 'translateX(' + dx + 'px)' }, { transform: 'none' }], { duration: 260, easing: EASE })];
-        }
-      });
-
-      show(0, 0);
-    })();
-  </script>
+  <Lightbox
+    sizes="(max-width: 1400px) 80vw, 1120px"
+    shots={[
+      { name: "simplelatlon/01", alt: "The simplest way to copy decimal coordinates to Xcode. The Simple LatLon window shows a map of San Francisco, a sidebar of saved locations, and the latitude and longitude at the bottom, next to the app icon." },
+      { name: "simplelatlon/02", alt: "Copy individual latitude and longitude decimal coordinates to paste into the simulator custom location dialog. From Simple LatLon to Device Hub: the latitude shows as copied, above the Custom Coordinates dialog with its Latitude and Longitude fields." },
+      { name: "simplelatlon/03", alt: "The right format. The right number of clicks. Lightweight and easy to use. No ads. No subscriptions. No bells and whistles. Just the coordinates you need for your project. Simple LatLon in satellite view." },
+    ]}
+  />
   <PrivacyScript />
 </Base>
