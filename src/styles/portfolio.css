@@ -244,4 +244,3 @@ html:has(dialog[open]) { overflow: hidden }
 .say-hello { display: block; white-space: nowrap; transform: rotate(-3deg); transform-origin: left bottom; font-weight: 800; font-size: 22vw; line-height: 0.82; letter-spacing: -0.07em; margin: 0 0 clamp(24px, 3vw, 40px) -0.06em }
 .contact__links { display: flex; flex-wrap: wrap; gap: 12px 32px; font-size: clamp(17px, 1.6vw, 20px); font-weight: 500; margin-bottom: clamp(80px, 12vw, 160px) }
 .contact__links a { display: inline-flex; align-items: center; min-height: 44px }
-.colophon { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-detail); font-size: var(--fs-label); color: var(--c-muted); border-top: 1px solid var(--c-line); padding-top: 16px }

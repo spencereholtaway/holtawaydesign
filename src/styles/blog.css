@@ -11,6 +11,7 @@
 
 /* Every blog page ends with the same space below its content. */
 .page--blog main { padding-bottom: var(--space-section) }
+.page--blog .site-footer { padding-bottom: clamp(32px, 4vw, 48px) }
 
 /* Page heading */
 .blog-head { padding: clamp(48px, 10vw, 144px) 0 clamp(40px, 6vw, 80px); display: grid; gap: clamp(20px, 3vw, 32px) }
