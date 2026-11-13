@@ -3,18 +3,9 @@
 // including the app pages the homepage doesn't feature, then the copyright line.
 // Styles in system.css.
 import { APP_PAGES } from '../data/apps';
+import { siteLinks } from '../data/footer';
 
-// On the homepage, the section links scroll; elsewhere they go to the homepage.
-const home = Astro.url.pathname.replace(/(index)?(\.html)?$/, '') === '/' ? '' : '/';
-
-const site = [
-  { href: home ? '/' : '#top', label: 'Home' },
-  { href: `${home}#recent`, label: 'Work' },
-  { href: `${home}#career`, label: 'Career' },
-  { href: `${home}#me`, label: 'Me' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/blog/rss.xml', label: 'RSS feed' },
-];
+const site = siteLinks(Astro.url.pathname.replace(/(index)?(\.html)?$/, '') === '/');
 ---
 
 <footer class="site-footer">

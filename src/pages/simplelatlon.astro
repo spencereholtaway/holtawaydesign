@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Lightbox from '../components/Lightbox.astro';
 import PrivacyScript from '../components/PrivacyScript.astro';
 import Shot from '../components/Shot.astro';
+import AppFooter from '../components/AppFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import css from '../styles/simplelatlon.css?raw';
 ---
@@ -73,10 +74,10 @@ import css from '../styles/simplelatlon.css?raw';
       </details>
     </section>
 
-    <footer style="max-width:1080px; margin:0 auto; padding:24px clamp(20px,4vw,48px) 40px; border-top:1px solid #DDDAD0; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:14px; color:#4A574E">
+    <AppFooter maxWidth={1080} color="#4A574E" ink="#1D2A22" border="1px solid #DDDAD0">
       <span>Simple LatLon</span>
       <span>Made by <a href="/">Spencer Holtaway</a></span>
-    </footer>
+    </AppFooter>
   </div>
   <Lightbox
     sizes="(max-width: 1400px) 80vw, 1120px"

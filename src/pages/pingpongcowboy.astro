@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import AppStoreButton from '../components/AppStoreButton.astro';
 import PrivacyScript from '../components/PrivacyScript.astro';
 import Shot from '../components/Shot.astro';
+import AppFooter from '../components/AppFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import css from '../styles/pingpongcowboy.css?raw';
 
@@ -81,6 +82,11 @@ const shots = ['01', '02', '03'].map((n) => `pingpongcowboy/${n}`);
       </details>
       </div>
     </section>
+
+    <AppFooter maxWidth={1200} color="#C9A77A" ink="#FBEBD0" border="1px solid #6E4A2A">
+      <span>Ping Pong Cowboy</span>
+      <span>Made by <a href="/">Spencer Holtaway</a></span>
+    </AppFooter>
   </div>
   <PrivacyScript />
 </Base>
