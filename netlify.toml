@@ -39,6 +39,22 @@
   status = 200
 
 [[redirects]]
+  from = "/simplelatlon/"
+  to = "/simplelatlon.html"
+  status = 200
+
+[[redirects]]
+  from = "/simpleoutage/"
+  to = "/simpleoutage.html"
+  status = 200
+
+# The app is called Simple Outages; send the plural URL to the page.
+[[redirects]]
+  from = "/simpleoutages"
+  to = "/simpleoutage"
+  status = 301
+
+[[redirects]]
   from = "/blog/"
   to = "/blog.html"
   status = 200

@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getPosts, getTags, postPath, tagPath } from '../data/blog';
 
-const paths = ['/', '/breathebody', '/fishingforcompliments', '/mybussf', '/olivers-train', '/pingpongcowboy', '/simplelatlon'];
+const paths = ['/', '/breathebody', '/fishingforcompliments', '/mybussf', '/olivers-train', '/pingpongcowboy', '/simplelatlon', '/simpleoutage'];
 
 export const GET: APIRoute = async ({ site }) => {
   const lastmod = new Date().toISOString().slice(0, 10); // build date

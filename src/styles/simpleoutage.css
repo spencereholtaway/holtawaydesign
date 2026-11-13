@@ -10,3 +10,13 @@ a:hover{color:#FF9230}
 .so-shot:hover{transform:translateY(-3px);box-shadow:0 0 0 1px rgba(255,255,255,.4)}
 .so-shot img{display:block;width:100%;height:auto}
 .so-shot:focus-visible{outline:2px solid #FF9230;outline-offset:3px}
+.so-table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.45}
+.so-table th,.so-table td{text-align:left;vertical-align:top;padding:10px 14px 10px 0;border-bottom:1px solid #3A6E88}
+.so-table th{color:#F2F7FA;font-weight:600}
+@media (max-width:600px){
+.so-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.so-table,.so-table tbody,.so-table tr,.so-table td{display:block}
+.so-table tr{padding:10px 0;border-bottom:1px solid #3A6E88}
+.so-table td{padding:4px 0;border:0}
+.so-table td::before{content:attr(data-label);display:block;font-size:13px;font-weight:600;color:#F2F7FA}
+}
