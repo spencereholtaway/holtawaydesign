@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import Lightbox from '../components/Lightbox.astro';
+import PrivacyScript from '../components/PrivacyScript.astro';
+import Shot from '../components/Shot.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import css from '../styles/simpleoutage.css?raw';
+
+const shots = [
+  {
+    name: 'simpleoutage/01',
+    label: 'Lightweight, at-a-glance outage information',
+    alt: 'Lightweight, at-a-glance outage information. Simple Outages shows an unplanned outage at an address in Redwood City, with an estimated fix in 2 hours 32 minutes, when it started and how many customers are affected.',
+  },
+  {
+    name: 'simpleoutage/02',
+    label: 'Dark mode for when your power goes dark',
+    alt: 'Dark mode for when your power goes dark. The same outage screen in dark colours.',
+  },
+  {
+    name: 'simpleoutage/03',
+    label: "Nearby outages to see what's happening around you",
+    alt: "Nearby outages to see what's happening around you. A list of three unplanned outages 1.5, 4.0 and 5.2 miles away, with a Report an Outage button.",
+  },
+  {
+    name: 'simpleoutage/04',
+    label: 'Designed for battery saving during a power outage',
+    alt: 'Designed for battery saving during a power outage. Asks PG&E for updates every 15 minutes. No maps, they like power too much. Dark mode saves battery on OLED screens. Not an official PG&E app.',
+  },
+];
+---
+
+<Base
+  title="Simple Outages — PG&E outage information that's easy on your battery"
+  description="A super simple iPhone app for checking PG&E power outages at your address and nearby, designed to save battery while the power is out. Not an official PG&E app."
+  path="/simpleoutage"
+  css={css}
+  themeColor="#01212F"
+>
+  <div style="font-family:system-ui,-apple-system,'Helvetica Neue',sans-serif; font-size:18px; line-height:1.55; min-height:100vh; overflow-x:clip">
+    <SiteHeader maxWidth={1080} background="rgba(1,33,47,0.92)" border="#143B4E" color="#F2F7FA" accent="#FF9230" link="#F2F7FA" weight={700} />
+
+    <section data-screen-label="Hero" style="max-width:1080px; margin:0 auto; padding:clamp(24px,3vw,40px) clamp(20px,4vw,48px) 0; display:grid; gap:10px; text-align:center; justify-items:center">
+      <h1 style="margin:0; font-weight:700; font-size:clamp(32px,4.4vw,52px); line-height:1.05; letter-spacing:-0.025em"><span style="color:#F7A800">Simple</span> Outages</h1>
+      <p style="margin:0; max-width:52ch; font-size:clamp(17px,1.6vw,20px); color:#B9D0DC; text-wrap:pretty">A super simple iPhone app for checking PG&amp;E power outages, designed to save your battery while the power is out.</p>
+      <div class="so-shots">
+        {shots.map((s, i) => (
+          <button type="button" class="so-shot" data-thumb aria-label={`View screenshot ${i + 1} of ${shots.length}: ${s.label}`}>
+            <Shot name={s.name} alt="" widths={[200, 320, 480, 640]} sizes="(max-width: 900px) 23vw, 200px" eager />
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <section data-section="Why" data-screen-label="Why" style="max-width:1080px; margin:0 auto; padding:clamp(32px,4vw,56px) clamp(20px,4vw,48px) clamp(40px,6vw,72px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:32px clamp(32px,6vw,80px)">
+      <div style="display:grid; gap:14px; align-content:start">
+        <h2 style="margin:0; font-weight:700; font-size:clamp(28px,3.4vw,40px); line-height:1.1; letter-spacing:-0.02em; text-wrap:balance">When the power is out, your battery is all you have</h2>
+        <p style="margin:0; color:#CFE0E9">Simple Outages answers the two questions that matter: is the power out at my address, and when is it expected back?</p>
+        <p style="margin:0; color:#CFE0E9">It leaves out everything that drains a phone. There are no maps, and it checks for updates only every 15 minutes.</p>
+        <p style="margin:0; font-size:15px; color:#9FBCCB">Simple Outages is an independent app. It isn't made by or affiliated with PG&amp;E. If safety is a concern, use PG&amp;E's official outages service.</p>
+      </div>
+      <ul style="margin:0; padding:0; list-style:none; display:grid; gap:20px; align-content:start">
+        <li style="display:grid; gap:4px; border-top:1px solid #2C566B; padding-top:16px"><strong>Your outage at a glance</strong><span style="color:#CFE0E9">The estimated fix time, the cause, when it started and how many customers are affected.</span></li>
+        <li style="display:grid; gap:4px; border-top:1px solid #2C566B; padding-top:16px"><strong>Nearby outages</strong><span style="color:#CFE0E9">See what's happening around you, with the distance to each outage.</span></li>
+        <li style="display:grid; gap:4px; border-top:1px solid #2C566B; padding-top:16px"><strong>Any address</strong><span style="color:#CFE0E9">Search for an address or use your current location.</span></li>
+        <li style="display:grid; gap:4px; border-top:1px solid #2C566B; padding-top:16px"><strong>Dark mode</strong><span style="color:#CFE0E9">For when your power goes dark. It also saves battery on OLED screens.</span></li>
+      </ul>
+    </section>
+
+    <section id="support" data-section="Support" data-screen-label="Support" style="max-width:1080px; margin:0 auto; padding:0 clamp(20px,4vw,48px) 0">
+      <div style="border-top:1px solid #F2F7FA; padding-top:clamp(32px,5vw,56px); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:16px 24px">
+        <h2 style="margin:0; font-weight:700; font-size:clamp(30px,4vw,48px); line-height:1.08; letter-spacing:-0.02em">need help? e-mail me!</h2>
+        <a href="mailto:spencer@holtawaydesign.com" style="font-size:clamp(18px,2vw,24px); font-weight:600">spencer@holtawaydesign.com</a>
+      </div>
+    </section>
+
+    <section id="privacy" data-section="Privacy" data-screen-label="Privacy Policy" style="max-width:1080px; margin:0 auto; padding:clamp(32px,5vw,56px) clamp(20px,4vw,48px) clamp(64px,8vw,112px); display:block">
+      <details style="border-top:1px solid #F2F7FA; border-bottom:1px solid #F2F7FA">
+        <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:64px; font-weight:600; font-size:17px">View privacy policy<span aria-hidden="true" style="font-size:24px; font-weight:400">+</span></summary>
+        <div style="padding:8px 0 48px; max-width:70ch; display:grid; gap:14px; font-size:17px; color:#CFE0E9">
+          <h2 style="margin:0; font-weight:700; font-size:clamp(28px,3.4vw,40px); line-height:1.08; letter-spacing:-0.02em; color:#F2F7FA">Simple Outages Privacy Policy</h2>
+          <p style="margin:0"><strong>Last updated: November 13, 2026</strong></p>
+          <p style="margin:0">Simple Outages shows whether there's a power outage at an address in PG&amp;E's California service area, along with outages nearby. It's built to work with as little information as possible.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#F2F7FA">The short version</h3>
+          <ul style="margin:0; padding-left:1.2em; display:grid; gap:8px">
+            <li>No accounts, no sign-in.</li>
+            <li>No analytics, advertising, tracking or crash reporting.</li>
+            <li>The developer doesn't collect, receive or store any of your information.</li>
+            <li>The one location you choose stays on your device.</li>
+          </ul>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#F2F7FA">Your location</h3>
+          <p style="margin:0">You can use your current location or search for an address. Either one is optional.</p>
+          <p style="margin:0"><strong>Current location.</strong> If you tap Use My Location, iOS asks for permission first. The app gets your location once, only while it's open, and then stops. It never tracks you in the background. You can turn location access off at any time in Settings, and search for an address instead.</p>
+          <p style="margin:0"><strong>Address search.</strong> As you type, the app uses Apple Maps to suggest addresses in California and to find where the one you pick is.</p>
+          <p style="margin:0"><strong>What's saved.</strong> The app saves the one location you chose (its coordinates and a short address) on your device, so it's there the next time you open the app. It isn't sent to the developer, backed up to any developer server or shared with anyone. Choosing a new location replaces it, and deleting the app removes it.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#F2F7FA">Services the app uses</h3>
+          <p style="margin:0">To do its job, the app sends a location's coordinates to these services. It doesn't send your name, contact details, or any account or device identifier.</p>
+          <table class="so-table">
+            <thead><tr><th scope="col">Service</th><th scope="col">What it receives</th><th scope="col">Why</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Service">California Governor's Office of Emergency Services (Cal OES) outage data, hosted by Esri ArcGIS</td><td data-label="What it receives">The coordinates of the location you chose</td><td data-label="Why">To find outages at and near that location</td></tr>
+              <tr><td data-label="Service">Apple Maps</td><td data-label="What it receives">The text you type in the search, plus coordinates</td><td data-label="Why">To suggest addresses, find where they are and name the places where outages are</td></tr>
+            </tbody>
+          </table>
+          <p style="margin:0">These services may record standard information such as your IP address, as any website does. Their own privacy policies cover how they handle it:</p>
+          <ul style="margin:0; padding-left:1.2em; display:grid; gap:8px">
+            <li>Apple: <a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a></li>
+            <li>Esri: <a href="https://www.esri.com/en-us/privacy/overview">https://www.esri.com/en-us/privacy/overview</a></li>
+          </ul>
+          <p style="margin:0">If you tap Report an Outage or open the official outage map, the app opens PG&amp;E's website in your browser, and PG&amp;E's privacy policy applies there.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#F2F7FA">Children</h3>
+          <p style="margin:0">The app isn't directed at children under 13 and doesn't knowingly collect any information from anyone.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#F2F7FA">Not affiliated with PG&amp;E</h3>
+          <p style="margin:0">Simple Outages is an independent app. It isn't made by or affiliated with PG&amp;E or Cal OES. For official outage information, use PG&amp;E's website.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#F2F7FA">Changes</h3>
+          <p style="margin:0">If this policy changes, the new version will be posted here with a new date.</p>
+          <h3 style="margin:24px 0 0; font-weight:700; font-size:21px; color:#F2F7FA">Contact</h3>
+          <p style="margin:0">Questions about this policy: <strong><a href="mailto:spencer@holtawaydesign.com">spencer@holtawaydesign.com</a></strong></p>
+        </div>
+      </details>
+    </section>
+
+    <footer style="max-width:1080px; margin:0 auto; padding:24px clamp(20px,4vw,48px) 40px; border-top:1px solid #143B4E; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:14px; color:#9FBCCB">
+      <span>Simple Outages</span>
+      <span>Made by <a href="/">Spencer Holtaway</a></span>
+    </footer>
+  </div>
+  <PrivacyScript />
+  <Lightbox shots={shots} sizes="(max-height: 900px) 40vh, 420px" maxWidth="92vw" maxHeight="calc(100dvh - 136px)" />
+</Base>

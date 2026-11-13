@@ -1,0 +1,22 @@
+html,body{margin:0;overflow-wrap:break-word;background:#01212F;color:#F2F7FA;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+#support a,footer a{display:inline-flex;align-items:center;min-height:44px}
+summary::-webkit-details-marker{display:none}
+nav a{display:inline-flex;align-items:center;min-height:44px}
+a{overflow-wrap:anywhere;color:#5CCBFA;text-decoration:underline;text-underline-offset:3px}
+a:hover{color:#FF9230}
+.so-shots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(6px,1.6vw,20px);width:100%;max-width:860px;margin-top:8px}
+.so-shot{padding:0;border:0;background:none;border-radius:clamp(8px,1.6vw,18px);cursor:zoom-in;overflow:hidden;box-shadow:0 10px 30px -12px rgba(0,0,0,.6);transition:transform .15s,box-shadow .15s}
+.so-shot:hover{transform:translateY(-3px);box-shadow:0 16px 36px -12px rgba(0,0,0,.7)}
+.so-shot img{display:block;width:100%;height:auto}
+.so-shot:focus-visible{outline:2px solid #FF9230;outline-offset:3px}
+.so-table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.45}
+.so-table th,.so-table td{text-align:left;vertical-align:top;padding:10px 14px 10px 0;border-bottom:1px solid #2C566B}
+.so-table th{color:#F2F7FA;font-weight:600}
+@media (max-width:600px){
+.so-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.so-table,.so-table tbody,.so-table tr,.so-table td{display:block}
+.so-table tr{padding:10px 0;border-bottom:1px solid #2C566B}
+.so-table td{padding:4px 0;border:0}
+.so-table td::before{content:attr(data-label);display:block;font-size:13px;font-weight:600;color:#F2F7FA}
+}
