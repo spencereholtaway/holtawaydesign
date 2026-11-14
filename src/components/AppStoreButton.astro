@@ -38,6 +38,11 @@ const STYLES: Record<AppSlug, { pending: string; live: string; dot: string }> = 
     live: 'min-height:54px; padding:0 28px; border-radius:14px; background:linear-gradient(#FF8A5B, #D9431E 52%, #B8331A); color:#FFF; font-weight:700; font-size:17px; text-shadow:0 -1px 0 rgba(0,0,0,.35); box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 2px 0 #6E1E0C, 0 8px 16px rgba(0,0,0,.4)',
     dot: '#FFD36B',
   },
+  simpleoutage: {
+    pending: 'min-height:52px; padding:0 24px; border-radius:12px; border:1px dashed #2C566B; color:#B9D0DC; font-weight:600; font-size:16px',
+    live: 'min-height:52px; padding:0 24px; border-radius:12px; background:#F7A800; color:#01212F; font-weight:700; font-size:16px; text-decoration:none',
+    dot: '#FF9230',
+  },
 };
 
 const s = STYLES[app];
