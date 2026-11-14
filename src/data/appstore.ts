@@ -5,6 +5,7 @@ export const APP_STORE = {
   mybussf: 'https://apps.apple.com/us/app/mybussf-2026/id6814334469',
   'olivers-train': 'https://apps.apple.com/us/app/olivers-train/id6818586303',
   pingpongcowboy: 'https://apps.apple.com/us/app/ping-pong-cowboy/id6816285942',
+  simpleoutage: 'https://apps.apple.com/us/app/simple-outages-california/id6833879513',
 } as const satisfies Record<string, string | null>;
 
 export type AppSlug = keyof typeof APP_STORE;

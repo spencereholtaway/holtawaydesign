@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import AppStoreButton from '../components/AppStoreButton.astro';
 import Lightbox from '../components/Lightbox.astro';
 import PrivacyScript from '../components/PrivacyScript.astro';
 import Shot from '../components/Shot.astro';
@@ -44,6 +45,10 @@ const shots = [
     <section data-screen-label="Hero" style="max-width:1080px; margin:0 auto; padding:clamp(24px,3vw,40px) clamp(20px,4vw,48px) 0; display:grid; gap:10px; text-align:center; justify-items:center">
       <h1 style="margin:0; font-weight:700; font-size:clamp(32px,4.4vw,52px); line-height:1.05; letter-spacing:-0.025em"><span style="color:#F7A800">Simple</span> Outages</h1>
       <p style="margin:0; max-width:52ch; font-size:clamp(17px,1.6vw,20px); color:#B9D0DC; text-wrap:pretty">A super simple iPhone app for checking PG&amp;E power outages, designed to save your battery while the power is out.</p>
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:12px; margin-top:6px">
+        <AppStoreButton app="simpleoutage" />
+        <span style="font-size:15px; color:#9FBCCB">iPhone · Free</span>
+      </div>
       <div class="so-shots">
         {shots.map((s, i) => (
           <button type="button" class="so-shot" data-thumb aria-label={`View screenshot ${i + 1} of ${shots.length}: ${s.label}`}>
