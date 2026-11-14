@@ -2,6 +2,7 @@
 // The blog: every post, newest first.
 import Base from '../../layouts/Base.astro';
 import BlogNav from '../../components/BlogNav.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 import PostList from '../../components/PostList.astro';
 import { getPosts, getTags, tagPath } from '../../data/blog';
 import tokens from '../../styles/tokens.css?raw';
@@ -45,5 +46,6 @@ const tags = await getTags();
         )
       }
     </main>
+    <div class="container"><SiteFooter /></div>
   </div>
 </Base>

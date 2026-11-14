@@ -3,6 +3,7 @@
 import Base from '../layouts/Base.astro';
 import Shot from '../components/Shot.astro';
 import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import RecentWork from '../components/RecentWork.astro';
 import Section from '../components/portfolio/Section.astro';
 import CaseHead from '../components/portfolio/CaseHead.astro';
@@ -157,9 +158,7 @@ const stagePhone = '(max-width: 719px) 40vw, (max-width: 1099px) 32vw, 420px';
           <a href={`mailto:${EMAIL}`} class="link-u">{EMAIL}</a>
           <a href="https://linkedin.com/in/holtawaydesign" class="link-u">LinkedIn</a>
         </div>
-        <div class="colophon">
-          <span>© 2026 Spencer Holtaway</span>
-        </div>
+        <SiteFooter />
       </Section>
     </main>
 

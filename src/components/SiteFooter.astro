@@ -1,0 +1,36 @@
+---
+// The footer for the homepage and the blog: a link to every page on the site,
+// including the app pages the homepage doesn't feature, then the copyright line.
+// Styles in system.css.
+import { APP_PAGES } from '../data/apps';
+import { siteLinks } from '../data/footer';
+
+const site = siteLinks(Astro.url.pathname.replace(/(index)?(\.html)?$/, '') === '/');
+---
+
+<footer class="site-footer">
+  <nav class="site-footer__cols" aria-label="All pages">
+    <div class="site-footer__col">
+      <h2 class="t-label site-footer__head">Site</h2>
+      <ul class="site-footer__list">
+        {site.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+    <div class="site-footer__col site-footer__col--apps">
+      <h2 class="t-label site-footer__head">Apps</h2>
+      <ul class="site-footer__list">
+        {APP_PAGES.map((a) => (
+          <li>
+            <a href={a.href}>
+              {a.name}
+              {a.platform && <span class="site-footer__tag">{a.platform}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+  <div class="colophon">
+    <span>© 2026 Spencer Holtaway</span>
+  </div>
+</footer>

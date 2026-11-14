@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import AppStoreButton from '../components/AppStoreButton.astro';
 import PrivacyScript from '../components/PrivacyScript.astro';
 import Shot from '../components/Shot.astro';
+import AppFooter from '../components/AppFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import css from '../styles/olivers-train.css?raw';
 ---
@@ -93,10 +94,10 @@ import css from '../styles/olivers-train.css?raw';
       </details>
     </section>
 
-    <footer style="max-width:1240px; margin:0 auto; padding:24px clamp(20px,4vw,48px) 40px; border-top:2px solid #1F4D3A; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:14px; color:#4E5D52">
+    <AppFooter maxWidth={1240} color="#4E5D52" ink="#1B2B22" border="2px solid #1F4D3A">
       <span>Oliver's Train</span>
       <span>Made by <a href="/">Spencer Holtaway</a></span>
-    </footer>
+    </AppFooter>
   </div>
   <PrivacyScript />
 </Base>

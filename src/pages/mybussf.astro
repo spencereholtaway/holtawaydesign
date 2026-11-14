@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import AppStoreButton from '../components/AppStoreButton.astro';
 import PrivacyScript from '../components/PrivacyScript.astro';
 import Shot from '../components/Shot.astro';
+import AppFooter from '../components/AppFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import css from '../styles/mybussf.css?raw';
 
@@ -95,7 +96,9 @@ const features = [
       </details>
     </section>
 
-    <footer style="max-width:1240px; margin:0 auto; padding:0 clamp(20px,4vw,48px) 40px; font-family:'Overpass Mono',monospace; font-size:13px; color:#4A4E52; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px"><span>© 2026 Spencer Holtaway</span><a href="/" style="color:#4A4E52">holtawaydesign.com</a></footer>
+    <AppFooter maxWidth={1240} color="#4A4E52" ink="#14171A" style="font-family:'Overpass Mono',monospace; font-size:13px">
+      <span>© 2026 Spencer Holtaway</span><a href="/" style="color:#4A4E52">holtawaydesign.com</a>
+    </AppFooter>
   </div>
   <PrivacyScript />
 </Base>

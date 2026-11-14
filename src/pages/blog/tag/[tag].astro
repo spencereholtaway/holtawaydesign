@@ -2,6 +2,7 @@
 // Posts with one tag, at /blog/tag/<tag>.
 import Base from '../../../layouts/Base.astro';
 import BlogNav from '../../../components/BlogNav.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
 import PostList from '../../../components/PostList.astro';
 import { getTags, tagPath } from '../../../data/blog';
 import tokens from '../../../styles/tokens.css?raw';
@@ -37,5 +38,6 @@ const { tag } = Astro.props as { tag: Awaited<ReturnType<typeof getTags>>[number
       </header>
       <PostList posts={tag.posts} id="posts" />
     </main>
+    <div class="container"><SiteFooter /></div>
   </div>
 </Base>

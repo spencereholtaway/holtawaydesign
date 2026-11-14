@@ -111,3 +111,26 @@ img { max-width: 100% }
   [data-tilt-panel] { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--s, 1)); clip-path: inset(0 round var(--tilt-radius, 0px)); transition: transform .6s var(--ease-out) }
   [data-tilt-panel][data-tilting] { --s: 1.03; transition: transform .15s ease-out; will-change: transform }
 }
+
+/* Site footer (SiteFooter.astro): every page on the site, then the copyright
+   line. Phones: Site and Apps side by side. Wider: on the 12-column grid, with
+   the apps in two columns. */
+.site-footer { border-top: 1px solid var(--c-line); padding-top: clamp(20px, 3vw, 32px) }
+.site-footer__cols { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 24px var(--col-pad); margin-bottom: clamp(40px, 6vw, 72px) }
+.site-footer__head { margin: 0 0 4px; color: var(--c-muted) }
+.site-footer__list { margin: 0; padding: 0; list-style: none; font-size: var(--fs-ui); font-weight: 500 }
+.site-footer__list a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; transition: color 0.2s ease }
+.site-footer__list a:hover { color: var(--c-accent) }
+.site-footer__tag { font-family: var(--font-detail); font-size: var(--fs-label); font-weight: 400; color: var(--c-faint) }
+@media (min-width: 720px) {
+  .site-footer__cols { grid-template-columns: repeat(12, minmax(0, 1fr)) }
+  .site-footer__col { grid-column: span 3 }
+  .site-footer__col--apps { grid-column: span 6 }
+  .site-footer__col--apps .site-footer__list { columns: 2; column-gap: var(--col-pad) }
+  .site-footer__col--apps li { break-inside: avoid }
+}
+/* With a mouse, the links can sit closer together. */
+@media (min-width: 720px) and (pointer: fine) {
+  .site-footer__list a { min-height: 32px }
+}
+.colophon { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--font-detail); font-size: var(--fs-label); color: var(--c-muted) }

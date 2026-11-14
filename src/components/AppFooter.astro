@@ -1,0 +1,72 @@
+---
+// The footer for the app pages, themed per page: a link to every page on the
+// site (the same links as SiteFooter), then the page's own sign-off line,
+// passed in as the slot.
+import { APP_PAGES } from '../data/apps';
+import { siteLinks } from '../data/footer';
+
+interface Props {
+  /** Inner width, matching the page's container. */
+  maxWidth: number;
+  /** Colour of the labels and the sign-off line. */
+  color: string;
+  /** Colour of the links (the page's text colour). */
+  ink: string;
+  /** Top rule, e.g. "1px solid #DDDAD0". Left out for none. */
+  border?: string;
+  /** Extra styles, e.g. the page's font family. */
+  style?: string;
+}
+
+const { maxWidth, color, ink, border, style = '' } = Astro.props;
+const here = Astro.url.pathname.replace(/\.html$/, '');
+const site = siteLinks(false);
+
+const css = `
+.af-cols{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:24px clamp(16px,3vw,40px);margin-bottom:clamp(32px,5vw,56px)}
+.af-head{margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.af-list{margin:0;padding:0;list-style:none;font-size:15px}
+.af-list a:not(:hover){color:var(--af-ink)}
+.af-list a{gap:8px;text-decoration:none}
+.af-list a[aria-current]{font-weight:700}
+.af-tag{font-size:12px;color:var(--af-muted)}
+@media (min-width:720px){
+  .af-cols{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+  .af-apps .af-list{columns:2;column-gap:clamp(16px,3vw,40px)}
+  .af-apps li{break-inside:avoid}
+}
+@media (min-width:720px) and (pointer:fine){
+  footer .af-list a{min-height:32px}
+}
+`;
+---
+
+<style is:inline set:html={css}></style>
+<footer
+  style={`max-width:${maxWidth}px; margin:0 auto; padding:${border ? '32px' : '0'} clamp(20px,4vw,48px) 40px; ${border ? `border-top:${border};` : ''} font-size:14px; color:${color}; --af-ink:${ink}; --af-muted:${color}; ${style}`}
+>
+  <nav class="af-cols" aria-label="All pages">
+    <div>
+      <h2 class="af-head">Site</h2>
+      <ul class="af-list">
+        {site.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+    <div class="af-apps">
+      <h2 class="af-head">Apps</h2>
+      <ul class="af-list">
+        {APP_PAGES.map((a) => (
+          <li>
+            <a href={a.href} aria-current={a.href === here ? 'page' : undefined}>
+              {a.name}
+              {a.platform && <span class="af-tag">{a.platform}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+  <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px">
+    <slot />
+  </div>
+</footer>

@@ -4,6 +4,7 @@ import { render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import BlogNav from '../../components/BlogNav.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 import { getPosts, postPath, tagPath, formatDate, readingMinutes, isDraft, type Post } from '../../data/blog';
 import tokens from '../../styles/tokens.css?raw';
 import system from '../../styles/system.css?raw';
@@ -84,5 +85,6 @@ const { Content } = await render(post);
         </span>
       </nav>
     </main>
+    <div class="container"><SiteFooter /></div>
   </div>
 </Base>
