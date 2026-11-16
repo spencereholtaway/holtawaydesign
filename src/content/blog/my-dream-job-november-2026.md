@@ -20,5 +20,6 @@ I recently applied for a Product Management job at the City of San Rafael, where
 - Improved job boards and application tracking
 - flood alerting,
 - a better infrastructure reporting system than SeeClickFix that runs cheaper than contracting it to a company making $20m+ in profits,
-- A city-based Marin transit, golden gate ferries, SMART train application for local commuters
+- A city-based Marin transit, golden gate ferries, SMART train, electric charging application for local commuters
+- Local parking meter helpers
 - licensing our software to other cities to generate city revenue to better fund the city.
